@@ -2,7 +2,7 @@
     "name": "Tengenetsar",
     "short_name": "Tengenetsar",
     "start_url": "/",
-    "display": "fullscreen",
+    "display": "standalone",
     "background_color": "#00b050",
     "description": "Tengenetsar - Get Professional Virtual Assistance from Experts - Plumbers, Electricians, Mechanic, Online",
     "categories": ["utilities", "productivity", "medical","shopping", "lifestyle","social" ],
