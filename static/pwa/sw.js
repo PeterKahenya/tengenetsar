@@ -5,7 +5,7 @@ const CACHE_NAME = 'static-cache-v1';
 
 // CODELAB: Add list of files to cache here.
 const FILES_TO_CACHE = [
-    '/static/offline/home.html',
+    '/static/pwa/offline/home.html',
 ];
 
 self.addEventListener('install', (evt) => {
@@ -48,7 +48,7 @@ self.addEventListener('fetch', (evt) => {
           .catch(() => {
             return caches.open(CACHE_NAME)
                 .then((cache) => {
-                  return cache.match('/static/offline/home.html');
+                  return cache.match('/static/pwa/offline/home.html');
                 });
           })
   );
