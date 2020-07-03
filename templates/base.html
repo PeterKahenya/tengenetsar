@@ -2,10 +2,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script type="text/javascript">
+        var swRegistration;
+        if ('serviceWorker' in navigator && 'PushManager' in window) {
+            console.log('Service Worker and Push is supported');
+            navigator.serviceWorker.register('/serviceworker.js', {
+                scope: '.' // <--- THIS BIT IS REQUIRED
+            }).then(function (registration) {
+                swRegistration=registration
+                console.log('Tengenetsar ServiceWorker registration successful with scope: ', registration);
+            }, function (err) {
+                // registration failed :(
+                console.warn('Tengenetsar ServiceWorker registration failed with error: ', err);
+            });
+        }
+    </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tengenetsar</title>
     <link rel="shortcut icon" href="{% static 'images/icon.png' %}" type="image/x-icon">
+
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#00b050" />
+    <meta rel="icon" href="{% static 'images/icon.png' %}" type="image/png">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="green">
+    <meta name="apple-mobile-web-app-title" content="Tengenetsar">
+    <link rel="apple-touch-icon" href="{% static '/images/icons/icon152x152.png' %}">
+    <meta name="description" content="Tengenetsar App - Get Professional Virtual Assistance from Experts - Plumbers, Electricians, Mechanic, Online">
+
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Asul&display=swap" rel="stylesheet">
     <style>

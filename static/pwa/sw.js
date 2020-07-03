@@ -2,14 +2,11 @@
 
 // CODELAB: Update cache names any time any of the cached files change.
 const CACHE_NAME = 'static-cache-v1';
-var peer;
-var dataconnection;
-var customer_call;
 
 // CODELAB: Add list of files to cache here.
 const FILES_TO_CACHE = [
-    '/static/pwa/offline.html',
-  ];
+    '/static/offline/home.html',
+];
 
 self.addEventListener('install', (evt) => {
     console.log('[ServiceWorker] Install');
@@ -51,7 +48,7 @@ self.addEventListener('fetch', (evt) => {
           .catch(() => {
             return caches.open(CACHE_NAME)
                 .then((cache) => {
-                  return cache.match('/static/pwa/offline.html');
+                  return cache.match('/static/offline/home.html');
                 });
           })
   );
@@ -61,6 +58,6 @@ self.addEventListener('fetch', (evt) => {
 self.addEventListener('notificationclick', function(event) {
   event.notification.close();
   event.waitUntil(
-    clients.openWindow('https://tengeneza.kipya-africa.com/fundi_n/')
+    clients.openWindow('https://tengenetsar.kipya-africa.com/expert/call/?notified=yes')
   );
 });
