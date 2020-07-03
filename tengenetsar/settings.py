@@ -25,7 +25,7 @@ SECRET_KEY = '971-m8&@!0bu^n&3j%g_mhux)@+d0sr$#v5et7kkl4la_zzkie'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1","tengenetsar.kipya-africa.com"]
 
 
 # Application definition
