@@ -1,0 +1,71 @@
+{% extends '../base.html' %}
+{% load static %}
+
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/calling_page.css' %}">
+<div id="start_call_page">
+    <div class="d-flex align-items-center flex-column">
+        <span class="material-icons text-white" style="font-size:5rem" >
+            account_circle
+        </span>
+        {% if fundi %}
+            <div>
+                <h5 class="text-white">{{fundi.user.first_name}} {{fundi.user.last_name}}</h5>
+            </div>
+        {% else %}
+            <div style="width: 80%;">
+                <h5 class="text-white">Sorry :( Our Staff are currently fully occupied. Please Try again Later</h5>
+            </div>
+        {% endif %}
+    </div>
+    <div id="logs" class="text-white display-1">
+
+    </div>
+
+    {% if fundi %}
+        <button  id="start_call_button" class="material-icons btn btn-outline-success bg-success control-buttons">
+            call
+        </button>
+    {% else %}
+        <button  onclick="location.reload()" class="material-icons btn btn-outline-success bg-success control-buttons">
+            refresh
+        </button>
+    {% endif %}
+    
+</div>
+<div id="live_calling_page"  class="row main_container">
+	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 shadow videos_holder">
+		  <video autoplay playsinline id="other_video" width="100%"></video>
+		  
+		  <input type="hidden" id="caller_id" value="{{caller.caller_id}}"/>
+		  <input type="hidden" id="fundi_id" value="{{fundi.id}}"/>
+		 
+		  <div class="live-controls">
+		  	<button id="mic_off_btn" class="material-icons btn btn-outline-light control-buttons">
+				mic
+			</button>
+			<button id="videocam_off_btn" class="material-icons btn btn-outline-light control-buttons">
+				videocam
+			</button>
+			<button id="hangout_btn" class="material-icons btn btn-outline-light control-buttons">
+				call
+			</button>
+		  	<video autoplay playsinline id="my_video"></video>
+
+		  </div>
+	</div>
+	<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 chats">
+		<div id="chat_logs">
+			
+		</div>
+		<div class="chatbox">
+			<input id="my_chat_text_area" placeholder="Enter message..." />
+			<button class="btn btn-primary material-icons" id="send_chat_btn">
+				send
+			</button>
+		</div>
+	</div>
+</div>
+<script src="{% static 'js/peerjs.min.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/calling_page.js' %}" type="text/javascript"></script>
+{% endblock content %}

@@ -4,6 +4,8 @@ from .home import *
 
 urlpatterns = [
     path('',HomeView.as_view(),name='homepage'),
+    path('caller/',include('callers.urls')),
+    path('expert/',include('experts.urls')),
     re_path('^serviceworker.js$', service_worker),
     re_path('^manifest.json$', manifest),
     path('admin/', admin.site.urls),
