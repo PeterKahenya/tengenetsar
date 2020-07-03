@@ -1,0 +1,23 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tengenetsar</title>
+    <link rel="shortcut icon" href="{% static 'images/icon.png' %}" type="image/x-icon">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Asul&display=swap" rel="stylesheet">
+    <style>
+        *{
+            font-family: 'Asul', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    {% block content %}
+    {% endblock %}
+    <script src="{% static 'js/jquery-3.5.1.min.js' %}"></script>
+
+</body>
+</html>
