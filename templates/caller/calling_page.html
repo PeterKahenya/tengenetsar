@@ -8,15 +8,11 @@
         <span class="material-icons text-white" style="font-size:5rem" >
             account_circle
         </span>
-        {% if expert %}
-            <div>
-                <h5 class="text-white">{{expert.user.first_name}} {{expert.user.last_name}}</h5>
-            </div>
-        {% else %}
-            <div style="width: 80%;">
-                <h5 class="text-white">Sorry :( Our Staff are currently fully occupied. Please Try again Later</h5>
-            </div>
-        {% endif %}
+
+        <div>
+            <h5 class="text-white">{{expert.user.first_name}} {{expert.user.last_name}}</h5>
+        </div>
+        
     </div>
     <div id="logs" class="text-white display-1">
 
@@ -25,11 +21,7 @@
     <button  id="start_call_button" class="material-icons btn btn-outline-success bg-success control-buttons">
         call
     </button>
-    {% else %}
-        <button  onclick="location.reload()" class="material-icons btn btn-outline-success bg-success control-buttons">
-            refresh
-        </button>
-    {% endif %}
+   
     
 </div>
 <div id="live_calling_page"  class="row main_container">
