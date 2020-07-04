@@ -78,7 +78,6 @@ function accept_call(e){
 
 
     customer_call.answer(stream); // Answer the call with an A/V stream.
-    customer_call.
     customer_call.on('stream', function(remoteStream) {
       other_video.srcObject=remoteStream
     });
