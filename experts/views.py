@@ -73,7 +73,7 @@ class ExpertCallsList(View):
             expert=Expert.objects.filter(user=request.user).first()
             if expert:
                 calls=Call.objects.filter(expert=expert)
-                return render(request,"experts/expert_calls_list_page.html",{'expert':expert,"calls":calls},None,None,None)
+                return render(request,"expert/expert_calls_list_page.html",{'expert':expert,"calls":calls},None,None,None)
             else:
                 return redirect('login')
         else:
