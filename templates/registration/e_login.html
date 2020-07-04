@@ -2,13 +2,15 @@
 {% load static %}
 {% block content %}
 <div class="d-flex flex-column align-items-center justify-content-center" style="width: 100%!important;height: 100% !important;">
-  	    <div class="card bg-light shadow-lg" style="width: 22.5rem;border-radius: 10px!important;">
+  	    <div class="card bg-light shadow-lg" style="width: 27.5rem;min-height: 30rem;border-radius: 10px!important;">
 		  <div class="card-body bg-light" style="border-radius: 10px!important;border: none!important;">
 		    <form class="form-signin p-2" action="" method="POST">
         		{% csrf_token %}
 		        <div class="text-center mb-4">
 		             <img class="mb-4" src="{% static 'images/brand.png' %}" alt="" width="60" height="72">
-		            <h1 class="h3 mb-3 font-weight-normal">Expert | Login</h1> 
+					<h1 class="h3 mb-3 font-weight-normal text-muted">Expert | Login</h1> 
+					<br>
+
 		            {% if errors %}
 		                <div class="alert alert-danger alert-dismissible fade show" role="alert">
 		                  <small class="text-small">{{errors}}</small>
@@ -28,14 +30,13 @@
   				</div>
   				<br>
   				<br>
-			  	<div class="text-center">
-			    	<button class="col-6 btn btn-lg btn-success" type="submit">Sign In</button>
-			    	<br>
-			    	<br>
-			    	<a href="/f_signup" class="col-6 btn-lg btn btn-warning">
+			  	<div class="d-flex justify-content-around text-center">
+			    	<button class="btn btn-success" type="submit">Sign In</button>
+			    	<a href="/expert/signup" class="col-6 btn-lg btn btn-warning">
 			        	Sign Up
 			    	</a>
-			  	</div>
+				  </div>
+				  <br>
 			</form>
 		  </div>
 		</div>

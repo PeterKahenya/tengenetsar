@@ -6,7 +6,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
-
+from calls.models import Call
 
 class SignUpForm(UserCreationForm):
     first_name = forms.CharField(max_length=30, required=False, help_text='Optional.')
@@ -70,7 +70,18 @@ class CallView(View):
 
 class CallerHome(View):
     def get(self, request):
-        return render(request,"caller/caller_home.html",None,None,None,None)
+        if request.user.is_authenticated:
+            caller=Caller.objects.filter(user=request.user).first()
+            if caller:
+                calls=Call.objects.filter(caller=caller)
+                return render(request,"caller/caller_home.html",{"caller":caller,"calls":calls},None,None,None)
+            else:
+                return redirect("/caller/login")
+        else:
+            return redirect("/caller/login")
+
+                
+            
 
     
     
