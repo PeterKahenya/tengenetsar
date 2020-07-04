@@ -140,6 +140,8 @@ start_call_button.onclick = (e) => {
         peer.disconnect()
         peer.destroy()
         dataconnection.close()
+
+    window.location.href="../caller"
         }
     })
 
