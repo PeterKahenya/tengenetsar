@@ -34,7 +34,7 @@ function setup_call(peer_object) {
   console.log("setting up video call")
   logs_panel.innerHTML += "."
   getUserMedia({
-    video:true,
+    video:{facingMode: {exact: "environment"}},
     audio: true
   }, function (stream) {
 
