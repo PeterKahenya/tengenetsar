@@ -1,4 +1,3 @@
-
 var fundi_peer_id = document.getElementById('expert_id').value;
 var my_peer_id = document.getElementById('caller_id').value;
 var my_video = document.getElementById('my_video')
