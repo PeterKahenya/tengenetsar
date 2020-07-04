@@ -8,5 +8,7 @@ urlpatterns = [
     path('expert/',include('experts.urls')),
     re_path('^serviceworker.js$', service_worker),
     re_path('^manifest.json$', manifest),
+    path('comingsoon/', ComingSoon.as_view()),
+
     path('admin/', admin.site.urls),
 ]

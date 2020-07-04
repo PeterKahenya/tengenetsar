@@ -22,3 +22,7 @@ def manifest(request):
 class HomeView(View):
 	def get(self,request):
 		return render(request,"home.html",None,None,None,None)
+
+class ComingSoon(View):
+	def get(self,request):
+		return render(request,"commingsoon.html",None,None,None,None)
