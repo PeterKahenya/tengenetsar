@@ -6,8 +6,12 @@
 <style>
                 .app-fab--absolute {
                   position: fixed;
-                  bottom: 1rem;
-                  right: 1rem;
+                  bottom: 2rem;
+                  right: 2rem;
+                  text-decoration: none;
+                }
+                .app-fab--absolute:hover{
+                    text-decoration-line: none;
                 }
                 body{
                     background-color: #f7f7f7 !important;
@@ -15,8 +19,8 @@
                 
                 @media(min-width: 1024px) {
                    .app-fab--absolute {
-                    bottom: 1.5rem;
-                    right: 1.5rem;
+                    bottom: 3rem;
+                    right: 3rem;
                   }
                 }
 </style>
@@ -56,30 +60,44 @@
     </header>
     <main class="main-content" id="main-content">
         <div class="mdc-top-app-bar--fixed-adjust" style="position: relative;">
-            <ul class="mdc-list mdc-list--two-line">
-                <li class="mdc-list-item" tabindex="0">
-                  <span class="mdc-list-item__text">
-                    <span class="mdc-list-item__primary-text">Two-line item</span>
-                    <span class="mdc-list-item__secondary-text">Secondary text</span>
-                  </span>
-                </li>
-                <li class="mdc-list-item">
-                  <span class="mdc-list-item__text">
-                    <span class="mdc-list-item__primary-text">Two-line item</span>
-                    <span class="mdc-list-item__secondary-text">Secondary text</span>
-                  </span>
-                </li>
-                <li class="mdc-list-item">
-                  <span class="mdc-list-item__text">
-                    <span class="mdc-list-item__primary-text">Two-line item</span>
-                    <span class="mdc-list-item__secondary-text">Secondary text</span>
-                  </span>
-                </li>
+            {% if message %}
+		                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+		                  <small class="text-small">{{message}}</small>
+		                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		                    <span aria-hidden="true">&times;</span>
+		                  </button>
+                    </div>
+                    <script>
+                      setTimeout(() => {
+                        window.location="/caller"
+                      }, 3000);
+                    </script>
+		    {% endif %}
+            <ul id="listTWO_LINE" class="mdc-list mdc-list--two-line inline-demo-list mdc-list--avatar-list">
+              <li class="mdc-list-item mdc-ripple-upgraded" tabindex="0">
+
+                <span class="mdc-list-item__graphic material-icons" aria-hidden="true">
+                    <img src="https://i2.wp.com/www.usmagazine.com/wp-content/uploads/2018/05/joseph-morgan-on-the-originals-2.jpg?crop=0px%2C0px%2C1200px%2C679px&resize=1600%2C900&ssl=1" width="60" height="60" style="border-radius: 50%;" alt="">
+                </span>
+                
+                <span class="mdc-list-item__text">
+                    <span class="mdc-list-item__primary-text">
+                        Joseph Morgan
+                    </span>
+                    <span class="mdc-list-item__secondary-text text-small">
+                        Thanks for the service
+                    </span>
+                </span>
+                <span aria-hidden="true" style="float: right !important;" class="mdc-list-item__meta text-success">July 6th</span>
+              </li>
+              <hr>
+              
               </ul>
                
-        <button class="mdc-fab app-fab--absolute bg-success" aria-label="Favorite">
-            <span class="mdc-fab__icon material-icons">favorite</span>
-        </button>
+        <a href="/caller/call" class="mdc-fab app-fab--absolute mdc-fab--extended text-white bg-success" aria-label="Favorite">
+            <span class="mdc-fab__icon material-icons">call</span>
+            New Call
+        </a>
         </div>
 
       </main>
@@ -90,7 +108,9 @@
         const drawer = mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
         document.getElementById("open__nav__button").onclick=(e)=>{
             drawer.open = !drawer.open;
-        }    
+        }
+        const list = new mdc.list.MDCList(document.querySelector('.mdc-list')); 
+        const listItemRipples = list.listElements.map((listItemEl) => new mdc.ripple.MDCRipple(listItemEl));   
     </script> 
  
 {% endblock content %}
