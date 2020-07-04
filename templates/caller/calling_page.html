@@ -8,9 +8,9 @@
         <span class="material-icons text-white" style="font-size:5rem" >
             account_circle
         </span>
-        {% if fundi %}
+        {% if expert %}
             <div>
-                <h5 class="text-white">{{fundi.user.first_name}} {{fundi.user.last_name}}</h5>
+                <h5 class="text-white">{{expert.user.first_name}} {{expert.user.last_name}}</h5>
             </div>
         {% else %}
             <div style="width: 80%;">
@@ -22,7 +22,7 @@
 
     </div>
 
-    {% if fundi %}
+    {% if expert %}
         <button  id="start_call_button" class="material-icons btn btn-outline-success bg-success control-buttons">
             call
         </button>
@@ -49,6 +49,9 @@
 			</button>
 			<button id="hangout_btn" class="material-icons btn btn-outline-light control-buttons">
 				call
+			</button>
+			<button id="flip_camera_btn" class="material-icons btn btn-outline-light control-buttons">
+				flip_camera_android
 			</button>
 		  	<video autoplay playsinline id="my_video"></video>
 

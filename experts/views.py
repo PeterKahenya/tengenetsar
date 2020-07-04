@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render,redirect
 from .models import Expert
 from calls.models import Call
@@ -6,6 +7,9 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from django.contrib.auth.models import User
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.http.response import JsonResponse
 
 
 class SignUpForm(UserCreationForm):
@@ -57,7 +61,7 @@ class ExpertCallingPage(View):
 		if request.user.is_authenticated:
 			expert=Expert.objects.filter(user=request.user).first()
 			if expert:
-				return render(request,"expert_calling_page.html",{'expert':expert},None,None,None)
+				return render(request,"expert/expert_calling_page.html",{'expert':expert},None,None,None)
 			else:
 				return redirect('login')
 		else:
@@ -69,8 +73,17 @@ class ExpertCallsList(View):
             expert=Expert.objects.filter(user=request.user).first()
             if expert:
                 calls=Call.objects.filter(expert=expert)
-                return render(request,"expert_calls_list_page.html",{'expert':expert,"calls":calls},None,None,None)
+                return render(request,"experts/expert_calls_list_page.html",{'expert':expert,"calls":calls},None,None,None)
             else:
                 return redirect('login')
         else:
             return redirect('login')
+
+@method_decorator(csrf_exempt, name='dispatch')
+class ExpertLock(View):
+	def post(self,request):
+		data=json.loads(request.body.decode('utf-8'))
+		expert=Expert.objects.get(id=data['expert_id'])
+		expert.is_free=data['status']
+		expert.save()
+		return JsonResponse({"status":data['status']})
