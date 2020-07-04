@@ -1,20 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
-<div class="text-center" style="width: 100%!important">
-	<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-  <header class="masthead mb-auto">
-
-  </header>
-  <div class="container d-flex align-items-center justify-content-center">
-  	    <div class="card" style="width: 25rem;">
-		  <div class="card-body">
+<div class="d-flex flex-column align-items-center justify-content-center" style="width: 100%!important;height: 100% !important;">
+	<div class="card bg-light shadow-lg" style="width: 22.5rem;border-radius: 10px!important;">
+	<div class="card-body bg-light" style="border-radius: 10px!important;border: none!important;">
 		    <form class="form-signin p-2 card" action="" method="POST">
         		{% csrf_token %}
 		        <div class="text-center mb-4">
 		             <img class="mb-4" src="{% static 'images/icon.png' %}" alt="" width="60" height="72">
-		            <h1 class="h3 mb-3 font-weight-normal">Tengenetsar | Signup</h1> 
+		            <h1 class="h3 mb-3 font-weight-normal">Caller | Signup</h1> 
 		            {% if form.errors %}
 		                <div class="alert alert-danger alert-dismissible fade show" role="alert">
 		                  {% for k,v in form.errors.items %}
@@ -43,15 +37,12 @@
 			</form>
 		  </div>
 		</div>
-  </div>
 
-  <footer class="mastfoot mt-auto">
+  <footer class="mastfoot">
     <div class="inner">
 		<p class="mt-5 mb-3 text-muted text-center">&copy; 2020</p>
-		<p>A product of <a href="https://www.kipya-africa.com/">Kipya Africa Limited</a>.</p>
 		
     </div>
   </footer>
-</div>
 </div>
 {% endblock %}

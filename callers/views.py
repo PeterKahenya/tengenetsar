@@ -61,7 +61,6 @@ class CallView(View):
 			caller=Caller.objects.filter(user=request.user).first()
 			if caller:
 				expert=Expert.objects.filter(is_free=True).first()
-				print(caller,expert)
 				return render(request,"caller/calling_page.html",{'caller':caller,'expert':expert},None,None,None)
 			else:
 				return redirect("/caller/login")
