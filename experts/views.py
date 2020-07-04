@@ -63,21 +63,21 @@ class ExpertCallingPage(View):
 			if expert:
 				return render(request,"expert/expert_calling_page.html",{'expert':expert},None,None,None)
 			else:
-				return redirect('login')
+				return redirect('/expert/login')
 		else:
-			return redirect('login')
+			return redirect('/expert/login')
 
-class ExpertCallsList(View):
+class ExpertHome(View):
     def get(self,request):
         if request.user.is_authenticated:
             expert=Expert.objects.filter(user=request.user).first()
             if expert:
                 calls=Call.objects.filter(expert=expert)
-                return render(request,"expert/expert_calls_list_page.html",{'expert':expert,"calls":calls},None,None,None)
+                return render(request,"expert/expert_home.html",{'expert':expert,"calls":calls},None,None,None)
             else:
-                return redirect('login')
+                return redirect('/expert/login')
         else:
-            return redirect('login')
+            return redirect('/expert/login')
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ExpertLock(View):
