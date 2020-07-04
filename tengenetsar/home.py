@@ -25,4 +25,4 @@ class HomeView(View):
 
 class ComingSoon(View):
 	def get(self,request):
-		return render(request,"commingsoon.html",None,None,None,None)
+		return render(request,"comingsoon.html",None,None,None,None)
