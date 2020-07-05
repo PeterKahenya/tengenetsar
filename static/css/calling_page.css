@@ -41,14 +41,7 @@ body{
 	margin: auto;
 }
 
-/* .top-controls{
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-around;
-	width: 95%;
-	height: 30%;
-}
+/*
 
 .bottom-controls{
 	display: flex;
@@ -71,6 +64,17 @@ body{
 	width: 100%;
 	background-color: green;
 }
+.top-controls{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	width: 95%;
+	height: 30%;
+}
+
+
+
 #my_video{
 	width: 80px;
 	height: 80px;
