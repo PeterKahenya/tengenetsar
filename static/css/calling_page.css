@@ -125,6 +125,12 @@ body{
 	width: 60%;
 	margin: 5px auto;
 }
+.my_chat>a{
+	color: white;
+}
+.other_chat>a{
+	color: #15ad43;
+}
 
 .my_chat{
 	background:linear-gradient(to top right,#15ad43,#00b050);
