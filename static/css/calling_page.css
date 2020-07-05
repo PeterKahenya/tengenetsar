@@ -41,17 +41,7 @@ body{
 	margin: auto;
 }
 
-/*
-
-.bottom-controls{
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-around;
-	bottom: 0;
-	width: 95%;
-	height: 30%;
-} */
+/* */
 
 .live-controls{
 	position: absolute;
@@ -63,10 +53,21 @@ body{
 	width: 100%;
 	background-color: green;
 }
+
 .top-controls{
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
+	height: 30%;
+}
+
+.bottom-controls{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	bottom: 0;
+	width: 95%;
 	height: 30%;
 }
 
