@@ -29,13 +29,14 @@
     {% if caller.profile %}
       <img src="https://i2.wp.com/www.usmagazine.com/wp-content/uploads/2018/05/joseph-morgan-on-the-originals-2.jpg?crop=0px%2C0px%2C1200px%2C679px&resize=1600%2C900&ssl=1" width="60" height="60" style="border-radius: 50%;" alt="{{call.expert.user.first_name}}">
     {% else %}
-      <div class="profile_letter display-5 font-weight-bold" style="min-width: 60px !important;height: 60px;background-color: #cccccc;border-radius: 50%;display: flex;align-items: center;justify-content: center;color: #15ad43;">
+      <div class="profile_letter display-5 font-weight-bold" style="max-width: 60px !important;height: 60px;background-color: #cccccc;border-radius: 50%;display: flex;align-items: center;justify-content: center;color: #15ad43;">
         {{ caller.user.first_name|make_list|first }}
       </div>
       {% endif %}
     <h3 class="mdc-drawer__title">{{caller.user.first_name}} {{caller.user.last_name}}</h3>
-    <h4 class="mdc-drawer__title text-muted text-small text-success">@{{caller.user.username}}</h4>
-    <h6 class="mdc-drawer__subtitle">{{caller.user.email}}</h6>
+    <h4 class="mdc-drawer__title">{{caller.user.email}}</h4>
+    <h6 class="mdc-drawer__subtitle text-muted text-small text-success">@{{caller.user.username}}</h6>
+
   </div>
     <div class="mdc-drawer__content">
       <nav class="mdc-list">
