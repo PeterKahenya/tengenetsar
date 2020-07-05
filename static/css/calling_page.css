@@ -130,6 +130,7 @@ body{
 }
 .other_chat>a{
 	color: #15ad43;
+	border: 0.5px solid #bbb;
 }
 
 .my_chat{
