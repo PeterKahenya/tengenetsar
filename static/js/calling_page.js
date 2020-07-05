@@ -75,8 +75,11 @@ function setup_call(peer_object) {
       document.getElementById('live_calling_page').style.display = "flex"
 
       flip_camera_btn.onclick=(e)=>{
+        alert("flip-clicked")
         getUserMedia({audio:true,video:{facingMode: {exact: "environment"}}},
           function (stream) {
+          alert("got stream")
+
             my_video.srcObject = stream
             my_stream = stream;
             let videoTrack = stream.getVideoTracks()[0];
