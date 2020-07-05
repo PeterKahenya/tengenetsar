@@ -101,6 +101,11 @@ function setup_call(peer_object) {
       console.log("Got Local Stream ", remoteStream)
       document.getElementById('start_call_page').style.display = "none"
       document.getElementById('live_calling_page').style.display = "flex"
+      my_video.onclick=(e)=>{
+        other_stream=other_video.srcObject
+        other_video.srcObject = my_video.srcObject
+        my_video.srcObject = other_stream
+      }
     });
     prepare_flip()
   }, function (err) {

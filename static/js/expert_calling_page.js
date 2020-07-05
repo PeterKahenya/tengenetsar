@@ -82,6 +82,11 @@ function accept_call(e){
     customer_call.answer(stream); // Answer the call with an A/V stream.
     customer_call.on('stream', function(remoteStream) {
       other_video.srcObject=remoteStream
+      my_video.onclick=(e)=>{
+        other_stream=other_video.srcObject
+        other_video.srcObject = my_video.srcObject
+        my_video.srcObject = other_stream
+      }
     });
   }, function(err) {
     console.log('Failed to get local stream' ,err);
