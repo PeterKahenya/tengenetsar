@@ -60,7 +60,6 @@ def caller_login(request):
 
 class CallView(View):
     def get(self, request):
-        print("no receiver")
         if request.user.is_authenticated:
             caller = Caller.objects.filter(user=request.user).first()
             if caller:
