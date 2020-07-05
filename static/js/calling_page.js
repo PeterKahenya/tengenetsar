@@ -42,17 +42,17 @@ function parse_chat(chat_message) {
 
 
 function save_chat(text,sender_id) {
-  alert("Saving Chat")
+  console.log("Saving Chat")
   axios.post('/calls/chats/add', {
     "sender_id": sender_id,
     'text':text,
     'call_id':call_id
   })
   .then(function (response) {
-    alert(JSON.stringify(response));
+    console.log(JSON.stringify(response));
   })
   .catch(function (error) {
-    alert(JSON.stringify(error));
+    console.warn(JSON.stringify(error));
   });
 }
 
