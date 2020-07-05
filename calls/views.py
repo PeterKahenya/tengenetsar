@@ -13,6 +13,7 @@ import json
 class AddChat(View):
     def post(self,request):
         data=json.loads(request.body.decode('utf-8'))
+        print(str(data))
         sender_id = data['sender_id']
         call = Call.objects.get(id=data['call_id'])
         text = data['text']
