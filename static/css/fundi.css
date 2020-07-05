@@ -172,13 +172,11 @@ body{
 	margin: 5px auto;
 }
 
-.my_chat>a{
+.my_chat>div>a{
 	color: white;
 }
-.other_chat>a{
+.other_chat>div>a{
 	color: #15ad43;
-	border: 0.5px solid #bbb;
-
 }
 
 .my_chat{
@@ -201,6 +199,7 @@ body{
 	border-bottom-right-radius: 10px;
 	border-bottom-left-radius: 10px;
 	margin-left: 5px;
+	border: 0.5px solid #bbb;
 }
 #fundi_home{
 	height: 100%;
