@@ -15,6 +15,8 @@ var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || nav
 var logs_panel = document.getElementById('logs')
 var devices_panel = document.getElementById('devices')
 var peer;
+var call;
+
 
 
 const DEFAULT_CONFIG = {
@@ -29,6 +31,28 @@ const DEFAULT_CONFIG = {
   ],
   sdpSemantics: "unified-plan"
 };
+
+function prepare_flip() {
+  flip_camera_btn.onclick=(e)=>{
+    alert("flip-clicked")
+    getUserMedia({
+      audio:true,video:{facingMode: {exact: "environment"}}},
+      function (stream) {
+      alert("got stream")
+
+        my_video.srcObject = stream
+        my_stream = stream;
+        let videoTrack = stream.getVideoTracks()[0];
+        video_sender=call.peerConnection.getSenders().find(function(s) {
+          return s.track.kind == videoTrack.kind;
+        });
+        video_sender.replaceTrack(videoTrack);
+      },
+      function (err) {
+        alert('Failed to get local stream', err);
+      })
+  }
+}
 
 function setup_call(peer_object) {
   console.log("setting up video call")
@@ -67,32 +91,14 @@ function setup_call(peer_object) {
       }
     }
 
-    var call = peer_object.call(fundi_peer_id, stream);
+    call = peer_object.call(fundi_peer_id, stream);
     call.on('stream', function (remoteStream) {
       other_video.srcObject = remoteStream
       console.log("Got Local Stream ", remoteStream)
       document.getElementById('start_call_page').style.display = "none"
       document.getElementById('live_calling_page').style.display = "flex"
-
-      flip_camera_btn.onclick=(e)=>{
-        alert("flip-clicked")
-        getUserMedia({audio:true,video:{facingMode: {exact: "environment"}}},
-          function (stream) {
-          alert("got stream")
-
-            my_video.srcObject = stream
-            my_stream = stream;
-            let videoTrack = stream.getVideoTracks()[0];
-            video_sender=call.peerConnection.getSenders().find(function(s) {
-              return s.track.kind == videoTrack.kind;
-            });
-            video_sender.replaceTrack(videoTrack);
-          }
-        )
-      }
-
-
     });
+    prepare_flip()
   }, function (err) {
     console.log('Failed to get local stream', err);
   });
