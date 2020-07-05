@@ -16,6 +16,7 @@ var logs_panel = document.getElementById('logs')
 var devices_panel = document.getElementById('devices')
 var peer;
 var call;
+var mode="user"
 
 
 
@@ -35,10 +36,9 @@ const DEFAULT_CONFIG = {
 function prepare_flip() {
   flip_camera_btn.onclick=(e)=>{
     my_stream.getTracks().forEach(track => track.stop());
-    alert("flip-clicked")
-    getUserMedia({ audio: true, video: { facingMode:"environment"  } },
+    var new_mode = mode === "user"?"environment":"user"
+    getUserMedia({ audio: true, video: { facingMode:new_mode  } },
       function (stream) {
-      alert("got stream")
 
         my_video.srcObject = stream
         my_stream = stream;
@@ -47,6 +47,7 @@ function prepare_flip() {
           return s.track.kind == videoTrack.kind;
         });
         video_sender.replaceTrack(videoTrack);
+        mode=new_mode
       },
       function (err) {
         chat_logs.append('Failed to get local stream'+err)
@@ -69,24 +70,24 @@ function setup_call(peer_object) {
     my_video.muted = true
 
     videocam_off_btn.onclick = (e) => {
-      if (stream.getVideoTracks()[0].enabled) {
-        stream.getVideoTracks()[0].enabled = false
+      if (my_stream.getVideoTracks()[0].enabled) {
+        my_stream.getVideoTracks()[0].enabled = false
         videocam_off_btn.classList.replace("btn-outline-light", "btn-danger")
         videocam_off_btn.innerText = "videocam_off"
       } else {
-        stream.getVideoTracks()[0].enabled = true
+        my_stream.getVideoTracks()[0].enabled = true
         videocam_off_btn.classList.replace("btn-danger", "btn-outline-light")
         videocam_off_btn.innerText = "videocam"
       }
     }
 
     mic_off_btn.onclick = (e) => {
-      if (stream.getAudioTracks()[0].enabled) {
-        stream.getAudioTracks()[0].enabled = false
+      if (my_stream.getAudioTracks()[0].enabled) {
+        my_stream.getAudioTracks()[0].enabled = false
         mic_off_btn.classList.replace("btn-outline-light", "btn-danger")
         mic_off_btn.innerText = "mic_off"
       } else {
-        stream.getAudioTracks()[0].enabled = true
+        my_stream.getAudioTracks()[0].enabled = true
         mic_off_btn.classList.replace("btn-danger", "btn-outline-light")
         mic_off_btn.innerText = "mic"
       }
