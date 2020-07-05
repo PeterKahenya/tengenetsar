@@ -8,7 +8,6 @@ var start_call_button = document.getElementById('start_call_button')
 var chat_logs = document.getElementById('chat_logs')
 var mic_off_btn = document.getElementById('mic_off_btn')
 var videocam_off_btn = document.getElementById('videocam_off_btn')
-var hangout_btn = document.getElementById('hangout_btn')
 var flip_camera_btn = document.getElementById('flip_camera_btn')
 var my_stream;
 var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
@@ -162,12 +161,6 @@ start_call_button.onclick = (e) => {
         }
         console.log('Data Sender is Ready')
         setup_call(peer)
-        hangout_btn.onclick = (e) => {
-          peer.disconnect()
-          peer.destroy()
-          dataconnection.close()
-          window.location.href="../caller"
-        }
         })
         
     })

@@ -7,7 +7,6 @@ var my_chat_text_area=document.getElementById('my_chat_text_area')
 var accept_call_btn=document.getElementById('accept_call_btn')
 var mic_off_btn=document.getElementById('mic_off_btn')
 var videocam_off_btn=document.getElementById('videocam_off_btn')
-var hangout_btn=document.getElementById('hangout_btn')
 var flip_camera_btn=document.getElementById('flip_camera_btn')
 
 var my_stream;
@@ -159,10 +158,4 @@ get_ready_btn.onclick=function (event) {
 
     notify()
   });
-  hangout_btn.onclick=(e)=> {
-    peer.disconnect()
-    peer.destroy()
-    dataconnection.close()
-    window.location.href="../expert"
-  }
 }
