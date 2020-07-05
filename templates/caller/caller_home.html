@@ -74,6 +74,7 @@
                     </script>
 		    {% endif %}
             <ul id="listTWO_LINE" class="mdc-list mdc-list--two-line inline-demo-list mdc-list--avatar-list">
+              {% for call in calls %}
               <li class="mdc-list-item mdc-ripple-upgraded" tabindex="0">
 
                 <span class="mdc-list-item__graphic material-icons" aria-hidden="true">
@@ -91,6 +92,7 @@
                 <span aria-hidden="true" style="float: right !important;" class="mdc-list-item__meta text-success">July 6th</span>
               </li>
               <hr>
+              {% endfor %}
               
               </ul>
                
