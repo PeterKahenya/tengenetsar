@@ -35,7 +35,7 @@
       {% endif %}
     <div class="display-6">{{caller.user.first_name}} {{caller.user.last_name}}</div>
     <div class="text-small text-muted">{{caller.user.email}}</div>
-    <div class="text-small text-success">@{{caller.user.username}}</div>
+    <small class="text-small text-success">@{{caller.user.username}}</small>
 
   </div>
     <div class="mdc-drawer__content">
@@ -46,11 +46,19 @@
         </a>
         <a class="mdc-list-item" href="#">
           <i class="material-icons mdc-list-item__graphic" aria-hidden="true">send</i>
-          <span class="mdc-list-item__text">Outgoing</span>
+          <span class="mdc-list-item__text">orders</span>
+        </a>
+        <a class="mdc-list-item" href="#">
+          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">gear</i>
+          <span class="mdc-list-item__text">settings</span>
         </a>
         <a class="mdc-list-item" href="/caller/logout">
           <i class="material-icons mdc-list-item__graphic" aria-hidden="true">exit_to_app</i>
           <span class="mdc-list-item__text">LOG OUT</span>
+        </a>
+        <a class="mdc-list-item" href="#">
+          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">help</i>
+          <span class="mdc-list-item__text">Help</span>
         </a>
       </nav>
     </div>
