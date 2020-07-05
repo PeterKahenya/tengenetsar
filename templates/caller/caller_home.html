@@ -33,9 +33,9 @@
         {{ caller.user.first_name|make_list|first }}
       </div>
       {% endif %}
-    <h3 class="display-6">{{caller.user.first_name}} {{caller.user.last_name}}</h3>
-    <h4 class="text-small">{{caller.user.email}}</h4>
-    <h6 class="text-small text-success">@{{caller.user.username}}</h6>
+    <div class="display-5 text-muted">{{caller.user.first_name}} {{caller.user.last_name}}</div>
+    <div class="text-small">{{caller.user.email}}</div>
+    <div class="text-small text-success">@{{caller.user.username}}</div>
 
   </div>
     <div class="mdc-drawer__content">
