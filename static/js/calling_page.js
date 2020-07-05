@@ -34,6 +34,7 @@ const DEFAULT_CONFIG = {
 
 function prepare_flip() {
   flip_camera_btn.onclick=(e)=>{
+    my_stream.getTracks().forEach(track => track.stop());
     alert("flip-clicked")
     getUserMedia({ audio: true, video: { facingMode:"environment"  } },
       function (stream) {
