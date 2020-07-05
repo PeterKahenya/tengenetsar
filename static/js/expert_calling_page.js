@@ -129,7 +129,9 @@ get_ready_btn.onclick=function (event) {
           connection.on('data',function(data) {
             var other_chat_node=document.createElement("div")
             other_chat_node.className="other_chat"
-            other_chat_node.appendChild(document.createTextNode(parse_chat(data)))
+            var chat = document.createElement("div")
+            chat.innerHTML=parse_chat(data)
+            other_chat_node.appendChild(chat)
             chat_logs.appendChild(other_chat_node)
             chat_logs.scrollTop = chat_logs.scrollHeight;
           })
@@ -139,7 +141,9 @@ get_ready_btn.onclick=function (event) {
             connection.send(my_chat_text_area_data);
             var other_chat_node=document.createElement("div")
             other_chat_node.className="my_chat"
-            other_chat_node.appendChild(document.createTextNode(parse_chat(my_chat_text_area_data)))
+            var chat = document.createElement("div")
+            chat.innerHTML=parse_chat(my_chat_text_area_data)
+            other_chat_node.appendChild(chat)
             chat_logs.appendChild(other_chat_node)
             chat_logs.scrollTop = chat_logs.scrollHeight
             my_chat_text_area.value=""
