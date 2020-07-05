@@ -92,11 +92,12 @@
                         {{call.expert.user.first_name}} {{call.expert.user.last_name}} 
                     </span>
                     <span class="mdc-list-item__secondary-text text-small">
-                        Thanks for the service
+                      {% if call.last_chat %}
                         {{call.last_chat}}
+                      {% endif %}
                     </span>
                 </span>
-                <span aria-hidden="true" style="float: right !important;" class="mdc-list-item__meta text-success">{{call.created|date:"F,j"}}</span>
+                <span aria-hidden="true" style="float: right !important;" class="mdc-list-item__meta text-success">{{call.created|date:"F, j"}}</span>
               </li>
               <hr>
               {% endfor %}
