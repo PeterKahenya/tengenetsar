@@ -66,9 +66,12 @@ class CallView(View):
             if caller:
                 expert = Expert.objects.filter(is_free=True).first()
                 if expert:
-                    return render(request, "caller/calling_page.html", {'caller': caller, 'expert': expert}, None, None, None)
+                    call = Call()
+                    call.caller=caller
+                    call.expert=expert
+                    call.save()
+                    return render(request, "caller/calling_page.html", {'call': call}, None, None, None)
                 else:
-                    print("no receiver")
                     calls = Call.objects.filter(caller=caller)
                     return render(request, "caller/caller_home.html", {"caller": caller, "calls": calls, "message": "Our Fix team is fully occupied at the moment. Please try again in a few minutes!"}, None, None, None)
             else:

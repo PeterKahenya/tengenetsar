@@ -1,5 +1,7 @@
 var fundi_peer_id = document.getElementById('expert_id').value;
 var my_peer_id = document.getElementById('caller_id').value;
+var call_id = document.getElementById('call_id').value;
+
 var my_video = document.getElementById('my_video')
 var other_video = document.getElementById('other_video')
 var send_chat_btn = document.getElementById('send_chat_btn')
@@ -17,10 +19,7 @@ var peer;
 var call;
 var mode="user"
 
-function parse_chat(chat_message) {
-  var urlRegex = /(https?:\/\/[^\s]+)/g;
-  return chat_message.replace(urlRegex, '<a target="_blank" href="$1">$1</a>')
-}
+
 
 const DEFAULT_CONFIG = {
   iceServers: [{
@@ -34,6 +33,29 @@ const DEFAULT_CONFIG = {
   ],
   sdpSemantics: "unified-plan"
 };
+
+
+function parse_chat(chat_message) {
+  var urlRegex = /(https?:\/\/[^\s]+)/g;
+  return chat_message.replace(urlRegex, '<a target="_blank" href="$1">$1</a>')
+}
+
+
+function save_chat(text,sender_id) {
+  console.log("Locking this Fundi")
+  axios.post('/calls/chats/add', {
+    "sender_id": sender_id,
+    'text':text,
+    'call_id':call_id
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
 
 function prepare_flip() {
   flip_camera_btn.onclick=(e)=>{
@@ -147,6 +169,7 @@ start_call_button.onclick = (e) => {
         logs_panel.innerHTML += "."
 
         connection.on('data', function (data) {
+            save_chat(data,fundi_peer_id)
             var other_chat_node = document.createElement("div")
             other_chat_node.className = "other_chat"
             var chat = document.createElement("div")
@@ -161,6 +184,8 @@ start_call_button.onclick = (e) => {
 
         send_chat_btn.onclick = function (e) {
             var my_chat_text_area_data = my_chat_text_area.value
+            save_chat(my_chat_text_area_data,my_peer_id)
+
             connection.send(my_chat_text_area_data);
             var other_chat_node = document.createElement("div")
             other_chat_node.className = "my_chat"
