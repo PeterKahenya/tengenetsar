@@ -35,7 +35,7 @@ const DEFAULT_CONFIG = {
 function prepare_flip() {
   flip_camera_btn.onclick=(e)=>{
     alert("flip-clicked")
-    getUserMedia({ audio: true, video: { facingMode: { exact: "environment" } } },
+    getUserMedia({ audio: true, video: { facingMode:"environment"  } },
       function (stream) {
       alert("got stream")
 
@@ -48,7 +48,8 @@ function prepare_flip() {
         video_sender.replaceTrack(videoTrack);
       },
       function (err) {
-        alert('Failed to get local stream'+Object.toString(err));
+        chat_logs.append('Failed to get local stream'+err)
+        alert('Failed to get local stream'+Object.toString(err.message));
       })
   }
 }
