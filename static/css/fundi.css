@@ -111,9 +111,14 @@ body{
 }
 #my_chat_text_area{
 	width: 80%;
-	border: none;
-	border-radius: 3px;
 	padding: 25px!important;
+	border: 0.3px solid #dbdbdb !important;
+	background: white;
+    border-radius: 30px;
+    text-align: left!important;
+	color: #333;
+	border: 0.5px solid #bbb;
+	
 
 }
 #chat_logs{
@@ -121,7 +126,20 @@ body{
 	height: 80%;
 	padding-bottom: 10px;
 }
-
+#send_chat_btn{
+    color: white;
+    font-size: 25px;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    background: #15ad43;
+    border: none;
+    width: 50px;
+    height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 #standby_container{
 	height: 100%;
 	width: 100%;
