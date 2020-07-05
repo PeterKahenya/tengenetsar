@@ -17,3 +17,6 @@ class Chat(models.Model):
 	text=models.TextField(blank=True,null=True)
 	created = models.DateTimeField(auto_now_add=True, editable=False,blank=True,null=True)
 
+	def __str__(self):
+		return self.text
+
