@@ -41,8 +41,6 @@ body{
 	margin: auto;
 }
 
-/* */
-
 .live-controls{
 	position: absolute;
 	z-index: 2;
@@ -51,7 +49,6 @@ body{
 	justify-content: space-between;
 	height: 100%;
 	width: 100%;
-	background-color: green;
 }
 
 .top-controls{
