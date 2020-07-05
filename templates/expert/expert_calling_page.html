@@ -8,19 +8,23 @@
 			  <video autoplay playsinline id="other_video"></video>
 			  <input type="hidden" id="expert_id" value="{{expert.id}}">
 			  <div class="live-controls" >
-				<button id="mic_off_btn" class="material-icons btn btn-outline-light control-buttons">
-					mic
-				</button>
-				<button id="videocam_off_btn" class="material-icons btn btn-outline-light control-buttons">
-					videocam
-				</button>
-				<button id="hangout_btn" class="material-icons btn btn-outline-light control-buttons">
-					call
-				</button>
-				<button id="flip_camera_btn" class="material-icons btn btn-outline-light control-buttons">
-					flip_camera_android
-				</button>
-				<video autoplay playsinline id="my_video"></video>
+				<div class="top-controls">
+					<button id="flip_camera_btn" style="float: right;" class="material-icons btn control-buttons">
+						flip_camera_android
+					</button>
+				</div>
+				<div class="bottom-controls">
+					<button id="mic_off_btn" class="material-icons btn btn-outline-light control-buttons">
+						mic
+					</button>
+					<button id="videocam_off_btn" class="material-icons btn btn-outline-light control-buttons">
+						videocam
+					</button>
+					<a href="/expert/" class="material-icons btn btn-outline-light control-buttons">
+						call
+					</a>
+					<video autoplay playsinline id="my_video"></video>
+				</div>
 			  </div>
 		</div>
 		<div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 chats">
