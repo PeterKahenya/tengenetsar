@@ -41,7 +41,7 @@ body{
 	margin: auto;
 }
 
-.top-controls{
+/* .top-controls{
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -58,7 +58,7 @@ body{
 	bottom: 0;
 	width: 95%;
 	height: 30%;
-}
+} */
 
 .live-controls{
 	position: absolute;
