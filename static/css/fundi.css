@@ -108,6 +108,8 @@ body{
 	bottom: 5px!important;
     width: 100%;
 	background: #f5f4ed;
+	align-items: center;
+	height: 60px !important;
 }
 #my_chat_text_area{
 	width: 80%;
