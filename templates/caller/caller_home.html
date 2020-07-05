@@ -33,14 +33,15 @@
         {{ caller.user.first_name|make_list|first }}
       </div>
       {% endif %}
-    <h3 class="mdc-drawer__title">Mail</h3>
-    <h6 class="mdc-drawer__subtitle">email@material.io</h6>
+    <h3 class="mdc-drawer__title">{{caller.user.first_name}} {{caller.user.last_name}}</h3>
+    <h4 class="mdc-drawer__title text-muted text-small text-success">@{{caller.user.username}}</h4>
+    <h6 class="mdc-drawer__subtitle">{{caller.user.email}}</h6>
   </div>
     <div class="mdc-drawer__content">
       <nav class="mdc-list">
-        <a class="mdc-list-item mdc-list-item--activated" href="#" aria-current="page" tabindex="0">
+        <a class="mdc-list-item mdc-list-item--activated" href="/shop" aria-current="page" tabindex="0">
           <i class="material-icons mdc-list-item__graphic" aria-hidden="true">inbox</i>
-          <span class="mdc-list-item__text">Inbox</span>
+          <span class="mdc-list-item__text">Shop</span>
         </a>
         <a class="mdc-list-item" href="#">
           <i class="material-icons mdc-list-item__graphic" aria-hidden="true">send</i>
