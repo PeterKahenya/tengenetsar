@@ -19,7 +19,7 @@ var mode="user"
 
 function parse_chat(chat_message) {
   var urlRegex = /(https?:\/\/[^\s]+)/g;
-  return chat_message.replace(urlRegex, '<a href="$1">$1</a>')
+  return chat_message.replace(urlRegex, '<a target="_blank" href="$1">$1</a>')
 }
 
 const DEFAULT_CONFIG = {
