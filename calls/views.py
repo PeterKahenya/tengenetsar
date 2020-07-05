@@ -10,9 +10,9 @@ from django.contrib.auth.models import User
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-class AddChat(View)
+class AddChat(View):
     def post(self,request):
-		data=json.loads(request.body.decode('utf-8'))
+        data=json.loads(request.body.decode('utf-8'))
         sender_id = data['sender_id']
         call = Call.objects.get(id=data['call_id'])
         text = data['text']
@@ -24,9 +24,9 @@ class AddChat(View)
             sender=Caller.objects.get(id=data['sender_id']).user
 
         chat=Chat()
-		chat.call=call
+        chat.call=call
         chat.sender=sender
         chat.text=text
         chat.save()
         
-		return JsonResponse({"chat_added":True})
+        return JsonResponse({"chat_added":True})
