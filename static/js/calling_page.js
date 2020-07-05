@@ -9,6 +9,7 @@ var chat_logs = document.getElementById('chat_logs')
 var mic_off_btn = document.getElementById('mic_off_btn')
 var videocam_off_btn = document.getElementById('videocam_off_btn')
 var hangout_btn = document.getElementById('hangout_btn')
+var flip_camera_btn = document.getElementById('flip_camera_btn')
 var my_stream;
 var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 var logs_panel = document.getElementById('logs')
@@ -72,6 +73,22 @@ function setup_call(peer_object) {
       console.log("Got Local Stream ", remoteStream)
       document.getElementById('start_call_page').style.display = "none"
       document.getElementById('live_calling_page').style.display = "flex"
+
+      flip_camera_btn.onclick=(e)=>{
+        getUserMedia({audio:true,video:{facingMode: {exact: "environment"}}},
+          function (stream) {
+            my_video.srcObject = stream
+            my_stream = stream;
+            let videoTrack = stream.getVideoTracks()[0];
+            video_sender=call.peerConnection.getSenders().find(function(s) {
+              return s.track.kind == videoTrack.kind;
+            });
+            video_sender.replaceTrack(videoTrack);
+          }
+        )
+      }
+
+
     });
   }, function (err) {
     console.log('Failed to get local stream', err);
