@@ -46,7 +46,6 @@ body{
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-around;
-	bottom: 0;
 	width: 95%;
 	height: 30%;
 }
@@ -68,6 +67,8 @@ body{
 	flex-direction: column;
 	align-items: center;
 	justify-content: space-between;
+	height: 100%;
+	background-color: green;
 }
 #my_video{
 	width: 80px;
