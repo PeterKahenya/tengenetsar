@@ -17,7 +17,10 @@ var peer;
 var call;
 var mode="user"
 
-
+function parse_chat(chat_message) {
+  var urlRegex = /(https?:\/\/[^\s]+)/g;
+  return chat_message.replace(urlRegex, '<a href="$1">$1</a>')
+}
 
 const DEFAULT_CONFIG = {
   iceServers: [{
@@ -141,7 +144,7 @@ start_call_button.onclick = (e) => {
         connection.on('data', function (data) {
             var other_chat_node = document.createElement("div")
             other_chat_node.className = "other_chat"
-            other_chat_node.appendChild(document.createTextNode(data))
+            other_chat_node.appendChild(document.createTextNode(parse_chat(data)))
             chat_logs.appendChild(other_chat_node)
             chat_logs.scrollTop = chat_logs.scrollHeight + 30
         })
@@ -154,7 +157,7 @@ start_call_button.onclick = (e) => {
             connection.send(my_chat_text_area_data);
             var other_chat_node = document.createElement("div")
             other_chat_node.className = "my_chat"
-            other_chat_node.appendChild(document.createTextNode(my_chat_text_area_data))
+            other_chat_node.appendChild(document.createTextNode(parse_chat(my_chat_text_area_data)))
             chat_logs.appendChild(other_chat_node)
             chat_logs.scrollTop = chat_logs.scrollHeight;
             my_chat_text_area.value = ""
