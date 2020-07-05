@@ -85,7 +85,17 @@ class CallerHome(View):
         if request.user.is_authenticated:
             caller = Caller.objects.filter(user=request.user).first()
             if caller:
-                calls = Call.objects.filter(caller=caller)
+                raw_calls = Call.objects.filter(caller=caller)
+                calls = []
+                for raw_call in raw_calls:
+                    call={}
+                    call["caller"]=raw_call.caller
+                    call["id"]=raw_call.id
+                    call["expert"]=raw_call.expert
+                    call["created"]=raw_call.created
+                    call["last_chat"]=raw_call.chat.last()
+                    calls.append(call)
+
                 return render(request, "caller/caller_home.html", {"caller": caller, "calls": calls}, None, None, None)
             else:
                 return redirect("/caller/login")
