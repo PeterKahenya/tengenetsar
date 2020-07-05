@@ -21,7 +21,7 @@ class SignUpForm(UserCreationForm):
         model = User
         fields = ('username', 'first_name', 'last_name',
                   'email', 'password1', 'password2', )
-
+    
 
 def caller_signup(request):
     if request.method == 'POST':

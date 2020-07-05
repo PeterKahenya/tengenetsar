@@ -33,7 +33,8 @@ function setup_call(peer_object) {
   console.log("setting up video call")
   logs_panel.innerHTML += "."
   getUserMedia({
-    video:{facingMode: {exact: "environment"}},
+    // video:{facingMode: {exact: "environment"}},
+    video:true,
     audio: true
   }, function (stream) {
 
@@ -132,16 +133,15 @@ start_call_button.onclick = (e) => {
             my_chat_text_area.value = ""
         }
         console.log('Data Sender is Ready')
-
-        })
         setup_call(peer)
         hangout_btn.onclick = (e) => {
-        peer.disconnect()
-        peer.destroy()
-        dataconnection.close()
-
-    window.location.href="../caller"
+          peer.disconnect()
+          peer.destroy()
+          dataconnection.close()
+          window.location.href="../caller"
         }
+        })
+        
     })
 
 }
