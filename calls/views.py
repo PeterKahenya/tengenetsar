@@ -17,8 +17,9 @@ class AddChat(View):
         call = Call.objects.get(id=data['call_id'])
         text = data['text']
         sender=None
-
-        if Expert.objects.get(id=data['sender_id']):
+        
+        expert=Expert.objects.get(id=data['sender_id'])
+        if expert:
             sender=Expert.objects.get(id=data['sender_id']).user
         else:
             sender=Caller.objects.get(id=data['sender_id']).user
