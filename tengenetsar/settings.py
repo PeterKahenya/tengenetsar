@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'experts.apps.ExpertsConfig',
     'calls.apps.CallsConfig',
     'shop.apps.ShopConfig',
-    'django.contrib.humanize'
+    'django.contrib.humanize',
 ]
 
 MIDDLEWARE = [

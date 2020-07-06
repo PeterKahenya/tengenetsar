@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 import locale
-from .models import Product, Order
+from .models import Product, Order,Category
 
 
 class ProductsListView(ListView):
@@ -17,6 +17,8 @@ class ProductsListView(ListView):
         user=self.request.user
         context = super().get_context_data(**kwargs)
         context['products'] = Product.objects.all()
+        context['categories'] = Category.objects.all()
+
 
         order = Order.objects.filter(user=user, is_fullfield=False).first()
         if not order:

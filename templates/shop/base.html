@@ -1,6 +1,5 @@
 {% extends '../base.html' %}
 {% load static %}
-{% load humanize %}
 
 {% block content %}
 <aside class="mdc-drawer mdc-drawer--modal">
@@ -68,13 +67,13 @@
           <div class="mdc-top-app-bar__row">
               <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                   <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" id="open__nav__button" aria-label="Open navigation menu">menu</button>
-                  <span class="mdc-top-app-bar__title">Tengenetsar|Shop</span>
+                  <span class="mdc-top-app-bar__title">CALLS</span>
               </section>
-              <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+              <!-- <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
                   <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Favorite">favorite</button>
                   <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Search">search</button>
                   <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Options">more_vert</button>
-              </section>
+              </section> -->
           </div>
       </header>
       <main class="main-content" id="main-content">
@@ -92,28 +91,7 @@
                         }, 3000);
                       </script> -->
               {% endif %}
-              {% for product in products %}
-              <div class="card m-3" style="width: 20rem;">
-                  <img src="{{product.image.url}}" class="card-img-top" alt="...">
-                  <a href="/shop/products/{{product.id}}/" class="card-body">
-                      <h5 class="card-title">{{product.name}}</h5>
-              {{product.supplier}}
-
-                      <!-- <div class="d-flex  m-5 justify-content-start">
-                        <label> By </label> <img src="{{product.suppler.image.url}}"  style="max-width: 50px; height: auto;" alt=""> 
-                      </div> -->
-                      <p class="card-text">{{product.description}}</p>
-                      <h4 class="text-warning font-weight-bold">KES. {{product.price|intcomma }}</h4>
-                  </a>
-                  <div class="card-footer text-center">
-                      {% if product in order_products %}
-                          <a href="#" style="max-width: 12rem;" class="btn font-weight-bold d-flex justify-content-around align-items-center btn-success">In Cart <span class="material-icons text-white">check</span></a>
-                      {% else %}
-                          <a href="/shop/products/{{product.id}}/add_to_cart" style="max-width: 12rem;" class="btn font-weight-bold d-flex justify-content-around align-items-center btn-warning">Add To Cart <span class="material-icons text-dark">add_shopping_cart</span></a>
-                      {% endif %}
-                      </div>
-              </div>
-          {% endfor %}
+            
           </div>
   
         </main>
