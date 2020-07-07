@@ -261,7 +261,7 @@ async function joinRoom(roomId) {
 
 
 async function hangUp(e) {
-  my_video.srcObject.getTracks();
+  var tracks=my_video.srcObject.getTracks();
   tracks.forEach(track => {track.stop()});
 
   if (remoteStream) {
