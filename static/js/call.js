@@ -350,7 +350,7 @@ function loadMessages(room) {
   const roomRef = db.collection('rooms').doc(`${room}`);
 
   send_chat_btn.onclick=(e)=>{
-    alert("send btn pressed")
+    // alert("send btn pressed")
     chat_message=my_chat_text_area.value
     if (chat_message==="") {return;}
     roomRef.collection("messages").add({
