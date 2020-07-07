@@ -114,6 +114,7 @@ async function init() {
         function (stream) {
         my_video.srcObject = stream
         localStream = stream;
+        alert("localStream: ",JSON.stringify(localStream))
         localStream.getTracks().forEach(track => {
           peerConnection.addTrack(track, localStream);
         });
