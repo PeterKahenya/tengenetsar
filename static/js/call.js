@@ -109,7 +109,7 @@ async function init() {
   flip_camera_btn.onclick=(e)=>{
     localStream.getTracks().forEach(track => track.stop());
     var new_mode = mode === "user"?"environment":"user"
-    getUserMedia({ audio: true, video: { facingMode:new_mode  } },
+    navigator.mediaDevices.getUserMedia({ audio: true, video: { facingMode:new_mode  } },
         function (stream) {
         my_video.srcObject = stream
         localStream = stream;
