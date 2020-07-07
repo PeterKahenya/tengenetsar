@@ -91,12 +91,12 @@ async function init() {
   }
 
   videocam_off_btn.onclick = (e) => {
-    if (my_stream.getVideoTracks()[0].enabled) {
-      my_stream.getVideoTracks()[0].enabled = false
+    if (localStream.getVideoTracks()[0].enabled) {
+      localStream.getVideoTracks()[0].enabled = false
       videocam_off_btn.classList.replace("btn-outline-light", "btn-danger")
       videocam_off_btn.innerText = "videocam_off"
     } else {
-      my_stream.getVideoTracks()[0].enabled = true
+      localStream.getVideoTracks()[0].enabled = true
       videocam_off_btn.classList.replace("btn-danger", "btn-outline-light")
       videocam_off_btn.innerText = "videocam"
     }
@@ -109,15 +109,14 @@ async function init() {
   flip_camera_btn.onclick=(e)=>{
     localStream.getTracks().forEach(track => track.stop());
     var new_mode = mode === "user"?"environment":"user"
+    alert(new_mode)
     navigator.mediaDevices.getUserMedia({ audio: true, video: { facingMode:new_mode  } },
         function (stream) {
         my_video.srcObject = stream
         localStream = stream;
-        let videoTrack = stream.getVideoTracks()[0];
-        video_sender=peerConnection.getSenders().find(function(s) {
-          return s.track.kind == videoTrack.kind;
+        localStream.getTracks().forEach(track => {
+          peerConnection.addTrack(track, localStream);
         });
-        video_sender.replaceTrack(videoTrack);
         mode=new_mode
       },
       function (err) {
