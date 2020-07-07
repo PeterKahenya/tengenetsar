@@ -59,7 +59,11 @@ var firebaseConfig = {
 async function init() {
   if (typeof firebase === 'undefined') throw new Error('hosting/init-error: Firebase SDK not detected.');
   firebase.initializeApp(firebaseConfig);
-  localStream = await navigator.mediaDevices.getUserMedia({video: { facingMode:mode }, audio: true});
+  if (user==="caller") {
+    localStream = await navigator.mediaDevices.getUserMedia({video: { facingMode:"environment" }, audio: true});
+  }else{
+    localStream = await navigator.mediaDevices.getUserMedia({video: { facingMode:"user" }, audio: true});
+  }
   my_video.srcObject = localStream;
   remoteStream = new MediaStream();
   other_video.srcObject = remoteStream;
@@ -70,6 +74,7 @@ async function init() {
   } else {
     roomId = document.getElementById('room_id').value;
     await joinRoom(roomId)
+    lock_this_fundi(false)
   }
 
   my_video.onclick=(e)=>{
@@ -127,6 +132,23 @@ async function init() {
 
   loadMessages(roomId)
 }
+
+
+function lock_this_fundi(status) {
+  console.log("Locking this Fundi")
+  axios.post('/expert/lock', {
+    "expert_id": my_peer_id,
+    'status':status
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+
 
 
 function sendRoom(roomId) {

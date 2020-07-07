@@ -39,3 +39,19 @@ messaging.onMessage(function (payload) {
   accept_call_btn.href="https://tengenetsar.kipya-africa.com/expert/call/"+payload.data.room_id
   incoming_call.style.display="block"
 })
+
+function unlock_this_fundi(status) {
+  console.log("Locking this Fundi")
+  axios.post('/expert/lock', {
+    "expert_id": my_peer_id,
+    'status':status
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
+
+unlock_this_fundi(true)
