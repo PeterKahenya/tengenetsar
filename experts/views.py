@@ -57,11 +57,11 @@ def expert_login(request):
             return render(request,"registration/e_login.html",{'errors': "invalid credentials"})
 
 class ExpertCallingPage(View):
-	def get(self,request):
+	def get(self,request,room):
 		if request.user.is_authenticated:
 			expert=Expert.objects.filter(user=request.user).first()
 			if expert:
-				return render(request,"expert/expert_calling_page.html",{'expert':expert},None,None,None)
+				return render(request,"expert/expert_calling_page.html",{'expert':expert,"room_id":room},None,None,None)
 			else:
 				return redirect('/expert/login')
 		else:
@@ -87,3 +87,16 @@ class ExpertLock(View):
 		expert.is_free=data['status']
 		expert.save()
 		return JsonResponse({"status":data['status']})
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class AddToken(View):
+    def post(self, request):
+        data=json.loads(request.body.decode('utf-8'))
+        expert=Expert.objects.filter(user=request.user).first()
+        if expert:
+            expert.gcm_token=data['token']
+            expert.save()
+            return JsonResponse({"token_added":True})
+        else:
+            return JsonResponse({"token_added":False})

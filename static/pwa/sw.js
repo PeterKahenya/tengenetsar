@@ -55,9 +55,9 @@ self.addEventListener('fetch', (evt) => {
   
 });
 
-self.addEventListener('notificationclick', function(event) {
-  event.notification.close();
-  event.waitUntil(
-    clients.openWindow('https://tengenetsar.kipya-africa.com/expert/call/?notified=yes')
-  );
-});
+// self.addEventListener('notificationclick', function(event) {
+//   event.notification.close();
+//   event.waitUntil(
+//     clients.openWindow('https://tengenetsar.kipya-africa.com/expert/call/?notified=yes')
+//   );
+// });

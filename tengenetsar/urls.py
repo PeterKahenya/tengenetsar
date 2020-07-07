@@ -12,6 +12,8 @@ urlpatterns = [
     path('shop/',include('shop.urls')),
     # path('summernote/', include('django_summernote.urls')),
     re_path('^serviceworker.js$', service_worker),
+    re_path('^firebase-messaging-sw.js$', firebase_messaging_sw),
+
     re_path('^manifest.json$', manifest),
     path('comingsoon/', ComingSoon.as_view()),
     path('admin/', admin.site.urls),

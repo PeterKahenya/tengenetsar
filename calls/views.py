@@ -8,6 +8,26 @@ from experts.models import Expert
 from .models import Call,Chat
 from django.contrib.auth.models import User
 import json
+import requests
+
+
+def sendPush(to,roomId):
+    url = 'https://fcm.googleapis.com/fcm/send'
+    json_data = {
+        "to": "fCbnZZkznLoNFwQ-y1BegI:APA91bE16DEH9eZYLHG6Pch8r9or1CkYBGjyiqBBCWEVg671CRZsWO5TrchUkS8hO2TVy4RWzRL2AwlpgAuJWf1465VMa5sxOsn3YP2wEZUnIrJK2Vf2mhL6WWzIA0fnMF3FS5tznqv_",
+        "data":{
+            "title":"Tengeneza Call Request",
+            "room_id":roomId,
+        },
+    }
+    headers = {
+        "Authorization":"key=AAAAOGOy1tc:APA91bH41zurNt10opqsUz66eNl79KlHgXDNDyiZ4Hzm7pwpmdvk2xz2tHjzQWQ4mPqeEDzldQkjVRJT8IR7eM-y8TNgrgTLMvbl4kTj92AP0Tnq0BF1xQbDuVaXrdqkwyiBHdQBfDjT",
+        "Content-Type":"application/json"
+    }
+
+    x = requests.post(url, json = json_data, headers=headers)
+
+
 
 @method_decorator(csrf_exempt, name='dispatch')
 class AddChat(View):
@@ -32,3 +52,19 @@ class AddChat(View):
         chat.save()
         
         return JsonResponse({"chat_added":True})
+
+@method_decorator(csrf_exempt, name='dispatch')
+class SendRoom(View):
+    def post(self,request):
+        data=json.loads(request.body.decode('utf-8'))
+        room_id=data["room_id"]
+        expert=Expert.objects.get(id=data["expert_id"])
+        print(room_id)
+        if expert:
+            sendPush(expert.gcm_token,room_id)
+            return JsonResponse({"call_initiated":True})
+        else:
+            return JsonResponse({"call_initiated":False})
+            
+
+

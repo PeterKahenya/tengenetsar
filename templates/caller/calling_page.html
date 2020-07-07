@@ -3,7 +3,7 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/calling_page.css' %}">
-<div id="start_call_page">
+<div id="start_call_page" style="display: none;">
     <div class="d-flex align-items-center flex-column">
         <span class="material-icons text-white" style="font-size:5rem" >
             account_circle
@@ -31,6 +31,10 @@
 		  <input type="hidden" id="caller_id" value="{{call.caller.id}}"/>
 		  <input type="hidden" id="expert_id" value="{{call.expert.id}}"/>
 		  <input type="hidden" id="call_id" value="{{call.id}}"/>
+		  <input type="hidden" id="user" value="caller"/>
+		  <input type="hidden" id="room_id" value=""/>
+
+
 
 		 
 		  <div class="live-controls">
@@ -46,7 +50,7 @@
 				<button id="videocam_off_btn" class="material-icons btn btn-outline-light control-buttons">
 					videocam
 				</button>
-				<a href="/caller/" class="material-icons btn btn-outline-light control-buttons">
+				<a id="hangup_btn" class="material-icons btn btn-outline-light control-buttons">
 					call
 				</a>
 				<video autoplay playsinline id="my_video"></video>
@@ -67,6 +71,6 @@
 </div>
 <script src="{% static 'js/peerjs.min.js' %}" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-<script src="{% static 'js/calling_page.js' %}" type="text/javascript"></script>
+<script src="{% static 'js/call.js' %}" type="text/javascript"></script>
 
 {% endblock content %}

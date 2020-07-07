@@ -4,10 +4,12 @@ var call_id = document.getElementById('call_id').value;
 
 var my_video = document.getElementById('my_video')
 var other_video = document.getElementById('other_video')
+var start_call_button = document.getElementById('start_call_button')
+
 var send_chat_btn = document.getElementById('send_chat_btn')
 var my_chat_text_area = document.getElementById('my_chat_text_area')
-var start_call_button = document.getElementById('start_call_button')
 var chat_logs = document.getElementById('chat_logs')
+
 var mic_off_btn = document.getElementById('mic_off_btn')
 var videocam_off_btn = document.getElementById('videocam_off_btn')
 var flip_camera_btn = document.getElementById('flip_camera_btn')
@@ -58,26 +60,7 @@ function save_chat(text,sender_id) {
 
 
 function prepare_flip() {
-  flip_camera_btn.onclick=(e)=>{
-    my_stream.getTracks().forEach(track => track.stop());
-    var new_mode = mode === "user"?"environment":"user"
-    getUserMedia({ audio: true, video: { facingMode:new_mode  } },
-      function (stream) {
 
-        my_video.srcObject = stream
-        my_stream = stream;
-        let videoTrack = stream.getVideoTracks()[0];
-        video_sender=call.peerConnection.getSenders().find(function(s) {
-          return s.track.kind == videoTrack.kind;
-        });
-        video_sender.replaceTrack(videoTrack);
-        mode=new_mode
-      },
-      function (err) {
-        chat_logs.append('Failed to get local stream'+err)
-        alert('Failed to get local stream'+Object.toString(err.message));
-      })
-  }
 }
 
 function setup_call(peer_object) {
@@ -135,6 +118,9 @@ function setup_call(peer_object) {
   });
 }
 
+if (fundi_peer_id==="") {
+  alert("")
+}
 
 start_call_button.onclick = (e) => {
     console.log("Connecting to Fundi...")
@@ -154,7 +140,7 @@ start_call_button.onclick = (e) => {
 
 
     peer.on('error', function (err) {
-        console.log("Error...", peer)
+        alert("Error...", JSON.stringify(peer))
         logs_panel.innerHTML += "|"
     })
 
@@ -162,8 +148,17 @@ start_call_button.onclick = (e) => {
         console.log("This peer has connected to PeerServer with id ", peer_id)
         logs_panel.innerHTML += "."
 
+        if (!fundi_peer_id) {
+          alert("error establishing connection. reload and try again")
+        }
 
         var connection = peer.connect(fundi_peer_id, {reliable: true})
+
+        if (!connection) {
+          alert("error establishing connection. check your internet")
+        }
+
+
         connection.on('open', function () {
         console.log('Connection ready to send and receive data')
         logs_panel.innerHTML += "."

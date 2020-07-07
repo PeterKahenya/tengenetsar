@@ -9,6 +9,7 @@ class Call(models.Model):
 	caller=models.ForeignKey(Caller,on_delete=models.CASCADE,related_name='initiator')
 	expert=models.ForeignKey(Expert,on_delete=models.CASCADE)
 	created = models.DateTimeField(auto_now_add=True, editable=False,blank=True,null=True)
+	room=models.TextField(blank=True,null=True)
 
 class Chat(models.Model):
 	id=models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
