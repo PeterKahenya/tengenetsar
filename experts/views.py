@@ -83,7 +83,7 @@ class ExpertHome(View):
 class ExpertLock(View):
 	def post(self,request):
 		data=json.loads(request.body.decode('utf-8'))
-		expert=Expert.objects.get(id=data['expert_id'])
+		expert=Expert.objects.filter(user=request.user).first()
 		expert.is_free=data['status']
 		expert.save()
 		return JsonResponse({"status":data['status']})
