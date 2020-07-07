@@ -36,5 +36,7 @@ messaging.requestPermission()
 })
 
 messaging.onMessage(function (payload) {
-  console.log("onMessage: "+JSON.stringify(payload))
+  accept_call_btn.href="https://tengenetsar.kipya-africa.com/expert/call/"+payload.data.room_id
+  incoming_call.style.display="block"
+  alert("onMessage: "+JSON.stringify(payload))
 })
