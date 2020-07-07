@@ -15,6 +15,8 @@ let roomId = null;
 let mode="user"
 var expert_id = document.getElementById('expert_id').value;
 var caller_id = document.getElementById('caller_id').value;
+var start_call_page = document.getElementById('start_call_page')
+var live_calling_page = document.getElementById('live_calling_page')
 
 
 
@@ -63,6 +65,8 @@ async function init() {
   other_video.srcObject = remoteStream;
   if (user==="caller") {
     await createRoom()
+    start_call_page.style.display="none"
+    live_calling_page.style.display="flex"
   } else {
     roomId = document.getElementById('room_id').value;
     await joinRoom(roomId)
@@ -199,9 +203,10 @@ async function createRoom() {
 
 }
 
-function parse_chat(chat_message) {
+function parse_chat(my_message) {
+  console.log(my_message)
   var urlRegex = /(https?:\/\/[^\s]+)/g;
-  return chat_message.replace(urlRegex, '<a target="_blank" href="$1">$1</a>')
+  return my_message.replace(urlRegex, '<a target="_blank" href="$1">$1</a>')
 }
 
 
@@ -344,12 +349,12 @@ function loadMessages(room) {
   roomRef.collection("messages").onSnapshot(function(snapshot) {
     snapshot.docChanges().forEach(function(change) {
       if (change.type === 'added') {
-        var chat=change.doc.data()
-        console.log(JSON.stringify(chat))
+        var actualMessage=change.doc.data()
+        console.log(JSON.stringify(actualMessage))
         var other_chat_node = document.createElement("div")
         other_chat_node.className = "other_chat"
         var chat = document.createElement("div")
-        chat.innerHTML=parse_chat(chat.chatMessage)
+        chat.innerHTML=parse_chat(actualMessage.chatMessage)
         other_chat_node.appendChild(chat)
         chat_logs.appendChild(other_chat_node)
         chat_logs.scrollTop = chat_logs.scrollHeight + 30

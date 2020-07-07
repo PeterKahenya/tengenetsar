@@ -3,7 +3,7 @@
 
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/calling_page.css' %}">
-<div id="start_call_page" style="display: none;">
+<div id="start_call_page">
     <div class="d-flex align-items-center flex-column">
         <span class="material-icons text-white" style="font-size:5rem" >
             account_circle
@@ -14,17 +14,12 @@
         </div>
         
     </div>
-    <div id="logs" class="text-white display-1">
-
-    </div>
-
-    <button  id="start_call_button" class="material-icons btn btn-lg btn-outline-light bg-white text-success shadow-lg control-buttons">
-        call
-    </button>
-   
+    <div id="logs" class="text-white display-3">
+		Calling...
+    </div>  
     
 </div>
-<div id="live_calling_page"  class="row main_container">
+<div id="live_calling_page"  class="row main_container" style="display: none;">
 	<div class="col-xs-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 shadow videos_holder">
 		  <video autoplay playsinline id="other_video" width="100%"></video>
 		  
