@@ -18,7 +18,6 @@ var caller_id = document.getElementById('caller_id').value;
 var start_call_page = document.getElementById('start_call_page')
 var live_calling_page = document.getElementById('live_calling_page')
 
-var getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
 
 
 
@@ -60,9 +59,8 @@ var firebaseConfig = {
 async function init() {
   if (typeof firebase === 'undefined') throw new Error('hosting/init-error: Firebase SDK not detected.');
   firebase.initializeApp(firebaseConfig);
-  localStream = await getUserMedia({video: true, audio: true});
+  localStream = await navigator.mediaDevices.getUserMedia({video: true, audio: true});
   my_video.srcObject = localStream;
-  my_video.muted=true
   remoteStream = new MediaStream();
   other_video.srcObject = remoteStream;
   if (user==="caller") {
@@ -108,15 +106,23 @@ async function init() {
     hangUp(e)
   }
 
-  flip_camera_btn.onclick=async (e)=>{
+  flip_camera_btn.onclick=(e)=>{
     localStream.getTracks().forEach(track => track.stop());
     var new_mode = mode === "user"?"environment":"user"
-    alert(new_mode)
-    localStream= await getUserMedia({ audio: true, video: { facingMode:new_mode  } }),
-    my_video.srcObject = localStream
-    alert("localStream: ",JSON.stringify(localStream))
-    localStream.getTracks().forEach(track => { peerConnection.addTrack(track, localStream);});
-    mode=new_mode
+    navigator.mediaDevices.getUserMedia({ audio: true, video: { facingMode:new_mode  } },
+        function (stream) {
+        my_video.srcObject = stream
+        localStream = stream;
+        let videoTrack = stream.getVideoTracks()[0];
+        video_sender=peerConnection.getSenders().find(function(s) {
+          return s.track.kind == videoTrack.kind;
+        });
+        video_sender.replaceTrack(videoTrack);
+        mode=new_mode
+      },
+      function (err) {
+        alert('Failed to get local stream'+Object.toString(err.message));
+      })
   }
 
   loadMessages(roomId)
