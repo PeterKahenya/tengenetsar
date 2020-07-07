@@ -14,7 +14,7 @@ import requests
 def sendPush(to,roomId):
     url = 'https://fcm.googleapis.com/fcm/send'
     json_data = {
-        "to": "fCbnZZkznLoNFwQ-y1BegI:APA91bE16DEH9eZYLHG6Pch8r9or1CkYBGjyiqBBCWEVg671CRZsWO5TrchUkS8hO2TVy4RWzRL2AwlpgAuJWf1465VMa5sxOsn3YP2wEZUnIrJK2Vf2mhL6WWzIA0fnMF3FS5tznqv_",
+        "to": to,
         "data":{
             "title":"Tengeneza Call Request",
             "room_id":roomId,
