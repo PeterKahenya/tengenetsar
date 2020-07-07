@@ -110,7 +110,7 @@ async function init() {
     localStream.getTracks().forEach(track => track.stop());
     var new_mode = mode === "user"?"environment":"user"
     alert(new_mode)
-    navigator.mediaDevices.getUserMedia({ audio: true, video: { facingMode:new_mode  } },
+    navigator.mediaDevices.getUserMedia({ audio: true, video: { facingMode:{exact:new_mode}  } },
         function (stream) {
         my_video.srcObject = stream
         localStream = stream;
