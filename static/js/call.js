@@ -140,7 +140,6 @@ async function init() {
 function lock_this_fundi(status) {
   console.log("Locking this Fundi")
   axios.post('/expert/lock', {
-    "expert_id": my_peer_id,
     'status':status
   })
   .then(function (response) {
