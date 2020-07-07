@@ -380,8 +380,11 @@ function loadMessages(room) {
         other_chat_node.className = "other_chat"
         var chat = document.createElement("div")
         chat.innerHTML=parse_chat(actualMessage.chatMessage)
-        console.log(actualMessage.from===user)
-        other_chat_node.appendChild(chat)
+        if (actualMessage.from===user) {
+          
+        }else{
+          other_chat_node.appendChild(chat)
+        }
         chat_logs.appendChild(other_chat_node)
         chat_logs.scrollTop = chat_logs.scrollHeight + 30
       }
