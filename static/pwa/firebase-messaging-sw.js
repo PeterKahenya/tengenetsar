@@ -34,6 +34,6 @@ self.addEventListener('notificationclick', function(event) {
     console.log("Event",event)
   event.notification.close();
   event.waitUntil(
-    clients.openWindow('http://127.0.0.1:80000/expert/call/'+event.notification.data.room_id)
+    clients.openWindow('https://tengenetsar.kipya-africa.com/expert/call/'+event.notification.data.room_id)
   );
 });

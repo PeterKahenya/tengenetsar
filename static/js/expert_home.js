@@ -1,3 +1,7 @@
+var incoming_call=document.getElementById('incoming_call')
+var accept_call_btn=document.getElementById('accept_call_btn')
+
+
 var firebaseConfig = {
     apiKey: "AIzaSyB6dl19UhwSuJfZBVZFLqwpvEVYQnZI7dQ",
     authDomain: "tengenetsar.firebaseapp.com",
