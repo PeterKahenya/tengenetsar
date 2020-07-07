@@ -74,29 +74,35 @@
                     </script>
 		    {% endif %}
             <ul id="listTWO_LINE" class="mdc-list mdc-list--two-line inline-demo-list mdc-list--avatar-list">
+              {% for call in calls %}
               <li class="mdc-list-item mdc-ripple-upgraded" tabindex="0">
 
                 <span class="mdc-list-item__graphic material-icons" aria-hidden="true">
-                    <img src="https://i2.wp.com/www.usmagazine.com/wp-content/uploads/2018/05/joseph-morgan-on-the-originals-2.jpg?crop=0px%2C0px%2C1200px%2C679px&resize=1600%2C900&ssl=1" width="60" height="60" style="border-radius: 50%;" alt="">
+                    {% if call.expert.profile %}
+                      <img src="https://i2.wp.com/www.usmagazine.com/wp-content/uploads/2018/05/joseph-morgan-on-the-originals-2.jpg?crop=0px%2C0px%2C1200px%2C679px&resize=1600%2C900&ssl=1" width="60" height="60" style="border-radius: 50%;" alt="{{call.expert.user.first_name}}">
+                    {% else %}
+                      <div class="profile_letter display-5 font-weight-bold" style="min-width: 60px !important;height: 60px;background-color: #cccccc;border-radius: 50%;display: flex;align-items: center;justify-content: center;color: #15ad43;">
+                        {{ call.expert.user.first_name|make_list|first }}
+                      </div>
+                    {% endif %}
                 </span>
                 
                 <span class="mdc-list-item__text">
                     <span class="mdc-list-item__primary-text">
-                        Joseph Morgan
+                        {{call.expert.user.first_name}} {{call.expert.user.last_name}} 
                     </span>
                     <span class="mdc-list-item__secondary-text text-small">
-                        Thanks for the service
+                      {% if call.last_chat %}
+                        {{call.last_chat}}
+                      {% endif %}
                     </span>
                 </span>
-                <span aria-hidden="true" style="float: right !important;" class="mdc-list-item__meta text-success">July 6th</span>
+                <span aria-hidden="true" style="float: right !important;" class="mdc-list-item__meta text-success">{{call.created|date:"F, j"}}</span>
               </li>
               <hr>
+              {% endfor %}
               
               </ul>
-            <a href="/expert/call" class="mdc-fab app-fab--absolute mdc-fab--extended text-white bg-success" aria-label="Favorite">
-                <span class="mdc-fab__icon material-icons">call</span>
-                New Call
-            </a>
         </div>
 
       </main>
