@@ -372,7 +372,7 @@ function loadMessages(room) {
     snapshot.docChanges().forEach(function(change) {
       if (change.type === 'added') {
         var actualMessage=change.doc.data()
-        console.log(JSON.stringify(actualMessage))
+        alert(JSON.stringify(actualMessage))
         var other_chat_node = document.createElement("div")
         other_chat_node.className = "other_chat"
         var chat = document.createElement("div")
