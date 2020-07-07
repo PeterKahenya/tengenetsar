@@ -363,7 +363,7 @@ function loadMessages(room) {
       var chat = document.createElement("div")
       chat.innerHTML=parse_chat(chat_message)
       other_chat_node.appendChild(chat)
-      chat_logs.appendChild(other_chat_node)
+      // chat_logs.appendChild(other_chat_node)
       chat_logs.scrollTop = chat_logs.scrollHeight+30;
       my_chat_text_area.value = ""
   }
@@ -378,9 +378,7 @@ function loadMessages(room) {
         var chat = document.createElement("div")
         chat.innerHTML=parse_chat(actualMessage.chatMessage)
         other_chat_node.appendChild(chat)
-        // if (user!==actualMessage.from) {
-          chat_logs.appendChild(other_chat_node)
-        // }
+        chat_logs.appendChild(other_chat_node)
         chat_logs.scrollTop = chat_logs.scrollHeight + 30
       }
     })
