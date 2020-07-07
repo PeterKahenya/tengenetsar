@@ -351,7 +351,7 @@ function loadMessages(room) {
     chat_message=my_chat_text_area.value
     if (chat_message==="") {return;}
     roomRef.collection("messages").add({
-      from:user==="caller"?caller_id:expert_id,
+      from:user==="caller"?"caller":"expert",
       chatMessage:chat_message,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
       })
@@ -378,7 +378,9 @@ function loadMessages(room) {
         var chat = document.createElement("div")
         chat.innerHTML=parse_chat(actualMessage.chatMessage)
         other_chat_node.appendChild(chat)
-        chat_logs.appendChild(other_chat_node)
+        if (user!==actualMessage.from) {
+          chat_logs.appendChild(other_chat_node)
+        }
         chat_logs.scrollTop = chat_logs.scrollHeight + 30
       }
     })
