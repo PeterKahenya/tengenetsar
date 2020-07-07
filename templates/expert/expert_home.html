@@ -60,6 +60,10 @@
     </header>
     <main class="main-content" id="main-content">
         <div class="mdc-top-app-bar--fixed-adjust" style="position: relative;">
+            <div id="incoming_call" class="bg-lightd-flex justify-content-around" style="">
+              <div>Incoming Call</div>
+              <a class="btn btn-primary" href="">Accept</a>
+            </div>
             {% if message %}
 		                <div class="alert alert-warning alert-dismissible fade show" role="alert">
 		                  <small class="text-small">{{message}}</small>
