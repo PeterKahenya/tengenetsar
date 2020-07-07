@@ -12,7 +12,7 @@ var flip_camera_btn = document.getElementById('flip_camera_btn')
 var hangup_btn = document.getElementById('hangup_btn')
 var user = document.getElementById('user').value;
 let roomId = null;
-let mode="user"
+let mode="environment"
 var expert_id = document.getElementById('expert_id').value;
 var caller_id = document.getElementById('caller_id').value;
 var start_call_page = document.getElementById('start_call_page')
@@ -59,7 +59,7 @@ var firebaseConfig = {
 async function init() {
   if (typeof firebase === 'undefined') throw new Error('hosting/init-error: Firebase SDK not detected.');
   firebase.initializeApp(firebaseConfig);
-  localStream = await navigator.mediaDevices.getUserMedia({video: true, audio: true});
+  localStream = await navigator.mediaDevices.getUserMedia({video: { facingMode:mode }, audio: true});
   my_video.srcObject = localStream;
   remoteStream = new MediaStream();
   other_video.srcObject = remoteStream;
