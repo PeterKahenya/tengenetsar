@@ -130,3 +130,23 @@ LOGOUT_REDIRECT_URL = '/'
 
 MEDIA_URL='/media/'
 MEDIA_ROOT=os.path.join(BASE_DIR,"media")
+
+
+EMAIL_HOST="smtp.gmail.com"
+EMAIL_PORT=587
+EMAIL_HOST_USER="info@africa-drilling-solutions.com"
+EMAIL_HOST_PASSWORD="MakeitHappen2016"
+EMAIL_USE_TLS=True
+
+
+# CELERY_BROKER_URL = "pyamqp://guest@localhost//"
+# CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_TASK_SERIALIZER = 'json'
+
+CELERY_BROKER_URL = 'pyamqp://guest@localhost//'
+
+#: Only add pickle to this list if your broker is secured
+#: from unwanted access (see userguide/security.html)
+CELERY_ACCEPT_CONTENT = ['json']
+# CELERY_RESULT_BACKEND = 'db+sqlite:///results.sqlite'
+CELERY_TASK_SERIALIZER = 'json'

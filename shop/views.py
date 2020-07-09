@@ -18,7 +18,7 @@ from xhtml2pdf import pisa
 from django.db.models import Q
 import datetime
 from django.conf import settings
-
+from .tasks import send_receipt
 
 
 receipt_no=0
@@ -179,8 +179,8 @@ class CheckOutView(View):
         receipt_file.close()
         return receipt_file_path
 
-    def send_email_and_invoice_receipt(self):
-        pass
+    def send_email_and_receipt(self,payment,user,receipt_path):
+        send_receipt.delay(payment,user,receipt_path)
     def get(self,request,order_id):
         order=Order.objects.get(id=order_id)
         user=get_logged_user(request,order_id)
@@ -199,12 +199,12 @@ class CheckOutView(View):
         payment.save()
         print(payment.amount < float(order.total_price))
         if payment.amount < float(order.total_price):
-            self.receipt(payment)
-            self.send_email_and_receipt(payment)
+            receipt_path=self.receipt(payment)
+            self.send_email_and_receipt(payment,user,receipt_path)
             return render(request,"shop/checkout.html",{'errors':"The Amount Paid is not enough to fullfill the order, you will be refunded soon!"})
         else:
-            self.receipt(payment)
-            self.send_email_and_receipt(payment)
             order.is_fullfield = True
             order.save()
+            receipt_path=self.receipt(payment)
+            self.send_email_and_receipt(payment,user,receipt_path)
             return JsonResponse({"PAYMENT_ACCEPTED": True})
