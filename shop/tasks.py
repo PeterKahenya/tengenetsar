@@ -4,12 +4,12 @@ from django.core.mail import EmailMessage
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
 import uuid
-
+from shop.models import Payment
 
 @shared_task
-def send_receipt(payment,user,receipt_path):
-
-    html_message = render_to_string('shop/receipt_email.html', {"user":user,"payment":payment,"scheme":scheme,"host":host})
+def send_receipt(payment,receipt_path):
+    payment_object=Payment.objects.get(id=payment)
+    html_message = render_to_string('shop/receipt_email.html', {"user":user,"payment":payment_object,"scheme":scheme,"host":host})
     plain_message = strip_tags(html_message)
     
 

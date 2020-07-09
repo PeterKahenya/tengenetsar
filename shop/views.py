@@ -179,8 +179,8 @@ class CheckOutView(View):
         receipt_file.close()
         return receipt_file_path
 
-    def send_email_and_receipt(self,payment,user,receipt_path):
-        send_receipt.delay(payment,user,receipt_path)
+    def send_email_and_receipt(self,payment,receipt_path):
+        send_receipt.delay(payment,receipt_path)
     def get(self,request,order_id):
         order=Order.objects.get(id=order_id)
         user=get_logged_user(request,order_id)
@@ -200,11 +200,11 @@ class CheckOutView(View):
         print(payment.amount < float(order.total_price))
         if payment.amount < float(order.total_price):
             receipt_path=self.receipt(payment)
-            self.send_email_and_receipt(payment,user,receipt_path)
+            self.send_email_and_receipt(payment.id,receipt_path)
             return render(request,"shop/checkout.html",{'errors':"The Amount Paid is not enough to fullfill the order, you will be refunded soon!"})
         else:
             order.is_fullfield = True
             order.save()
             receipt_path=self.receipt(payment)
-            self.send_email_and_receipt(payment,user,receipt_path)
+            self.send_email_and_receipt(payment.id,receipt_path)
             return JsonResponse({"PAYMENT_ACCEPTED": True})
