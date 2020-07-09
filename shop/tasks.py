@@ -17,9 +17,11 @@ def send_receipt(payment,user,receipt_path):
     from_email = 'Kipya Africa Limited <info@kipya-africa.com>'
     to = user.email
     bccs = ["info@kipya-africa.com","stephen@kipya-africa.com"]
-    subject=newsletter.newsletter_name
+    subject="Tengenetsar Order Receipt"
 
-    message = EmailMessage(subject,html_message,from_email,[to],bccs,headers={'Message-ID': str(uuid.uuid4()) },attachments=[])
+    message = EmailMessage(subject,html_message,from_email,[to],bccs,headers={'Message-ID': str(uuid.uuid4()) },attachments=[
+                    ("RECEIPT.pdf",open(receipt_path,"rb").read(),'application/pdf'),
+    ])
     message.content_subtype = "html"
     message.send()
     newsletter.is_sent=True
