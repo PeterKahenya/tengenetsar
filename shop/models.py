@@ -1,6 +1,8 @@
 import uuid
 from django.db import models
 from django.contrib.auth.models import User
+from experts.models import Expert
+from callers.models import Caller
 
 def get_image_dir(instance,filename):
 	return 'product_images/{0}{1}'.format(uuid.uuid4(), filename)
@@ -26,10 +28,13 @@ class Product(models.Model):
 
 class Order(models.Model):
 	id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-	user=models.ForeignKey(User,on_delete=models.CASCADE)
+	added_by=models.ForeignKey(User,on_delete=models.CASCADE)
+	checkout_by=models.ForeignKey(User,on_delete=models.CASCADE, related_name="orders",null=True)
 	products=models.ManyToManyField(Product)
 	total_price = models.DecimalField(max_digits=12,decimal_places=2,default=0.00)
 	is_fullfield=models.BooleanField(default=False)
+	created = models.DateTimeField(auto_now_add=True, editable=False,blank=True,null=True)
+
 
 class Payment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)

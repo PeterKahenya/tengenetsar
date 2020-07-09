@@ -7,7 +7,24 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 import locale
 from .models import Product, Order,Category
+from experts.models import Expert
+from callers.models import Caller
 
+
+def get_logged_user(request,order_id):
+    order = Order.objects.get(id=order_id)
+    user=None
+    expert=Expert.objects.filter(user=request.user).first()
+    if expert:
+        order.expert=expert
+        order.save()
+        user=expert
+    else:
+        caller=Caller.objects.filter(user=request.user).first()
+        order.caller=caller
+        order.save()
+        user=caller
+    return user
 
 class ProductsListView(ListView):
     model = Product
@@ -20,13 +37,12 @@ class ProductsListView(ListView):
         context['categories'] = Category.objects.all()
 
 
-        order = Order.objects.filter(user=user, is_fullfield=False).first()
+        order = Order.objects.filter(added_by=self.request.user, is_fullfield=False).first()
         if not order:
             order = Order()
-            order.user = user
             order.is_fullfield = False
             order.save()
-            
+        context['user']=get_logged_user(self.request,order.id)
         context['order_products'] = order.products.all()
         return context
 
@@ -38,14 +54,15 @@ class ProductDetailView(DetailView):
         user=self.request.user
         context = super().get_context_data(**kwargs)
         context['products'] = Product.objects.all()
+        context['categories'] = Category.objects.all()
         
         order = Order.objects.filter(user=user, is_fullfield=False).first()
         if not order:
             order = Order()
-            order.user = user
             order.is_fullfield = False
             order.save()
 
+        context['user']=get_logged_user(self.request,order.id)
         context['order_products'] = order.products.all()
         return context
 
@@ -53,16 +70,33 @@ class ProductDetailView(DetailView):
 class OrderListView(ListView):
     model = Order
     template_name = "shop/orders.html"
-    context_object_name="orders"
+
+    def get_context_data(self, **kwargs):
+        user=self.request.user
+        context = super().get_context_data(**kwargs)
+        context['orders'] = Order.objects.all().order_by("created")
+        return context
 
 
-class OrderDetailView(DetailView):
-    model = Order
-    template_name = "shop/checkout.html"
+class OrderDetailView(View):
+    def get(self, request,order_id):
+        order = Order.objects.get(id=order_id)
+        user=None
+        expert=Expert.objects.filter(user=request.user).first()
+        if expert:
+            order.expert=expert
+            order.save()
+            user=expert
+        else:
+            caller=Caller.objects.filter(user=request.user).first()
+            order.caller=caller
+            order.save()
+            user=caller
+        return render(request,"shop/checkout.html",{"order":order,"user":user})
 
 
-# @method_decorator(csrf_exempt, name='dispatch')
-class AddToCardView(View):
+@method_decorator(csrf_exempt, name='dispatch')
+class AddToCartView(View):
     def get(self, request,pk):
         user = request.user
         product_id = pk
@@ -71,9 +105,10 @@ class AddToCardView(View):
         order = Order.objects.filter(user=user, is_fullfield=False).first()
         if not order:
             order = Order()
-            order.user = user
             order.is_fullfield = False
             order.save()
+        
+        user=get_logged_user(self.request,order.id)
 
         if product not in order.products.all():
             order.products.add(product)
@@ -85,12 +120,19 @@ class AddToCardView(View):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class CheckOutView(View):
+    def invoice(self):
+        pass
+    def receipt(self):
+        pass
+    def send_email_and_invoice_receipt(self):
+        pass
     def get(self,request,order_id):
         order=Order.objects.get(id=order_id)
-        return render(request,"shop/checkout.html",{"order":order,"products":order.products.all()})
+        user=get_logged_user(request,order_id)
+        return render(request,"shop/checkout.html",{"order":order,"products":order.products.all(),"user":user})
     def post(self, request,order_id):
-        order_id = order_id
         order = Order.objects.get(id=order_id)
+        user=get_logged_user(request,order_id)
 
         payment = Payment()
         payment.order = order

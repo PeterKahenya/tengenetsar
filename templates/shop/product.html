@@ -1,94 +1,143 @@
 {% extends '../base.html' %}
 {% load static %}
 {% load humanize %}
+
 {% block content %}
-<link rel="stylesheet" href="{% static 'css/shop.css' %}">
-<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="/shop">
-        <img src="{% static 'images/icon.png' %}" style="max-width: 50px;" alt="">
-    </a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <ul class="navbar-nav px-3">
-      <li class="nav-item text-nowrap">
-        <a class="nav-link" href="/logout">Sign out</a>
-      </li>
-    </ul>
-  </nav>
-  
-  <div class="container-fluid">
-    <div class="row">
-      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-        <div class="sidebar-sticky pt-3">
-          <ul class="nav flex-column">
-            <li class="nav-item">
-              <a class="nav-link active" href="#">
-                <span data-feather="home"></span>
-                Dashboard <span class="sr-only">(current)</span>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="file"></span>
-                Orders
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="shopping-cart"></span>
-                Products
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="users"></span>
-                Customers
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="bar-chart-2"></span>
-                Reports
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">
-                <span data-feather="layers"></span>
-                Integrations
-              </a>
-            </li>
-          </ul>
-        </div>
-      </nav>
-  
-      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-        <img src="{{product.image.url}}" alt="" style="width: 40%;">
-        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-          <h1 class="h2">{{product.name}}</h1>
-        </div>
-        <hr>
-        <div>
-            {{product.description}}
-        </div>
-        <div>
-            <h4 class="text-warning font-weight-bold">KES. {{product.price|intcomma }}</h4>
-        </div>
-        <!-- <div class="d-flex  m-5 justify-content-start">
-          <label> By </label> <img src="{{product.suppler.image.url}}"  style="max-width: 50px; height: auto;"  alt=""> 
-        </div> -->
-        <div class="card-footer text-center">
-          {% if product in order_products %}
-          <a href="#" style="max-width: 12rem;" class="btn font-weight-bold d-flex justify-content-around align-items-center btn-success">In Cart <span class="material-icons text-white">check</span></a>
+<aside class="mdc-drawer mdc-drawer--modal">
+    <div class="mdc-drawer__header">
+      {% if caller.profile %}
+        <img src="https://i2.wp.com/www.usmagazine.com/wp-content/uploads/2018/05/joseph-morgan-on-the-originals-2.jpg?crop=0px%2C0px%2C1200px%2C679px&resize=1600%2C900&ssl=1" width="60" height="60" style="border-radius: 50%;" alt="{{call.expert.user.first_name}}">
       {% else %}
-          <a href="/shop/products/{{product.id}}/add_to_cart" style="max-width: 12rem;" class="btn font-weight-bold d-flex justify-content-around align-items-center btn-warning">Add To Cart <span class="material-icons text-dark">add_shopping_cart</span></a>
-      {% endif %}
+        <div class="profile_letter display-4 font-weight-bold mt-2" style="max-width: 60px !important;height: 60px;background-color: #cccccc;border-radius: 50%;display: flex;align-items: center;justify-content: center;color: #15ad43;">
+          {{ request.user.first_name|make_list|first }}
         </div>
-      </main>
+      {% endif %}
+      <div class="display-6">{{request.user.first_name}} {{caller.user.last_name}}</div>
+      <div class="text-small text-muted">{{request.user.email}}</div>
+      <small class="text-small text-success">@{{request.user.username}}</small>
+  
     </div>
+    <hr class="mdc-list-divider">
+  
+      <div class="mdc-drawer__content">
+        <nav class="mdc-list">
+          <h6 class="mdc-list-group__subheader">Store</h6>
+          <a class="mdc-list-item mdc-list-item--activated" href="/shop" aria-current="page" tabindex="0">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">shopping_cart</i>
+            <span class="mdc-list-item__text">Shop</span>
+          </a>
+          <a class="mdc-list-item" href="#">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">shopping_basket</i>
+            <span class="mdc-list-item__text">Orders</span>
+          </a>
+          <a class="mdc-list-item" href="#">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">payments</i>
+            <span class="mdc-list-item__text">Billing</span>
+          </a>
+          <hr class="mdc-list-divider">
+          <h6 class="mdc-list-group__subheader">Categories</h6>
+          {% for category in categories %}
+            <a class="mdc-list-item" href="/caller/logout">
+              <i class="material-icons mdc-list-item__graphic" aria-hidden="true">category</i>
+              <span class="mdc-list-item__text">{{category.name}}</span>
+            </a>
+          {% endfor %}
+          <hr class="mdc-list-divider">
+          <a class="mdc-list-item" href="/caller/logout">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">account_circle</i>
+            <span class="mdc-list-item__text">Profile</span>
+          </a>
+        <a class="mdc-list-item" href="/caller/logout">
+          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">exit_to_app</i>
+          <span class="mdc-list-item__text">LOG OUT</span>
+        </a>
+          <a class="mdc-list-item" href="#">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">settings</i>
+            <span class="mdc-list-item__text">Settings</span>
+          </a>
+          <a class="mdc-list-item" href="#">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">help</i>
+            <span class="mdc-list-item__text">Call Support</span>
+          </a>
+          <a class="mdc-list-item" href="#">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">help</i>
+            <span class="mdc-list-item__text">About Us</span>
+          </a>
+        </nav>
+      </div>
+    </aside>
+  
+    <div class="mdc-drawer-scrim"></div>
+    <div class="mdc-drawer-app-content bg-light" style="display: flex !important; flex-direction: column !important;">
+      <header class="mdc-top-app-bar bg-success shadow">
+          <div class="mdc-top-app-bar__row">
+              <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                  <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" id="open__nav__button" aria-label="Open navigation menu">menu</button>
+                  <span class="mdc-top-app-bar__title">Tengenetsar|Shop</span>
+              </section>
+              <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+                    <a href="/shop/orders" style="max-width: 12rem;" class="btn font-weight-bold d-flex justify-content-around align-items-center btn-warning">
+                      Checkout <span class="material-icons text-dark">add_shopping_cart</span></a>
+              </section>
+          </div>
+      </header>
+      <main class="main-content" id="main-content">
+          <div class="mdc-top-app-bar--fixed-adjust" style="position: relative;">
+              {% if message %}
+                          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <small class="text-small">{{message}}</small>
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                      </div>
+                      <script>
+                        setTimeout(() => {
+                          window.location="/caller"
+                        }, 3000);
+                      </script>
+              {% endif %}
+              <div role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+                <img src="{{product.image.url}}" alt="" style="width: 40%;">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  <h1 class="h2">{{product.name}}</h1>
+                </div>
+                <hr>
+                <div>
+                    {{product.description}}
+                </div>
+                <div>
+                    <h4 class="text-warning font-weight-bold">KES. {{product.price|intcomma }}</h4>
+                </div>
+                <!-- <div class="d-flex  m-5 justify-content-start">
+                  <label> By </label> <img src="{{product.suppler.image.url}}"  style="max-width: 50px; height: auto;"  alt=""> 
+                </div> -->
+                <div class="card-footer text-center">
+                  {% if product in order_products %}
+                  <a href="#" style="max-width: 12rem;" class="btn font-weight-bold d-flex justify-content-around align-items-center btn-success">In Cart <span class="material-icons text-white">check</span></a>
+              {% else %}
+                  <a href="/shop/products/{{product.id}}/add_to_cart" style="max-width: 12rem;" class="btn font-weight-bold d-flex justify-content-around align-items-center btn-warning">Add To Cart <span class="material-icons text-dark">add_shopping_cart</span></a>
+              {% endif %}
+                </div>
+              </div>
+          </div>
+  
+        </main>
+      
   </div>
-  <script>
-      var add_shopping_cart_btn=document.getElementById('add_shopping_cart_btn')
-  </script>
-{% endblock %}
+      
+      <script>
+          const drawer = mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
+          document.getElementById("open__nav__button").onclick=(e)=>{
+              drawer.open = !drawer.open;
+          }
+          const list = new mdc.list.MDCList(document.querySelector('.mdc-list')); 
+          const listItemRipples = list.listElements.map((listItemEl) => new mdc.ripple.MDCRipple(listItemEl));   
+      </script> 
+   
+  {% endblock content %}
+
+
+
+
+
+

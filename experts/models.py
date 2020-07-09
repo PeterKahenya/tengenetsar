@@ -12,6 +12,9 @@ class Expert(models.Model):
 	specialty = models.CharField(max_length=256,blank=True,null=True)
 	gcm_token=models.TextField(blank=True,null=True)
 	profile = models.ImageField(upload_to=get_image_dir,blank=True,null=True)
+	address_longitude=models.FloatField(blank=True,null=True)
+	address_latitude=models.FloatField(blank=True,null=True)
+	phone_number=models.CharField(blank=True,null=True,max_length=11)
 
 	
 	def __str__(self):

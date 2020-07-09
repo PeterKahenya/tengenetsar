@@ -100,3 +100,12 @@ class CallerHome(View):
                 return redirect("/caller/login")
         else:
             return redirect("/caller/login")
+
+
+class ProfileView(View):
+    def get(self,request):
+        return render(request,"caller/profile.html")
+    def post(self, request):
+        pass
+    def put(self, request):
+        pass
