@@ -63,7 +63,7 @@ class CallView(View):
         if request.user.is_authenticated:
             caller = Caller.objects.filter(user=request.user).first()
             if caller:
-                expert = Expert.objects.filter(is_free=True).first()
+                expert = Expert.objects.get(id=request.GET.get('expert'))
                 if expert:
                     call = Call()
                     call.caller=caller
@@ -94,8 +94,8 @@ class CallerHome(View):
                     call["created"]=raw_call.created
                     call["last_chat"]=raw_call.chat.last()
                     calls.append(call)
-
-                return render(request, "caller/caller_home.html", {"caller": caller, "calls": calls}, None, None, None)
+                experts = Expert.objects.all()
+                return render(request, "caller/caller_home.html", {"caller": caller, "calls": calls,"experts":experts}, None, None, None)
             else:
                 return redirect("/caller/login")
         else:

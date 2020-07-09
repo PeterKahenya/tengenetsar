@@ -4,7 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.shortcuts import render, redirect
 import os
 from django.http import HttpResponse
-
+from experts.models import Expert
 from . import settings
 
 
@@ -22,8 +22,16 @@ def manifest(request):
 
 
 class HomeView(View):
-	def get(self,request):
-		return render(request,"home.html",None,None,None,None)
+    def get(self, request):
+        if request.user.is_authenticated:
+            expert=Expert.objects.filter(user=request.user).first()
+            if expert:
+                return redirect("/expert")
+            else:
+                return redirect("/caller")
+        else:
+            return render(request,"home.html",None,None,None,None)
+
 
 class ComingSoon(View):
 	def get(self,request):

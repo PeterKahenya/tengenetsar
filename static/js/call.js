@@ -19,8 +19,6 @@ var start_call_page = document.getElementById('start_call_page')
 var live_calling_page = document.getElementById('live_calling_page')
 
 
-
-
 const configuration = {
   iceServers: [{
       urls: [
@@ -385,7 +383,6 @@ function loadMessages(room) {
         }else{
           other_chat_node.appendChild(chat)
           chat_logs.appendChild(other_chat_node)
-
         }
         chat_logs.scrollTop = chat_logs.scrollHeight + 30
       }

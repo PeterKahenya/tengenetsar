@@ -24,135 +24,185 @@
                   }
                 }
 </style>
-<aside class="mdc-drawer mdc-drawer--modal">
-  <div class="mdc-drawer__header">
-    {% if caller.profile %}
-      <img src="https://i2.wp.com/www.usmagazine.com/wp-content/uploads/2018/05/joseph-morgan-on-the-originals-2.jpg?crop=0px%2C0px%2C1200px%2C679px&resize=1600%2C900&ssl=1" width="60" height="60" style="border-radius: 50%;" alt="{{call.expert.user.first_name}}">
-    {% else %}
-      <div class="profile_letter display-4 font-weight-bold mt-2" style="max-width: 60px !important;height: 60px;background-color: #cccccc;border-radius: 50%;display: flex;align-items: center;justify-content: center;color: #15ad43;">
-        {{ caller.user.first_name|make_list|first }}
-      </div>
-      {% endif %}
-    <div class="display-6">{{caller.user.first_name}} {{caller.user.last_name}}</div>
-    <div class="text-small text-muted">{{caller.user.email}}</div>
-    <small class="text-small text-success">@{{caller.user.username}}</small>
-
-  </div>
-  <hr class="mdc-list-divider">
-
-    <div class="mdc-drawer__content">
-      <nav class="mdc-list">
-        <h6 class="mdc-list-group__subheader">Store</h6>
-        <a class="mdc-list-item mdc-list-item--activated" href="/shop" aria-current="page" tabindex="0">
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">shopping_cart</i>
-          <span class="mdc-list-item__text">Shop</span>
-        </a>
-        <a class="mdc-list-item" href="/shop/orders">
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">shopping_basket</i>
-          <span class="mdc-list-item__text">Orders</span>
-        </a>
-        <a class="mdc-list-item" href="/billing">
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">payments</i>
-          <span class="mdc-list-item__text">Billing</span>
-        </a>
-        <hr class="mdc-list-divider">
-        <h6 class="mdc-list-group__subheader">Account</h6>
-
-        <a class="mdc-list-item" href="/profile">
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">account_circle</i>
-          <span class="mdc-list-item__text">Profile</span>
-        </a>
-        <a class="mdc-list-item" href="/caller/logout">
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">exit_to_app</i>
-          <span class="mdc-list-item__text">LOG OUT</span>
-        </a>
-        <hr class="mdc-list-divider">
-        <a class="mdc-list-item" href="/settings">
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">settings</i>
-          <span class="mdc-list-item__text">Settings</span>
-        </a>
-        <a class="mdc-list-item" href="/call-support">
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">help</i>
-          <span class="mdc-list-item__text">Call Support</span>
-        </a>
-        <a class="mdc-list-item" href="/about-us">
-          <i class="material-icons mdc-list-item__graphic" aria-hidden="true">help</i>
-          <span class="mdc-list-item__text">About Us</span>
-        </a>
-      </nav>
+<div>
+  <aside class="mdc-drawer mdc-drawer--modal">
+    <div class="mdc-drawer__header">
+      {% if caller.profile %}
+        <img src="https://i2.wp.com/www.usmagazine.com/wp-content/uploads/2018/05/joseph-morgan-on-the-originals-2.jpg?crop=0px%2C0px%2C1200px%2C679px&resize=1600%2C900&ssl=1" width="60" height="60" style="border-radius: 50%;" alt="{{call.expert.user.first_name}}">
+      {% else %}
+        <div class="profile_letter display-4 font-weight-bold mt-2" style="max-width: 60px !important;height: 60px;background-color: #cccccc;border-radius: 50%;display: flex;align-items: center;justify-content: center;color: #15ad43;">
+          {{ caller.user.first_name|make_list|first }}
+        </div>
+        {% endif %}
+      <div class="display-6">{{caller.user.first_name}} {{caller.user.last_name}}</div>
+      <div class="text-small text-muted">{{caller.user.email}}</div>
+      <small class="text-small text-success">@{{caller.user.username}}</small>
+  
     </div>
-  </aside>
-
-  <div class="mdc-drawer-scrim"></div>
-  <div class="mdc-drawer-app-content bg-light" style="display: flex !important; flex-direction: column !important;">
-    <header class="mdc-top-app-bar bg-success shadow">
-        <div class="mdc-top-app-bar__row">
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" id="open__nav__button" aria-label="Open navigation menu">menu</button>
-                <span class="mdc-top-app-bar__title">CALLS</span>
-            </section>
-            <!-- <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
-                <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Favorite">favorite</button>
-                <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Search">search</button>
-                <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Options">more_vert</button>
-            </section> -->
-        </div>
-    </header>
-    <main class="main-content" id="main-content">
-        <div class="mdc-top-app-bar--fixed-adjust" style="position: relative;">
-            {% if message %}
-		                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-		                  <small class="text-small">{{message}}</small>
-		                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-		                    <span aria-hidden="true">&times;</span>
-		                  </button>
-                    </div>
-                    <script>
-                      setTimeout(() => {
-                        window.location="/caller"
-                      }, 3000);
-                    </script>
-		        {% endif %}
-            <ul id="listTWO_LINE" class="mdc-list mdc-list--two-line inline-demo-list mdc-list--avatar-list">
-              {% for call in calls %}
-              <li class="mdc-list-item mdc-ripple-upgraded" tabindex="0">
-
-                <span class="mdc-list-item__graphic material-icons" aria-hidden="true">
-                    {% if call.expert.profile %}
-                      <img src="https://i2.wp.com/www.usmagazine.com/wp-content/uploads/2018/05/joseph-morgan-on-the-originals-2.jpg?crop=0px%2C0px%2C1200px%2C679px&resize=1600%2C900&ssl=1" width="60" height="60" style="border-radius: 50%;" alt="{{call.expert.user.first_name}}">
-                    {% else %}
-                      <div class="profile_letter display-5 font-weight-bold" style="min-width: 60px !important;height: 60px;background-color: #cccccc;border-radius: 50%;display: flex;align-items: center;justify-content: center;color: #15ad43;">
-                        {{ call.expert.user.first_name|make_list|first }}
+    <hr class="mdc-list-divider">
+  
+      <div class="mdc-drawer__content">
+        <nav class="mdc-list">
+          <h6 class="mdc-list-group__subheader">Store</h6>
+          <a class="mdc-list-item mdc-list-item--activated" href="/shop" aria-current="page" tabindex="0">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">shopping_cart</i>
+            <span class="mdc-list-item__text">Shop</span>
+          </a>
+          <a class="mdc-list-item" href="/shop/orders">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">shopping_basket</i>
+            <span class="mdc-list-item__text">Orders</span>
+          </a>
+          <a class="mdc-list-item" href="/billing">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">payments</i>
+            <span class="mdc-list-item__text">Billing</span>
+          </a>
+          <hr class="mdc-list-divider">
+          <h6 class="mdc-list-group__subheader">Account</h6>
+  
+          <a class="mdc-list-item" href="/profile">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">account_circle</i>
+            <span class="mdc-list-item__text">Profile</span>
+          </a>
+          <a class="mdc-list-item" href="/caller/logout">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">exit_to_app</i>
+            <span class="mdc-list-item__text">LOG OUT</span>
+          </a>
+          <hr class="mdc-list-divider">
+          <a class="mdc-list-item" href="/settings">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">settings</i>
+            <span class="mdc-list-item__text">Settings</span>
+          </a>
+          <a class="mdc-list-item" href="/call-support">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">help</i>
+            <span class="mdc-list-item__text">Call Support</span>
+          </a>
+          <a class="mdc-list-item" href="/about-us">
+            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">help</i>
+            <span class="mdc-list-item__text">About Us</span>
+          </a>
+        </nav>
+      </div>
+    </aside>
+  
+    <div class="mdc-drawer-scrim"></div>
+    <div class="mdc-drawer-app-content bg-light" style="display: flex !important; flex-direction: column !important;">
+      <header class="mdc-top-app-bar bg-success shadow">
+          <div class="mdc-top-app-bar__row">
+              <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                  <button class="material-icons mdc-top-app-bar__navigation-icon mdc-icon-button" id="open__nav__button" aria-label="Open navigation menu">menu</button>
+                  <span class="mdc-top-app-bar__title">CALLS</span>
+              </section>
+              <!-- <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
+                  <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Favorite">favorite</button>
+                  <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Search">search</button>
+                  <button class="material-icons mdc-top-app-bar__action-item mdc-icon-button" aria-label="Options">more_vert</button>
+              </section> -->
+          </div>
+      </header>
+      <main class="main-content" id="main-content">
+          <div class="mdc-top-app-bar--fixed-adjust" style="position: relative;">
+              {% if message %}
+                      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <small class="text-small">{{message}}</small>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
                       </div>
-                    {% endif %}
-                </span>
-                
-                <span class="mdc-list-item__text">
-                    <span class="mdc-list-item__primary-text">
-                        {{call.expert.user.first_name}} {{call.expert.user.last_name}} 
-                    </span>
-                    <span class="mdc-list-item__secondary-text text-small">
-                      {% if call.last_chat %}
-                        {{call.last_chat}}
-                      {% endif %}
-                    </span>
-                </span>
-                <span aria-hidden="true" style="float: right !important;" class="mdc-list-item__meta text-success">{{call.created|date:"F, j"}}</span>
-              </li>
-              <hr>
-              {% endfor %}
-              
-              </ul>
-               
-        <a href="/caller/call" class="mdc-fab app-fab--absolute mdc-fab--extended text-white bg-success" aria-label="Favorite">
-            <span class="mdc-fab__icon material-icons">call</span>
-            New Call
-        </a>
-        </div>
+                      <script>
+                        setTimeout(() => {
+                          window.location="/caller"
+                        }, 3000);
+                      </script>
+              {% endif %}
+              <div class="container" id="choose_expert_page" style="display: none;height: 90vh !important;">
+                <div class="d-flex justify-content-between mt-4">
+                  <h3>Chooose an Expert</h3>
+                  <span class="material-icons" style="float: right;cursor: pointer;" id="close_chooose_expert_btn">close</span>
+                </div>
 
-      </main>
-    
+                <div class="d-flex flex-wrap">
+                  {% for expert in experts %}
+                  {% if expert.is_free %}
+                      <a href="/caller/call?expert={{expert.id}}" style="text-decoration: none;width: 150px;height: 150px;" class="card shadow-sm bg-white text-dark d-flex flex-column justify-content-between align-items-center bg-light p-2 m-1">
+                        {% if expert.profile %}
+                          <img src="https://i2.wp.com/www.usmagazine.com/wp-content/uploads/2018/05/joseph-morgan-on-the-originals-2.jpg?crop=0px%2C0px%2C1200px%2C679px&resize=1600%2C900&ssl=1" width="60" height="60" style="border-radius: 50%;" alt="{{call.expert.user.first_name}}">
+                        {% else %}
+                          <div class="profile_letter display-5 font-weight-bold" style="width: 60px !important;height: 60px !important;background-color: #cccccc;border-radius: 50%;display: flex;align-items: center;justify-content: center;color: #15ad43;">
+                            {{ expert.user.first_name|make_list|first }}
+                          </div>
+                        {% endif %}
+                        <h5 class="text-muted mt-2">{{expert.user.first_name}} {{expert.user.last_name}}</h5>
+                        <h6 class="mt-2 text-warning">{{expert.specialty}}</h6>
+                            <div class="d-flex justify-content-end align-items-center">
+                              <div class="text-success">Online</div>
+                              <span class="material-icons text-success text-small ml-4" style="font-size: 5px;">fiber_manual_record</span>
+                            </div>
+                      </a>
+                      {% else %}
+                      <div href="" style="text-decoration: none;width: 150px;height: 150px;" class="card shadow-sm bg-white text-dark d-flex flex-column justify-content-between align-items-center bg-light p-2 m-1">
+                          {% if expert.profile %}
+                            <img src="https://i2.wp.com/www.usmagazine.com/wp-content/uploads/2018/05/joseph-morgan-on-the-originals-2.jpg?crop=0px%2C0px%2C1200px%2C679px&resize=1600%2C900&ssl=1" width="60" height="60" style="border-radius: 50%;" alt="{{call.expert.user.first_name}}">
+                          {% else %}
+                            <div class="profile_letter display-5 font-weight-bold" style="width: 60px !important;height: 60px !important;background-color: #cccccc;border-radius: 50%;display: flex;align-items: center;justify-content: center;color: #15ad43;">
+                              {{ expert.user.first_name|make_list|first }}
+                            </div>
+                          {% endif %}
+                            <h5 class="text-muted mt-2">{{expert.user.first_name}} {{expert.user.last_name}}</h5>
+                            <h6 class="mt-2 text-warning">{{expert.specialty}}</h6>
+                            <div class="d-flex justify-content-end align-items-center">
+                              <div class="text-secondary">Offline</div>
+                              <span class="material-icons text-secondary text-small ml-4" style="font-size: 5px;">fiber_manual_record</span>
+                            </div>
+                          </div>
+
+                      {% endif %}
+                {% endfor %}
+                </div>
+                
+              </div>
+              <ul id="main_page" class="mdc-list mdc-list--two-line inline-demo-list container mdc-list--avatar-list">
+                {% for call in calls %}
+                <li class="mdc-list-item mdc-ripple-upgraded" tabindex="0">
+  
+                  <span class="mdc-list-item__graphic material-icons" aria-hidden="true">
+                      {% if call.expert.profile %}
+                        <img src="https://i2.wp.com/www.usmagazine.com/wp-content/uploads/2018/05/joseph-morgan-on-the-originals-2.jpg?crop=0px%2C0px%2C1200px%2C679px&resize=1600%2C900&ssl=1" width="60" height="60" style="border-radius: 50%;" alt="{{call.expert.user.first_name}}">
+                      {% else %}
+                        <div class="profile_letter display-5 font-weight-bold" style="min-width: 60px !important;height: 60px;background-color: #cccccc;border-radius: 50%;display: flex;align-items: center;justify-content: center;color: #15ad43;">
+                          {{ call.expert.user.first_name|make_list|first }}
+                        </div>
+                      {% endif %}
+                  </span>
+                  
+                  <span class="mdc-list-item__text">
+                      <span class="mdc-list-item__primary-text">
+                          {{call.expert.user.first_name}} {{call.expert.user.last_name}} 
+                      </span>
+                      <span class="mdc-list-item__secondary-text text-small">
+                        {% if call.last_chat %}
+                          {{call.last_chat}}
+                        {% endif %}
+                      </span>
+                  </span>
+                  <span aria-hidden="true" style="float: right !important;" class="mdc-list-item__meta text-success">{{call.created|date:"F, j"}}</span>
+                </li>
+                <hr>
+                {% endfor %}
+                <button id="start_call_button" class="mdc-fab app-fab--absolute mdc-fab--extended text-white bg-success" aria-label="Favorite">
+                  <span class="mdc-fab__icon material-icons">call</span>
+                  New Call
+              </button>
+                </ul>
+                 
+          
+          </div>
+  
+        </main>
+      
+  </div>
 </div>
+
+
     
     <script>
         const drawer = mdc.drawer.MDCDrawer.attachTo(document.querySelector('.mdc-drawer'));
@@ -162,5 +212,5 @@
         const list = new mdc.list.MDCList(document.querySelector('.mdc-list')); 
         const listItemRipples = list.listElements.map((listItemEl) => new mdc.ripple.MDCRipple(listItemEl));   
     </script> 
- 
+ <script src="{% static 'js/caller_home.js' %}"></script>
 {% endblock content %}

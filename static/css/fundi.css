@@ -59,7 +59,7 @@ body{
 .top-controls{
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-end;
+	justify-content: space-between;
 	height: 30%;
 }
 
