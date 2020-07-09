@@ -115,7 +115,8 @@ class AddToCartView(View):
         product_id = pk
         product = Product.objects.get(id=product_id)
 
-        order = Order.objects.filter(user=user, is_fullfield=False).first()
+        order = Order.objects.filter(added_by=self.request.user, is_fullfield=False).first()
+
         if not order:
             order = Order()
             order.is_fullfield = False
