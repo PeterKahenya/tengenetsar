@@ -6,9 +6,22 @@ from django.http import JsonResponse
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 import locale
-from .models import Product, Order,Category
+from .models import Product, Order,Category,Payment
 from experts.models import Expert
 from callers.models import Caller
+from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+import os
+from io import BytesIO
+from django.template.loader import get_template
+from xhtml2pdf import pisa
+from django.db.models import Q
+import datetime
+from django.conf import settings
+
+
+
+receipt_no=0
 
 
 def get_logged_user(request,order_id):
@@ -74,7 +87,7 @@ class OrderListView(ListView):
     def get_context_data(self, **kwargs):
         user=self.request.user
         context = super().get_context_data(**kwargs)
-        context['orders'] = Order.objects.all().order_by("created")
+        context['orders'] = Order.objects.filter(Q(added_by=user)|Q(checkout_by=user)).order_by("created")
         return context
 
 
@@ -120,10 +133,51 @@ class AddToCartView(View):
 
 @method_decorator(csrf_exempt, name='dispatch')
 class CheckOutView(View):
-    def invoice(self):
-        pass
-    def receipt(self):
-        pass
+    def get_receipt_no(self):
+        global receipt_no
+        day=datetime.datetime.today().day
+        if day<10:
+            day="0"+str(day)
+        month=datetime.datetime.today().month
+        if month<10:
+            month="0"+str(month)
+        current=receipt_no
+        if receipt_no<10:
+            current="0"+str(receipt_no)
+        receipt=str(datetime.datetime.today().year)+str(month)+str(day)+str(current)
+        receipt_no+=1
+        return receipt
+    def link_callback(self,uri, rel):
+
+        sUrl = settings.STATIC_URL      
+        sRoot = settings.STATIC_ROOT    
+        mUrl = settings.MEDIA_URL      
+        mRoot = settings.MEDIA_ROOT    
+
+        if uri.startswith(mUrl):
+            path = os.path.join(mRoot, uri.replace(mUrl, ""))
+        elif uri.startswith(sUrl):
+            path = os.path.join(sRoot, uri.replace(sUrl, ""))
+        else:
+            return uri
+
+        if not os.path.isfile(path):
+                raise Exception(
+                    'media URI must start with %s or %s' % (sUrl, mUrl)
+                )
+        return path
+    def receipt(self,order):
+        template = get_template('shop/receipt.html')
+        context = {'receipt_no':self.get_receipt_no() ,'order':order,'date':datetime.datetime.today().strftime('%d/%m/%Y')}
+        html = template.render(context)
+        receipt_file_path=os.path.join(settings.MEDIA_ROOT,"receipts/"+self.request.user.first_name+self.request.user.last_name+"Receipt"+self.get_receipt_no()+".pdf")
+        receipt_file = open(receipt_file_path, "w+b")
+        pisaStatus = pisa.CreatePDF(html, dest=receipt_file, link_callback=self.link_callback)
+        if pisaStatus.err:
+            return HttpResponse('We had some errors <pre>' + html + '</pre>')
+        receipt_file.close()
+        return receipt_file_path
+
     def send_email_and_invoice_receipt(self):
         pass
     def get(self,request,order_id):
@@ -138,14 +192,18 @@ class CheckOutView(View):
         payment.order = order
         payment.payment_method = "MPESA"
         payment.code = request.POST.get('mpesa_code')
-        payment.amount = request.POST.get('mpesa_amount')
+        # payment.amount = float(request.POST.get('mpesa_amount'))
         payment.account_no = request.POST.get('mpesa_name')
 
         payment.save()
-        print(float(request.POST.get('mpesa_amount')) < float(order.total_price))
-        if float(request.POST.get('mpesa_amount')) < float(order.total_price):
+        print(payment.amount < float(order.total_price))
+        if payment.amount < float(order.total_price):
+            self.receipt(payment)
+            self.send_email_and_receipt(payment)
             return render(request,"shop/checkout.html",{'errors':"The Amount Paid is not enough to fullfill the order, you will be refunded soon!"})
         else:
+            self.receipt(payment)
+            self.send_email_and_receipt(payment)
             order.is_fullfield = True
             order.save()
             return JsonResponse({"PAYMENT_ACCEPTED": True})

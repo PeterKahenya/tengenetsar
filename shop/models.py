@@ -40,7 +40,7 @@ class Payment(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     order = models.ForeignKey(Order,on_delete=models.CASCADE)
     code=models.CharField(max_length=256)
-    amount=models.DecimalField(max_digits=9,decimal_places=2)
+    amount=models.DecimalField(max_digits=9,decimal_places=2,default=0.00)
     account_no = models.CharField(max_length=256)
     payment_method = models.CharField(max_length=256)
 
