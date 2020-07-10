@@ -23,8 +23,6 @@ def send_receipt(payment,email_address,receipt_path):
     ])
     message.content_subtype = "html"
     message.send()
-    newsletter.is_sent=True
-    newsletter.save()
     return None
 
 # @shared_task
