@@ -19,7 +19,7 @@ from django.db.models import Q
 import datetime
 from django.conf import settings
 from .send_emails import send_receipt
-from .tasks import send_receipt as async_send_email
+# from .tasks import send_receipt as async_send_email
 
 
 
