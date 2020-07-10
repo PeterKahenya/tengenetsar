@@ -63,6 +63,7 @@ async function init() {
     localStream = await navigator.mediaDevices.getUserMedia({video: { facingMode:"user" }, audio: true});
   }
   my_video.srcObject = localStream;
+  my_video.muted=true
   remoteStream = new MediaStream();
   other_video.srcObject = remoteStream;
   if (user==="caller") {
@@ -204,6 +205,8 @@ async function createRoom() {
     event.streams[0].getTracks().forEach(track => {
       remoteStream.addTrack(track);
     });
+    start_call_page.style.display="none"
+    live_calling_page.style.display="flex"
   });
 
   roomRef.onSnapshot(async snapshot => {
