@@ -189,6 +189,7 @@ class CheckOutView(View):
     def post(self, request,order_id):
         order = Order.objects.get(id=order_id)
         user=get_logged_user(request,order_id)
+        print(request.POST.get('address_longitude')+"---"+request.POST.get('address_latitude'))
         user.address_longitude=request.POST.get('address_longitude')
         user.address_latitude=request.POST.get('address_latitude')
         user.save()
@@ -197,7 +198,7 @@ class CheckOutView(View):
         payment.order = order
         payment.payment_method = "MPESA"
         payment.code = request.POST.get('mpesa_code')
-        # payment.amount = float(request.POST.get('mpesa_amount'))
+        payment.amount = float(request.POST.get('mpesa_amount'))
         payment.account_no = request.POST.get('mpesa_name')
 
         payment.save()

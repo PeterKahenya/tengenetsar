@@ -231,7 +231,7 @@
             <form action="" method="post">
               {% csrf_token %}
               <input  type="hidden"  name="phone_no_val"  value="" id="phone_no_val" />
-              <input type="hidden" name="mpesa_code" value="" id="mpesa_code" />
+              <input type="hidden" name="mpesa_code" value="0.00" id="mpesa_code" />
               <input type="hidden" name="mpesa_name" value="" id="mpesa_name" />
               <input type="hidden" name="user_longitude" value="{{user.address_longitude}}" id="address_longitude">
               <input type="hidden" name="user_latitude" value="{{user.address_latitude}}" id="address_latitude">
