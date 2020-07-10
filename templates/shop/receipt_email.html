@@ -488,11 +488,11 @@ ul.social li{
             			<div class="text" style="padding: 0 2.5em; text-align: center;">
             				<h4>TENGENETSAR PAYMENT RECEIVED</h4>
             				<p style="text-align: left;">
-                        Dear {{payment.order.checkout_by.first_name}} {{attendee.first_name}} {{attendee.last_name}}, <br>
+                        Dear {{payment.order.checkout_by.first_name}}, <br>
                         Your Payment for <strong><small><i> TENGENETSAR order {{payment.order.id}}</i></small> </strong> has been received. <br>
 						The delivery process has began and will be completed within 24 hours. <br>
 						The delivery address is in the link below.
-						<a href="https://www.google.com/maps/search/?api=1&query=47.5951518,-122.3316393" class="btn btn-primary">Delivery Address</a>
+						<a href="https://www.google.com/maps/search/?api=1&query={{user.address_latitude}},{{user.address_longitude}}" class="btn btn-primary">Delivery Address</a>
 							      </p>
 							      <small>Find attached a copy of your receipt.</small>
             			</div>

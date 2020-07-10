@@ -6,10 +6,10 @@ from django.utils.html import strip_tags
 import uuid
 from shop.models import Payment
 
-def send_receipt(payment,email_address,receipt_path):
+def send_receipt(payment,email_address,receipt_path,user):
     print(str(payment)+email_address+receipt_path)
     payment_object=Payment.objects.get(id=payment)
-    html_message = render_to_string('shop/receipt_email.html', {"payment":payment_object})
+    html_message = render_to_string('shop/receipt_email.html', {"payment":payment_object,"user":user})
     plain_message = strip_tags(html_message)
     
 
