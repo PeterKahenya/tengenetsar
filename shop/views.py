@@ -199,7 +199,7 @@ class CheckOutView(View):
         if payment.amount < float(order.total_price):
             receipt_path=self.receipt(payment)
             send_receipt.delay(payment.id,user.user.email,receipt_path)
-            order.checkout_by(user.user)
+            order.checkout_by=user.user
             order.save()
             return render(request,"shop/checkout.html",{'errors':"The Amount Paid is not enough to fullfill the order, you will be refunded soon!"})
         else:
