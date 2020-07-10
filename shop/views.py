@@ -171,7 +171,7 @@ class CheckOutView(View):
         return path
     def receipt(self,payment):
         template = get_template('shop/receipt.html')
-        context = {'receipt_no':self.get_receipt_no() ,'payment':payment,'date':datetime.datetime.today().strftime('%d/%m/%Y')}
+        context = {'receipt_no':self.get_receipt_no() ,'payment':payment,"products":order.products.all(),'date':datetime.datetime.today().strftime('%d/%m/%Y')}
         html = template.render(context)
         receipt_file_path=os.path.join(settings.MEDIA_ROOT,"receipts/"+self.request.user.first_name+self.request.user.last_name+"Receipt"+self.get_receipt_no()+".pdf")
         receipt_file = open(receipt_file_path, "w+b")

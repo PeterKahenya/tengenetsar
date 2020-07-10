@@ -1,3 +1,11 @@
+<style>
+  table, th, td {
+  border: 1px solid black;
+}
+</style>
+<div>
+
+</div>
 <img width="100%" height="200px" src="https://tengenetsar.kipya-africa.com/static/images/top_image.png" alt="">
 
 <div style="display: flex;flex-direction: row;justify-content: space-between;">
@@ -18,7 +26,6 @@ PIN: P051326321U <br>
 <h2 style="text-align: center;"><i>RECEIPT</i></h2>
 
 <div>
-    <h1 style="text-align: center;font-weight: bolder;">Receipt</h1>
     <p style="text-align: center;">
       Receipt Number:
       <strong>
@@ -35,7 +42,30 @@ PIN: P051326321U <br>
       </strong>
       
     </p>
+
+    <hr>
+    <table>
+      <tr>
+        <th>Item</th>
+        <th>Qty</th>
+        <th>Rate Per Item</th>
+        <th>Amount (KES)</th>
+      </tr>
     
+    {% for product products %}
+      <tr>
+        <td>{{product.name}}</td>
+        <td>1</td>
+        <td>{{product.price}}</td>
+        <td>{{product.price}}</td>
+      </tr>
+    {% endfor }
+      <tr>
+        <td>Order Total </td>
+        <td>{{payment.order.total_price}}</td>
+      </tr>
+    </table>
+    <hr>
     <br>
     <p style="text-align: center;">
       Sum of:
