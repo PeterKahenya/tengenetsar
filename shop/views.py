@@ -51,7 +51,6 @@ class ProductsListView(ListView):
         context['products'] = Product.objects.all()
         context['categories'] = Category.objects.all()
 
-
         order = Order.objects.filter(added_by=self.request.user, is_fullfield=False).first()
         if not order:
             order = Order()
