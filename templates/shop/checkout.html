@@ -271,6 +271,8 @@
 
       <script>
         console.log($('#address_longitude').val())
+        $("#first_step").hide();
+
         if ($('#address_longitude').val()==="None") {
             console.log("address_longitude")
             if (navigator.geolocation) {
@@ -329,7 +331,6 @@
             });
         }
         $("#second_step").hide();
-        $("#first_step").hide();
 
         function update_number() {
           $("#final_number").html(
