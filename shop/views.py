@@ -71,7 +71,7 @@ class ProductDetailView(DetailView):
         context['products'] = Product.objects.all()
         context['categories'] = Category.objects.all()
         
-        order = Order.objects.filter(user=user, is_fullfield=False).first()
+        order = Order.objects.filter(Q(added_by=user)|Q(checkout_by=user)).order_by("created").first()
         if not order:
             order = Order()
             order.is_fullfield = False
