@@ -270,15 +270,20 @@
       <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
       <script>
+        console.log($('#address_longitude').val())
         if ($('#address_longitude').val==="") {
+            console.log("address_longitude")
             if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition(function (position) {
+              console.log("geolocation supported")
+
               var lat= position.coords.latitude 
               var long= position.coords.longitude
               $("#address_longitude").val(long)
               $("#address_latitude").val(lat)
               $("#get_address").hide();
-              $("#first_step").hide();
+              $("#first_step").show();
+
             });
             } else {
               alert("Geolocation is not supported by this browser.");
