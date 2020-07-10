@@ -7,6 +7,6 @@ urlpatterns = [
 	path('products/<uuid:pk>/',ProductDetailView.as_view()),
 	path('products/<uuid:pk>/add_to_cart',AddToCartView.as_view()),
 	path('orders',OrderListView.as_view()),
-	path('orders/<uuid:order_id>/checkout',CheckOutView.as_view())
-	path('orders/<uuid:order_id>/checkout',CheckOutView.as_view())
+	path('orders/<uuid:order_id>/checkout',CheckOutView.as_view()),
+	path('orders/<uuid:order_id>/track',TrackShipment.as_view())
 ]

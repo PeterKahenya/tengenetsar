@@ -218,3 +218,7 @@ class CheckOutView(View):
             receipt_path=self.receipt(payment)
             send_receipt(payment.id,user.user.email,receipt_path,user)
             return redirect("shop/orders/"+str(order.id)+"/track")
+
+class TrackShipment(View):
+    def get(self,request):
+        return render(request,"shop/track_shipment.html")
