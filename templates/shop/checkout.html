@@ -288,6 +288,9 @@
             } else {
               alert("Geolocation is not supported by this browser.");
             }
+        }else{
+          $("#get_address").hide();
+          $("#first_step").show();
         }
 
         var interval = NaN;
