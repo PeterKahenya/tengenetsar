@@ -7,7 +7,7 @@ import uuid
 from shop.models import Payment
 
 def send_receipt(payment,email_address,receipt_path):
-    print(payment+email_address+receipt_path)
+    print(str(payment)+email_address+receipt_path)
     payment_object=Payment.objects.get(id=payment)
     html_message = render_to_string('shop/receipt_email.html', {"payment":payment_object,"scheme":scheme,"host":host})
     plain_message = strip_tags(html_message)
