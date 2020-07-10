@@ -18,7 +18,7 @@ from xhtml2pdf import pisa
 from django.db.models import Q
 import datetime
 from django.conf import settings
-from .tasks import send_receipt
+from .send_emails import send_receipt
 
 
 receipt_no=0
@@ -183,6 +183,7 @@ class CheckOutView(View):
         order=Order.objects.get(id=order_id)
         user=get_logged_user(request,order_id)
         return render(request,"shop/checkout.html",{"order":order,"products":order.products.all(),"user":user})
+    
     def post(self, request,order_id):
         order = Order.objects.get(id=order_id)
         user=get_logged_user(request,order_id)
@@ -198,9 +199,9 @@ class CheckOutView(View):
         print(payment.amount < float(order.total_price))
         if payment.amount < float(order.total_price):
             receipt_path=self.receipt(payment)
-            send_receipt.delay(payment.id,user.user.email,receipt_path)
             order.checkout_by=user.user
             order.save()
+            send_receipt.delay(payment.id,user.user.email,receipt_path)
             return render(request,"shop/checkout.html",{'errors':"The Amount Paid is not enough to fullfill the order, you will be refunded soon!"})
         else:
             order.is_fullfield = True
