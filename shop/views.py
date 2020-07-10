@@ -194,6 +194,8 @@ class CheckOutView(View):
         user.address_latitude=request.POST.get('user_longitude')
         user.save()
 
+        print(request.POST.get('mpesa_amount'))
+
         payment = Payment()
         payment.order = order
         payment.payment_method = "MPESA"
