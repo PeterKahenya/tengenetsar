@@ -157,15 +157,17 @@
           <br />
           <div class="card text-center p-4" id="get_address">
             {% if not user.address_longitude %}
-
-            
-
+              <div class="alert alert-warning" id="address_message" role="alert">
+                Enable Your Location in order to log your address
+              </div>
             {% else %}
-
-
-
+              <div class="alert bg-success alert-success" role="alert">
+                Your Location is already logged
+              </div>
             {% endif %}
-
+            <!-- <button id="locdonebtn" disabled class="btn btn-secondary m-2">
+              Next
+            </button> -->
           </div>
           <div class="card" id="first_step" style="width: 300px;">
             <!-- <img src="{{purpose_object.image.url}}" class="card-img-top" alt="..."> -->
@@ -228,20 +230,12 @@
             <br />
             <form action="" method="post">
               {% csrf_token %}
-              <input
-                type="hidden"
-                name="phone_no_val"
-                value=""
-                id="phone_no_val"
-              />
+              <input  type="hidden"  name="phone_no_val"  value="" id="phone_no_val" />
               <input type="hidden" name="mpesa_code" value="" id="mpesa_code" />
               <input type="hidden" name="mpesa_name" value="" id="mpesa_name" />
-              <input
-                type="hidden"
-                name="mpesa_amount"
-                value=""
-                id="mpesa_amount"
-              />
+              <input type="hidden" name="user_longitude" value="{{user.address_longitude}}" id="address_longitude">
+              <input type="hidden" name="user_latitude" value="{{user.address_latitude}}" id="address_latitude">
+              <input type="hidden"  name="mpesa_amount" value=""  id="mpesa_amount" />
               <button id="finishbtn" class="btn btn-secondary m-2">
                 Finish
               </button>
@@ -276,16 +270,31 @@
       <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
       <script>
+        if ($('#address_longitude').val==="") {
+            if (navigator.geolocation) {
+              navigator.geolocation.getCurrentPosition(function (position) {
+              var lat= position.coords.latitude 
+              var long= position.coords.longitude
+              $("#address_longitude").val(long)
+              $("#address_latitude").val(lat)
+              $("#get_address").hide();
+              $("#first_step").hide();
+            });
+            } else {
+              alert("Geolocation is not supported by this browser.");
+            }
+        }
+
         var interval = NaN;
         function checkStatus() {
           fetch("https://eawaterspayments.herokuapp.com/ispaid?purpose=course")
             .then((response) => {
-              if (response.ok) {
-                return response.json();
-              } else {
-                return;
-              }
-            })
+                if (response.ok) {
+                  return response.json();
+                } else {
+                  return;
+                }
+              })
             .then((res) => {
               if (res.status === 0) {
                 var msg = res.body;
