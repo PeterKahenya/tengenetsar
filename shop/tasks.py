@@ -8,9 +8,9 @@ from shop.models import Payment
 
 @shared_task
 def send_receipt(payment,email_address,receipt_path):
-    print(payment+email_address+receipt_path)
+    print(str(payment)+email_address+receipt_path)
     payment_object=Payment.objects.get(id=payment)
-    html_message = render_to_string('shop/receipt_email.html', {"payment":payment_object,"scheme":scheme,"host":host})
+    html_message = render_to_string('shop/receipt_email.html', {"payment":payment_object})
     plain_message = strip_tags(html_message)
     
 
@@ -24,8 +24,6 @@ def send_receipt(payment,email_address,receipt_path):
     ])
     message.content_subtype = "html"
     message.send()
-    newsletter.is_sent=True
-    newsletter.save()
     return None
 
 # @shared_task

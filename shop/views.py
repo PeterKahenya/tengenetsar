@@ -19,6 +19,8 @@ from django.db.models import Q
 import datetime
 from django.conf import settings
 from .send_emails import send_receipt
+from .tasks import send_receipt as async_send_email
+
 
 
 receipt_no=0
@@ -201,12 +203,12 @@ class CheckOutView(View):
             receipt_path=self.receipt(payment)
             order.checkout_by=user.user
             order.save()
-            send_receipt(payment.id,user.user.email,receipt_path)
+            async_send_email.delay(payment.id,user.user.email,receipt_path)
             return render(request,"shop/checkout.html",{'errors':"The Amount Paid is not enough to fullfill the order, you will be refunded soon!"})
         else:
             order.is_fullfield = True
             order.checkout_by=user.user
             order.save()
             receipt_path=self.receipt(payment)
-            send_receipt(payment.id,user.user.email,receipt_path)
+            async_send_email.delay(payment.id,user.user.email,receipt_path)
             return JsonResponse({"PAYMENT_ACCEPTED": True})
