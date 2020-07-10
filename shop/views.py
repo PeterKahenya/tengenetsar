@@ -167,9 +167,9 @@ class CheckOutView(View):
                     'media URI must start with %s or %s' % (sUrl, mUrl)
                 )
         return path
-    def receipt(self,order):
+    def receipt(self,payment):
         template = get_template('shop/receipt.html')
-        context = {'receipt_no':self.get_receipt_no() ,'order':order,'date':datetime.datetime.today().strftime('%d/%m/%Y')}
+        context = {'receipt_no':self.get_receipt_no() ,'payment':payment,'date':datetime.datetime.today().strftime('%d/%m/%Y')}
         html = template.render(context)
         receipt_file_path=os.path.join(settings.MEDIA_ROOT,"receipts/"+self.request.user.first_name+self.request.user.last_name+"Receipt"+self.get_receipt_no()+".pdf")
         receipt_file = open(receipt_file_path, "w+b")
@@ -179,8 +179,6 @@ class CheckOutView(View):
         receipt_file.close()
         return receipt_file_path
 
-    def send_email_and_receipt(self,payment,receipt_path):
-        send_receipt.delay(payment,receipt_path)
     def get(self,request,order_id):
         order=Order.objects.get(id=order_id)
         user=get_logged_user(request,order_id)
@@ -200,11 +198,14 @@ class CheckOutView(View):
         print(payment.amount < float(order.total_price))
         if payment.amount < float(order.total_price):
             receipt_path=self.receipt(payment)
-            self.send_email_and_receipt(payment.id,receipt_path)
+            send_receipt.delay(payment.id,user.user.email,receipt_path)
+            order.checkout_by(user.user)
+            order.save()
             return render(request,"shop/checkout.html",{'errors':"The Amount Paid is not enough to fullfill the order, you will be refunded soon!"})
         else:
             order.is_fullfield = True
+            order.checkout_by=user.user
             order.save()
             receipt_path=self.receipt(payment)
-            self.send_email_and_receipt(payment.id,receipt_path)
+            send_receipt.delay(payment.id,user.user.email,receipt_path)
             return JsonResponse({"PAYMENT_ACCEPTED": True})
