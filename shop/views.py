@@ -189,9 +189,9 @@ class CheckOutView(View):
     def post(self, request,order_id):
         order = Order.objects.get(id=order_id)
         user=get_logged_user(request,order_id)
-        print(request.POST.get('address_longitude')+"---"+request.POST.get('address_latitude'))
-        user.address_longitude=request.POST.get('address_longitude')
-        user.address_latitude=request.POST.get('address_latitude')
+        print(request.POST.get('user_longitude')+"---"+request.POST.get('user_longitude'))
+        user.address_longitude=request.POST.get('user_longitude')
+        user.address_latitude=request.POST.get('user_longitude')
         user.save()
 
         payment = Payment()
