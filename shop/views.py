@@ -165,9 +165,7 @@ class CheckOutView(View):
             return uri
 
         if not os.path.isfile(path):
-                raise Exception(
-                    'media URI must start with %s or %s' % (sUrl, mUrl)
-                )
+                raise Exception( 'media URI must start with %s or %s' % (sUrl, mUrl))
         return path
     def receipt(self,payment):
         template = get_template('shop/receipt.html')
