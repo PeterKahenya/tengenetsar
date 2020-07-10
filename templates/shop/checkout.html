@@ -271,7 +271,7 @@
 
       <script>
         console.log($('#address_longitude').val())
-        if ($('#address_longitude').val==="") {
+        if ($('#address_longitude').val()==="None") {
             console.log("address_longitude")
             if (navigator.geolocation) {
               navigator.geolocation.getCurrentPosition(function (position) {
