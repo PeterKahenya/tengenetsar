@@ -30,10 +30,6 @@
             <i class="material-icons mdc-list-item__graphic" aria-hidden="true">shopping_basket</i>
             <span class="mdc-list-item__text">Orders</span>
           </a>
-          <a class="mdc-list-item" href="#">
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">payments</i>
-            <span class="mdc-list-item__text">Billing</span>
-          </a>
           <hr class="mdc-list-divider">
           <h6 class="mdc-list-group__subheader">Categories</h6>
           {% for category in categories %}
@@ -42,27 +38,10 @@
               <span class="mdc-list-item__text">{{category.name}}</span>
             </a>
           {% endfor %}
-          <hr class="mdc-list-divider">
-          <a class="mdc-list-item" href="/caller/logout">
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">account_circle</i>
-            <span class="mdc-list-item__text">Profile</span>
-          </a>
         <a class="mdc-list-item" href="/caller/logout">
           <i class="material-icons mdc-list-item__graphic" aria-hidden="true">exit_to_app</i>
           <span class="mdc-list-item__text">LOG OUT</span>
         </a>
-          <a class="mdc-list-item" href="#">
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">settings</i>
-            <span class="mdc-list-item__text">Settings</span>
-          </a>
-          <a class="mdc-list-item" href="#">
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">help</i>
-            <span class="mdc-list-item__text">Call Support</span>
-          </a>
-          <a class="mdc-list-item" href="#">
-            <i class="material-icons mdc-list-item__graphic" aria-hidden="true">help</i>
-            <span class="mdc-list-item__text">About Us</span>
-          </a>
         </nav>
       </div>
     </aside>
