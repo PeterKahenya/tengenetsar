@@ -41,7 +41,24 @@ def get_logged_user(request,order_id):
         user=caller
     return user
 
-class ProductsListView(ListView):
+class ProductsListView(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            context={}
+            context['products'] = Product.objects.all()
+            context['categories'] = Category.objects.all()
+            order = Order.objects.filter(added_by=self.request.user, is_fullfield=False).first()
+            if not order:
+                order = Order()
+                order.is_fullfield = False
+                order.added_by=user
+                order.save()
+            context['user']=get_logged_user(self.request,order.id)
+            context['order_products'] = order.products.all()
+            return render(request,"shop/index.html",context)
+        else:
+            return render(request,"shop/index.html",{"products":Product.objects.all(),"categories":Category.objects.all()})
+
     model = Product
     template_name = "shop/index.html"
 
@@ -51,14 +68,7 @@ class ProductsListView(ListView):
         context['products'] = Product.objects.all()
         context['categories'] = Category.objects.all()
 
-        order = Order.objects.filter(added_by=self.request.user, is_fullfield=False).first()
-        if not order:
-            order = Order()
-            order.is_fullfield = False
-            order.added_by=user
-            order.save()
-        context['user']=get_logged_user(self.request,order.id)
-        context['order_products'] = order.products.all()
+        
         return context
 
 class ProductDetailView(DetailView):
