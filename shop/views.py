@@ -123,25 +123,28 @@ class OrderDetailView(View):
 @method_decorator(csrf_exempt, name='dispatch')
 class AddToCartView(View):
     def get(self, request,pk):
-        user = request.user
-        product_id = pk
-        product = Product.objects.get(id=product_id)
+        if request.user.is_authenticated:
+            user = request.user
+            product_id = pk
+            product = Product.objects.get(id=product_id)
 
-        order = Order.objects.filter(added_by=self.request.user, is_fullfield=False).first()
+            order = Order.objects.filter(added_by=self.request.user, is_fullfield=False).first()
 
-        if not order:
-            order = Order()
-            order.is_fullfield = False
-            order.save()
-        
-        user=get_logged_user(self.request,order.id)
+            if not order:
+                order = Order()
+                order.is_fullfield = False
+                order.save()
+            
+            user=get_logged_user(self.request,order.id)
 
-        if product not in order.products.all():
-            order.products.add(product)
-            order.total_price = order.total_price+product.price
-            order.save()
+            if product not in order.products.all():
+                order.products.add(product)
+                order.total_price = order.total_price+product.price
+                order.save()
 
-        return redirect('/shop/')
+            return redirect('/shop/')
+        else:
+            return redirect("/caller/login")
 
 
 @method_decorator(csrf_exempt, name='dispatch')
