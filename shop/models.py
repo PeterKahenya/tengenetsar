@@ -31,6 +31,7 @@ class Product(models.Model):
 	image = models.ImageField(upload_to=get_image_dir)
 	price = models.DecimalField(max_digits=9,decimal_places=2)
 	suppler = models.ForeignKey(Supplier,on_delete=models.CASCADE,blank=True,null=True)
+	item_code = models.TextField(blank=True,null=True)
 
 	def __str__(self):
 		return self.name
