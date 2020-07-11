@@ -82,25 +82,32 @@
                 </div>
           
                 <div>
+                  {% if orders %}
                     {% for order in orders %}
-                        {% if order.is_fullfield %}
-        
-                        <div class="jumbotron">
-                            <h6 class="display-4">Order ID: {{order.id}}</h6>
-                            <p class="lead">Total KES. {{order.total_price}}</p>
-                        </div>
-        
-                        {% else %}
-        
-                        <div class="jumbotron bg-light shadow">
-                            <h4>Order ID: {{order.id}}</h4>
-                            <p class="lead">Total KES. {{order.total_price}}</p>
-                            <hr class="my-4">
-                            <p>Click button below to proceed to Checkout</p>
-                            <a class="btn btn-light btn-lg" href="/shop/orders/{{order.id}}/checkout" role="button">Checkout</a>
-                        </div>
-                        {% endif %}
+                      {% if order.is_fullfield %}
+      
+                      <div class="jumbotron">
+                          <h6 class="display-4">Order ID: {{order.id}}</h6>
+                          <p class="lead">Total KES. {{order.total_price}}</p>
+                      </div>
+      
+                      {% else %}
+      
+                      <div class="jumbotron bg-light shadow">
+                          <h4>Order ID: {{order.id}}</h4>
+                          <p class="lead">Total KES. {{order.total_price}}</p>
+                          <hr class="my-4">
+                          <p>Click button below to proceed to Checkout</p>
+                          <a class="btn btn-light btn-lg" href="/shop/orders/{{order.id}}/checkout" role="button">Checkout</a>
+                      </div>
+                      {% endif %}
                     {% endfor %}
+
+                  {% else %}
+
+
+                  {% endif %}
+                   
                 </div>
               </div>
           </div>
