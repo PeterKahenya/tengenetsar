@@ -93,7 +93,7 @@ class ProductDetailView(DetailView):
         return context
 
 
-class OrderListView(ListView,LoginRequiredMixin):
+class OrderListView(LoginRequiredMixin,ListView):
     login_url = '/'
     redirect_field_name = 'next'
     model = Order
