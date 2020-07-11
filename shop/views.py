@@ -94,7 +94,7 @@ class ProductDetailView(DetailView):
 
 
 class OrderListView(LoginRequiredMixin,ListView):
-    login_url = '/'
+    login_url = 'caller/login'
     redirect_field_name = 'next'
     model = Order
     template_name = "shop/orders.html"
