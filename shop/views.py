@@ -92,14 +92,19 @@ class ProductDetailView(DetailView):
         return context
 
 
-class OrderListView(ListView):
+class OrderListView(ListView,LoginRequiredMixin):
+    login_url = '/'
+    redirect_field_name = 'next'
     model = Order
     template_name = "shop/orders.html"
 
     def get_context_data(self, **kwargs):
         user=self.request.user
         context = super().get_context_data(**kwargs)
-        context['orders'] = Order.objects.filter(Q(added_by=user)|Q(checkout_by=user)).order_by("created")
+        context["orders"]=[]
+        for order in Order.objects.filter(Q(added_by=user)|Q(checkout_by=user)).order_by("created"):
+            if order.products.count()!=0:
+                context["orders"].append(order)
         return context
 
 
@@ -193,9 +198,13 @@ class CheckOutView(View):
         return receipt_file_path
 
     def get(self,request,order_id):
-        order=Order.objects.get(id=order_id)
-        user=get_logged_user(request,order_id)
-        return render(request,"shop/checkout.html",{"order":order,"products":order.products.all(),"user":user})
+        if request.user.is_authenticated:
+            order=Order.objects.get(id=order_id)
+            user=get_logged_user(request,order_id)
+            return render(request,"shop/checkout.html",{"order":order,"products":order.products.all(),"user":user})
+        else:
+            return redirect("/caller/login")
+        
     
     def post(self, request,order_id):
         order = Order.objects.get(id=order_id)
