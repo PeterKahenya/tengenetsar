@@ -44,8 +44,9 @@ def caller_signup(request):
 
 
 def caller_login(request):
+    next_url=request.GET.get('next',"/caller/")
+
     if request.method == "GET":
-        print("next is = "+request.GET.get('next',"/caller/"))
         return render(request, "registration/c_login.html")
     else:
         username = request.POST.get('username')
@@ -54,7 +55,7 @@ def caller_login(request):
         user = authenticate(username=username, password=password)
         if Caller.objects.filter(user=user).first():
             login(request, user)
-            return redirect('/caller/')
+            return redirect(next_url)
         else:
             return render(request, "registration/c_login.html", {'errors': "invalid credentials"})
 
