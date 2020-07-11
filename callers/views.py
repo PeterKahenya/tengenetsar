@@ -45,7 +45,7 @@ def caller_signup(request):
 
 def caller_login(request):
     if request.method == "GET":
-        print(request.GET.get('next'))
+        print("next is = "+request.GET.get('next',"/caller/"))
         return render(request, "registration/c_login.html")
     else:
         username = request.POST.get('username')
