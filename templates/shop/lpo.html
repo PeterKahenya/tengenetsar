@@ -56,23 +56,14 @@
       </tr>
     {% endfor %}
       <tr style="border: 0px solid #bbbbbb;">
-        <td></td>
-        <td></td>
-        <td></td>
         <td style="border: 0px solid #bbbbbb;">Order Subtotal(KES) </td>
         <td>{{subtotal|intcomma}}</td>
       </tr>
       <tr style="border: 0px solid #bbbbbb;">
-        <td></td>
-        <td></td>
-        <td></td>
         <td style="border: 0px solid #bbbbbb;">VAT @ 14% (KES) </td>
         <td>{{vat|intcomma}}</td>
       </tr>
       <tr style="border: 0px solid #bbbbbb;">
-        <td></td>
-        <td></td>
-        <td></td>
         <td style="border: 0px solid #bbbbbb;">TOTAL (KES)</td>
         <td>{{payment.order.total_price|intcomma}}</td>
       </tr>
