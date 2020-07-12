@@ -190,6 +190,9 @@ class CheckOutView(View):
     def receipt(self,payment,number):
         subtotal=payment.amount*(100/114)
         vat=payment.amount-subtotal
+        print(vat)
+        print(subtotal)
+
         template = get_template('shop/receipt.html')
         context = {'receipt_no':number,'vat':vat,'subtotal':subtotal ,'payment':payment,"products":payment.order.products.all(),'date':datetime.datetime.today().strftime('%d/%m/%Y')}
         html = template.render(context)
