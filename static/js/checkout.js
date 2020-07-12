@@ -111,7 +111,7 @@ function initAutocomplete() {
 
         $("#address_longitude").val(place.geometry.location.lng())
         $("#address_latitude").val(place.geometry.location.lat())
-        $("#delivery_address_alert").html("<small>"+place.adr_address+"</small>")
+        $("#delivery_address_alert").html("<small>"+place.name+" "+place.adr_address+"</small>")
         $("#locdonebtn").prop("disabled",false)
             console.log(place.name)
             var icon = {
