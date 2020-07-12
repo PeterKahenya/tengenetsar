@@ -113,7 +113,7 @@ function initAutocomplete() {
         $("#address_latitude").val(place.geometry.location.lat())
         $("#delivery_address_alert").html("<small>"+place.adr_address+"</small>")
         $("#locdonebtn").prop("disabled",false)
-
+            console.log(place)
             var icon = {
                 url: place.icon,
                 size: new google.maps.Size(71, 71),
