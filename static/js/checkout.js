@@ -1,5 +1,5 @@
-var previous_lat=$("#user_latitude").val()
-var previous_lng=$("#user_longitude").val()
+var previous_lat=$("#address_latitude").val()
+var previous_lng=$("#address_longitude").val()
 
 $("#first_step").hide();
 
