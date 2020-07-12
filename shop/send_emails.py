@@ -6,7 +6,7 @@ from django.utils.html import strip_tags
 import uuid
 from shop.models import Payment
 
-def send_receipt(payment,email_address,receipt_path,lpo_path=None,user):
+def send_receipt(payment,email_address,receipt_path,user,lpo_path=None):
     print(str(payment)+email_address+receipt_path)
     payment_object=Payment.objects.get(id=payment)
     html_message = render_to_string('shop/receipt_email.html', {"payment":payment_object,"user":user})
