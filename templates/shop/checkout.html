@@ -109,6 +109,13 @@
           <br />
           <br />
           <div class="card text-center p-4" id="get_address">
+                    <input
+              id="pac-input"
+              class="controls"
+              type="text"
+              placeholder="Search Box"
+            />
+            <div id="map"></div>
             {% if not user.address_longitude %}
               <div class="alert alert-warning" id="address_message" role="alert">
                 Enable Your Location in order to log your address
