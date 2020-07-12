@@ -23,7 +23,7 @@ messaging.setBackgroundMessageHandler(function (payload) {
     const options={
         body: "Request for Advice",
         icon: "/static/images/icon.png",
-        image: "/static/images/icon.png",
+        // image: "/static/images/icon.png",
         badge: "/static/images/icon.png",
         sound: "/static/multimedia/sounds.mp3",
         tag: "incoming-call",
