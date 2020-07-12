@@ -1,66 +1,80 @@
+{% load humanize %}
 <style>
   table, th, td {
-  border: 1px solid black;
+  border: 1px solid #bbbbbb;
+  padding: 5px;
 }
 </style>
-<div>
-
+<div style="text-align: center;">
+  <img width="100%" height="200px" src="https://tengenetsar.kipya-africa.com/static/images/top_image.png" alt="">
 </div>
-<img width="100%" height="200px" src="https://tengenetsar.kipya-africa.com/static/images/top_image.png" alt="">
-
-<div style="display: flex;flex-direction: row;justify-content: space-between;">
-<div>
-Supplier Legal Name: Kipya (Africa) Limited  <br>
-Senteu plaza, Galana/Lenana Road, Kilimani, Nairobi <br>
-P.O. BOX 7407-00100, Nairobi, Kenya <br>
-Tel: +254-705-537101 <br>
-Email: nimo@africa-drilling-solutions.com <br>
-PIN: P051326321U <br>
 <br>
-</div>
-<div>
-    <strong>LPO Number:</strong>  {{receipt_no}}
-    <br>
-    Date: {{date}}
-</div>
-<h2 style="text-align: center;"><i>RECEIPT</i></h2>
-
-<div>
-    <p style="text-align: center;">
-      Receipt Number:
-      <strong>
-       {{receipt_no}}
-      </strong>
-    </p>
-    <br>
-    <p style="text-align: center;">
-      Received from:
+<br>
+<div style="display: flex;flex-direction: column;justify-content: space-between;">
+  <div>
+      <strong>Supplier Legal Name:</strong> Kipya (Africa) Limited  <br>
+      <strong>P.O. BOX </strong> 7407-00100, Nairobi, Kenya <br>
+      <strong>Tel:</strong> +254-728-615-438 <br>
+      <strong>Email:</strong> info@kipya-africa.com <br>
+      <strong>PIN:</strong> P051326321U <br>
+  </div>
+  <br>
+  <p><strong>LOCAL PURCHASE ORDER</strong></p>
+  <br>
+  <div>
+      <strong>LPO Number:</strong>  {{receipt_no}}
       <br>
-      <strong>
-        {{payment.order.checkout_by.first_name}}
-        {{payment.order.checkout_by.last_name}}
-      </strong>
-      
-    </p>
+      <strong>Date:</strong> {{date}}
+  </div>
+  <br>
+  <div>
+    <strong>Supplier Details</strong><br>
+    Doshi & Co (Hardware) Ltd. <br>
+    P.O Box 40671 GPO 00100 <br>
+    Nairobi, Kenya
+  </div>
+</div>
+<br>
+<br>
+<div>
     <table>
       <tr>
         <th>Item</th>
+        <th>Item S/N</th>
         <th>Qty</th>
-        <th>Rate Per Item</th>
+        <th>Rate Per Item (KES)</th>
         <th>Amount (KES)</th>
       </tr>
     
     {% for product in products %}
       <tr>
         <td>{{product.name}}</td>
+        <td>{{product.item_code}}</td>
         <td>1</td>
-        <td>{{product.price}}</td>
-        <td>{{product.price}}</td>
+        <td>{{product.price|intcomma}}</td>
+        <td>{{product.price|intcomma}}</td>
       </tr>
     {% endfor %}
-      <tr>
-        <td>Order Total </td>
-        <td>{{payment.order.total_price}}</td>
+      <tr style="border: 0px solid #bbbbbb;">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="border: 0px solid #bbbbbb;">Order Subtotal(KES) </td>
+        <td>{{subtotal|intcomma}}</td>
+      </tr>
+      <tr style="border: 0px solid #bbbbbb;">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="border: 0px solid #bbbbbb;">VAT @ 14% (KES) </td>
+        <td>{{vat|intcomma}}</td>
+      </tr>
+      <tr style="border: 0px solid #bbbbbb;">
+        <td></td>
+        <td></td>
+        <td></td>
+        <td style="border: 0px solid #bbbbbb;">TOTAL (KES)</td>
+        <td>{{payment.order.total_price|intcomma}}</td>
       </tr>
     </table>
     <br>
