@@ -74,17 +74,26 @@ WSGI_APPLICATION = 'tengenetsar.wsgi.application'
 # }
 
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'tengenetsar',
         'USER': 'kipyadev',
         'PASSWORD': 'Kipya2010$',
-        'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
+        'HOST': '35.223.177.71',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'tengenetsar',
+#         'USER': 'kipyadev',
+#         'PASSWORD': 'Kipya2010$',
+#         'HOST': '127.0.0.1',   # Or an IP Address that your DB is hosted on
+#         'PORT': '3306',
+#     }
+# }
 
 
 # Password validation
