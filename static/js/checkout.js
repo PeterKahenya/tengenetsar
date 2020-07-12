@@ -140,32 +140,41 @@ function initAutocomplete() {
 
 
 function choosePreviousLocation(){
-    console.log("choosePreviousLocation")
+    $("#address_longitude").val(previous_lng)
+    $("#address_latitude").val(previous_lat)
+
+    $("#delivery_address_alert").html("Previous Delivery Location")
+
+    $("locdonebtn").prop("disabled",false)
+
+
 }
 
 
 
 function chooseYourLocation() {
-    console.log('chooseYourLocation')
-    if ($('#address_longitude').val()==="None") {
-        console.log("address_longitude")
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function (position) {
-          console.log("geolocation supported")
-    
-          var lat= position.coords.latitude 
-          var long= position.coords.longitude
-          $("#address_longitude").val(long)
-          $("#address_latitude").val(lat)
-          $("#get_address").hide();
-          $("#first_step").show();
-    
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+
+        var lat= position.coords.latitude 
+        var long= position.coords.longitude
+        $("#address_longitude").val(long)
+        $("#address_latitude").val(lat)
+        $("#delivery_address_alert").html("Using your Current Location")
+
+        $("locdonebtn").prop("disabled",false)
+        
+
         });
         } else {
+
           alert("Geolocation is not supported by this browser.");
+
         }
-    }else{
-      $("#get_address").hide();
-      $("#first_step").show();
-    }
+
+}
+
+function deliveryAddressChosen() {
+    $("#get_address").hide();
+    $("#first_step").show();
 }
