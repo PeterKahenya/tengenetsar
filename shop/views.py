@@ -189,7 +189,7 @@ class CheckOutView(View):
 
     def receipt(self,payment,number):
         subtotal=float(payment.order.total_price)*(100/114)
-        vat=payment.order.total_price-subtotal
+        vat=float(payment.order.total_price)-subtotal
         print(vat)
         print(subtotal)
 
@@ -207,7 +207,7 @@ class CheckOutView(View):
     def generate_po(self,payment,number):
         template = get_template('shop/lpo.html')
         subtotal=float(payment.order.total_price)*(100/114)
-        vat=payment.order.total_price-subtotal
+        vat=float(payment.order.total_price)-subtotal
         context = {'receipt_no':number,'vat':vat,'subtotal':subtotal ,'payment':payment,"products":payment.order.products.all(),'date':datetime.datetime.today().strftime('%d/%m/%Y')}
         html = template.render(context)
         receipt_file_path=os.path.join(settings.MEDIA_ROOT,"lpos/"+self.request.user.first_name+self.request.user.last_name+"LPO"+self.get_receipt_no()+".pdf")
