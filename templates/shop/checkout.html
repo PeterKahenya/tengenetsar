@@ -109,8 +109,13 @@
           <br />
           <br />
           <div class="card text-center p-4" style="max-width: 400px !important;" id="get_address">
-                <input id="pac-input" class="controls form-control" type="text" placeholder="Search Location" />
-                <div id="map"></div>
+                <div id="delivery_address_alert" class="p-4 alert alert-success bg-success text-white">
+
+                </div>
+                <div class="text-center">
+                  <input id="pac-input" class="controls form-control" type="text" placeholder="Search Location" />
+                  <div id="map"></div>
+                </div>
                 <br>
                 {% if user.address_longitude %}
                   <div class="alert bg-light text-dark" onclick="choosePreviousLocation()" style="cursor: pointer;" role="alert">
