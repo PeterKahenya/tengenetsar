@@ -248,17 +248,17 @@ class CheckOutView(View):
 
         receipt_number=self.get_receipt_no()
         receipt_path=self.receipt(payment,receipt_number)
-        lpo_path=self.generate_po(payment,receipt_number) #this should be generated once enough money is sent
 
         if payment.amount < float(order.total_price):
             order.checkout_by=user.user
             order.save()
-            send_receipt(payment.id,user.user.email,receipt_path,user,lpo_path)
+            send_receipt(payment.id,user.user.email,receipt_path,user,lpo_path=None)
             return render(request,"shop/checkout.html",{'errors':"The Amount Paid is not enough to fullfill the order, you will be refunded soon!"})
         else:
             order.is_fullfield = True
             order.checkout_by=user.user
             order.save()
+            lpo_path=self.generate_po(payment,receipt_number) #this should be generated once enough money is sent
             send_receipt(payment.id,user.user.email,receipt_path,user,lpo_path)
             return redirect("shop/orders/"+str(order.id)+"/track")
 
