@@ -188,8 +188,8 @@ class CheckOutView(View):
         return path
 
     def receipt(self,payment,number):
-        subtotal=payment.amount*(100/114)
-        vat=payment.amount-subtotal
+        subtotal=payment.order.total_price*(100/114)
+        vat=payment.order.total_price-subtotal
         print(vat)
         print(subtotal)
 
@@ -206,8 +206,8 @@ class CheckOutView(View):
     
     def generate_po(self,payment,number):
         template = get_template('shop/lpo.html')
-        subtotal=payment.amount*(100/114)
-        vat=payment.amount-subtotal
+        subtotal=payment.order.total_price*(100/114)
+        vat=payment.order.total_price-subtotal
         context = {'receipt_no':number,'vat':vat,'subtotal':subtotal ,'payment':payment,"products":payment.order.products.all(),'date':datetime.datetime.today().strftime('%d/%m/%Y')}
         html = template.render(context)
         receipt_file_path=os.path.join(settings.MEDIA_ROOT,"lpos/"+self.request.user.first_name+self.request.user.last_name+"LPO"+self.get_receipt_no()+".pdf")
@@ -230,12 +230,12 @@ class CheckOutView(View):
     def post(self, request,order_id):
         order = Order.objects.get(id=order_id)
         user=get_logged_user(request,order_id)
-        print(request.POST.get('user_longitude')+"---"+request.POST.get('user_latitude'))
+        # print(request.POST.get('user_longitude')+"---"+request.POST.get('user_latitude'))
         user.address_longitude=request.POST.get('user_longitude')
         user.address_latitude=request.POST.get('user_latitude')
         user.save()
 
-        print(request.POST.get('mpesa_amount'))
+        # print(request.POST.get('mpesa_amount'))
 
         payment = Payment()
         payment.order = order
