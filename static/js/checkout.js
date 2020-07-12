@@ -1,27 +1,9 @@
-console.log($('#address_longitude').val())
+var previous_lat=$("#user_latitude").val()
+var previous_lng=$("#user_longitude").val()
+
 $("#first_step").hide();
 
-// if ($('#address_longitude').val()==="None") {
-//     console.log("address_longitude")
-//     if (navigator.geolocation) {
-//       navigator.geolocation.getCurrentPosition(function (position) {
-//       console.log("geolocation supported")
 
-//       var lat= position.coords.latitude 
-//       var long= position.coords.longitude
-//       $("#address_longitude").val(long)
-//       $("#address_latitude").val(lat)
-//       $("#get_address").hide();
-//       $("#first_step").show();
-
-//     });
-//     } else {
-//       alert("Geolocation is not supported by this browser.");
-//     }
-// }else{
-//   $("#get_address").hide();
-//   $("#first_step").show();
-// }
 
 var interval = NaN;
 
@@ -165,4 +147,25 @@ function choosePreviousLocation(){
 
 function chooseYourLocation() {
     console.log('chooseYourLocation')
+    if ($('#address_longitude').val()==="None") {
+        console.log("address_longitude")
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function (position) {
+          console.log("geolocation supported")
+    
+          var lat= position.coords.latitude 
+          var long= position.coords.longitude
+          $("#address_longitude").val(long)
+          $("#address_latitude").val(lat)
+          $("#get_address").hide();
+          $("#first_step").show();
+    
+        });
+        } else {
+          alert("Geolocation is not supported by this browser.");
+        }
+    }else{
+      $("#get_address").hide();
+      $("#first_step").show();
+    }
 }
