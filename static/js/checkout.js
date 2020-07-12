@@ -108,8 +108,12 @@ function initAutocomplete() {
                 console.log("Returned place contains no geometry");
                 return;
             }
-            console.log(place.geometry.location.lat(),place.geometry.location.lng())
-            console.log(place)
+
+        $("#address_longitude").val(place.geometry.location.lng())
+        $("#address_latitude").val(place.geometry.location.lat())
+        $("#delivery_address_alert").html("<small>"+place.home+" "+place.adr_address+"</small>")
+        $("#locdonebtn").prop("disabled",false)
+
             var icon = {
                 url: place.icon,
                 size: new google.maps.Size(71, 71),
@@ -142,9 +146,7 @@ function initAutocomplete() {
 function choosePreviousLocation(){
     $("#address_longitude").val(previous_lng)
     $("#address_latitude").val(previous_lat)
-
     $("#delivery_address_alert").html("Previous Delivery Location")
-
     $("#locdonebtn").prop("disabled",false)
 
 
