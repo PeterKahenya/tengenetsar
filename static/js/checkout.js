@@ -84,7 +84,7 @@ function confirm_number() {
 
 function initAutocomplete() {
     var map = new google.maps.Map(document.getElementById("map"), {
-      center: { lat: -33.8688, lng: 151.2195 },
+      center: { lat: -1.3, lng: 36.7 },
       zoom: 13,
       mapTypeId: "roadmap"
     });
