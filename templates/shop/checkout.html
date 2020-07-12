@@ -109,25 +109,21 @@
           <br />
           <br />
           <div class="card text-center p-4" id="get_address">
-                    <input
-              id="pac-input"
-              class="controls form-control"
-              type="text"
-              placeholder="Search Box"
-            />
-            <div id="map"></div>
-            {% if not user.address_longitude %}
-              <div class="alert alert-warning" id="address_message" role="alert">
-                Enable Your Location in order to log your address
-              </div>
-            {% else %}
-              <div class="alert bg-success alert-success" role="alert">
-                Your Location is already logged
-              </div>
-            {% endif %}
-            <!-- <button id="locdonebtn" disabled class="btn btn-secondary m-2">
-              Next
-            </button> -->
+                <input id="pac-input" class="controls form-control" type="text" placeholder="Search Location" />
+                <div id="map"></div>
+                <br>
+                {% if not user.address_longitude %}
+                  <div class="alert alert-warning text-white" id="address_message" role="alert">
+                    Enable Your Location in order to log your address
+                  </div>
+                {% else %}
+                  <div class="alert bg-success alert-success" role="alert">
+                    Your Location is already logged
+                  </div>
+                {% endif %}
+                  <button id="locdonebtn" disabled class="btn btn-secondary m-2">
+                    Next
+                  </button>
           </div>
           <div class="card" id="first_step" style="width: 300px;">
             <!-- <img src="{{purpose_object.image.url}}" class="card-img-top" alt="..."> -->
