@@ -155,3 +155,14 @@ function initAutocomplete() {
         map.fitBounds(bounds);
     });
 }
+
+
+function choosePreviousLocation(){
+    console.log("choosePreviousLocation")
+}
+
+
+
+function chooseYourLocation() {
+    console.log('chooseYourLocation')
+}

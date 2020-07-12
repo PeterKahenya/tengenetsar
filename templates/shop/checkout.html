@@ -112,15 +112,14 @@
                 <input id="pac-input" class="controls form-control" type="text" placeholder="Search Location" />
                 <div id="map"></div>
                 <br>
-                {% if not user.address_longitude %}
-                  <div class="alert alert-warning text-white" id="address_message" role="alert">
-                    Enable Your Location in order to log your address
-                  </div>
-                {% else %}
-                  <div class="alert bg-success alert-success" role="alert">
-                    Your Location is already logged
-                  </div>
+                {% if user.address_longitude %}
+                  <div class="alert bg-light text-dark" onclick="choosePreviousLocation()" style="cursor: pointer;" role="alert">
+                    Previous Billing Address
+                  </div>                  
                 {% endif %}
+                <div id="yourlocation" class="alert bg-light text-dark" onclick="chooseYourLocation()" style="cursor: pointer;" role="alert">
+                  Your Location
+                </div>  
                   <button id="locdonebtn" disabled class="btn btn-secondary m-2">
                     Next
                   </button>
