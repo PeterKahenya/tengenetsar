@@ -145,7 +145,7 @@ function choosePreviousLocation(){
 
     $("#delivery_address_alert").html("Previous Delivery Location")
 
-    $("locdonebtn").prop("disabled",false)
+    $("#locdonebtn").prop("disabled",false)
 
 
 }
@@ -162,7 +162,7 @@ function chooseYourLocation() {
         $("#address_latitude").val(lat)
         $("#delivery_address_alert").html("Using your Current Location")
 
-        $("locdonebtn").prop("disabled",false)
+        $("#locdonebtn").prop("disabled",false)
         
 
         });
