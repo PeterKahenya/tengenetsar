@@ -36,3 +36,11 @@ class HomeView(View):
 class ComingSoon(View):
 	def get(self,request):
 		return render(request,"comingsoon.html",None,None,None,None)
+
+class Terms(View):
+	def get(self,request):
+		return render(request,"terms.html",None,None,None,None)
+
+class Help(View):
+	def get(self,request):
+		return render(request,"help.html",None,None,None,None)

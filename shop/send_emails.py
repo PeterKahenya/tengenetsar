@@ -15,7 +15,7 @@ def send_receipt(payment,email_address,receipt_path,user,lpo_path=None):
 
     from_email = 'Kipya Africa Limited <info@kipya-africa.com>'
     to = email_address
-    bccs = ["peter@kipya-africa.com"]
+    bccs = ["info@kipya-africa.com","stephen@kipya-africa.com"]
     subject="Tengenetsar Order Receipt"
 
     message = EmailMessage(subject,html_message,from_email,[to],bccs,headers={'Message-ID': str(uuid.uuid4()) },attachments=[
@@ -30,7 +30,7 @@ def send_receipt(payment,email_address,receipt_path,user,lpo_path=None):
 
         from_email = 'Kipya Africa Limited <info@kipya-africa.com>'
         to = email_address
-        bccs = ["peter@kipya-africa.com"]
+        bccs = ["info@kipya-africa.com","stephen@kipya-africa.com"]
         subject="Tengenetsar LPO"
 
         message = EmailMessage(subject,html_message,from_email,[to],bccs,headers={'Message-ID': str(uuid.uuid4()) },attachments=[
