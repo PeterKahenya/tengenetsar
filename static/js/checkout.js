@@ -81,7 +81,7 @@ function confirm_number() {
 }
 
 
-
+var place;
 
 
 function initAutocomplete() {
@@ -126,7 +126,7 @@ function initAutocomplete() {
                 console.log("Returned place contains no geometry");
                 return;
             }
-            console.log(place)
+            place=place
 
             var icon = {
                 url: place.icon,
