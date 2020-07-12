@@ -109,7 +109,7 @@ function initAutocomplete() {
                 return;
             }
             console.log(place.geometry.location.lat(),place.geometry.location.lng())
-
+            console.log(place)
             var icon = {
                 url: place.icon,
                 size: new google.maps.Size(71, 71),
