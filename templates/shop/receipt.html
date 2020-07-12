@@ -1,3 +1,4 @@
+{% load humanize %}
 <style>
   table, th, td {
   border: 1px solid #bbbbbb;
@@ -48,21 +49,21 @@
       <tr>
         <td>{{product.name}}</td>
         <td>1</td>
-        <td>{{product.price}}</td>
-        <td>{{product.price}}</td>
+        <td>{{product.price|intcomma}}</td>
+        <td>{{product.price|intcomma}}</td>
       </tr>
     {% endfor %}
       <tr style="border: 0px solid #bbbbbb;">
         <td style="border: 0px solid #bbbbbb;">Order Subtotal(KES) </td>
-        <td>{{subtotal}}</td>
+        <td>{{subtotal|intcomma}}</td>
       </tr>
       <tr style="border: 0px solid #bbbbbb;">
         <td style="border: 0px solid #bbbbbb;">VAT @ 14% (KES) </td>
-        <td>{{vat}}</td>
+        <td>{{vat|intcomma}}</td>
       </tr>
       <tr style="border: 0px solid #bbbbbb;">
         <td style="border: 0px solid #bbbbbb;">TOTAL (KES)</td>
-        <td>{{payment.order.total_price}}</td>
+        <td>{{payment.order.total_price|intcomma}}</td>
       </tr>
     </table>
     <br>
