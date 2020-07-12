@@ -109,7 +109,6 @@ function initAutocomplete() {
     // more details for that place.
     searchBox.addListener("places_changed", function () {
         var places = searchBox.getPlaces();
-        console.log(places)
         if (places.length == 0) {
             return;
         }
@@ -127,6 +126,8 @@ function initAutocomplete() {
                 console.log("Returned place contains no geometry");
                 return;
             }
+            console.log(place)
+
             var icon = {
                 url: place.icon,
                 size: new google.maps.Size(71, 71),
@@ -136,13 +137,12 @@ function initAutocomplete() {
             };
 
             // Create a marker for each place.
-            markers.push(
-                new google.maps.Marker({
-                    map: map,
-                    icon: icon,
-                    title: place.name,
-                    position: place.geometry.location
-                })
+            markers.push(new google.maps.Marker({
+                                    map: map,
+                                    icon: icon,
+                                    title: place.name,
+                                    position: place.geometry.location
+                                    })
             );
 
             if (place.geometry.viewport) {
