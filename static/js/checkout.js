@@ -126,7 +126,7 @@ function initAutocomplete() {
                 console.log("Returned place contains no geometry");
                 return;
             }
-            place=place
+            console.log(place)
 
             var icon = {
                 url: place.icon,
