@@ -1,31 +1,37 @@
 <style>
   table, th, td {
-  border: 1px solid #bbbbbb;
-  padding: 5px;
+  border: 1px solid black;
 }
 </style>
-<div style="text-align: center;">
-  <img width="100%" height="200px" src="https://tengenetsar.kipya-africa.com/static/images/top_image.png" alt="">
-</div>
+<div>
 
-<div style="display: flex;flex-direction: column;justify-content: space-between;">
-  <div>
-      <strong>Supplier Legal Name:</strong> Kipya (Africa) Limited  <br>
-      <strong>P.O. BOX </strong> 7407-00100, Nairobi, Kenya <br>
-      <strong>Tel:</strong> +254-728-537-101 <br>
-      <strong>Email:</strong> info@kipya-africa.com <br>
-      <strong>PIN:</strong> P051326321U <br>
-  </div>
-  <div>
-      <strong>Invoice Number:</strong>  {{receipt_no}}
-      <br>
-      <strong>Date:</strong> {{date}}
-  </div>
 </div>
-<hr>
+<img width="100%" height="200px" src="https://tengenetsar.kipya-africa.com/static/images/top_image.png" alt="">
+
+<div style="display: flex;flex-direction: row;justify-content: space-between;">
+<div>
+Supplier Legal Name: Kipya (Africa) Limited  <br>
+Senteu plaza, Galana/Lenana Road, Kilimani, Nairobi <br>
+P.O. BOX 7407-00100, Nairobi, Kenya <br>
+Tel: +254-705-537101 <br>
+Email: nimo@africa-drilling-solutions.com <br>
+PIN: P051326321U <br>
+<br>
+</div>
+<div>
+    <strong>LPO Number:</strong>  {{receipt_no}}
+    <br>
+    Date: {{date}}
+</div>
 <h2 style="text-align: center;"><i>RECEIPT</i></h2>
 
 <div>
+    <p style="text-align: center;">
+      Receipt Number:
+      <strong>
+       {{receipt_no}}
+      </strong>
+    </p>
     <br>
     <p style="text-align: center;">
       Received from:
@@ -34,6 +40,7 @@
         {{payment.order.checkout_by.first_name}}
         {{payment.order.checkout_by.last_name}}
       </strong>
+      
     </p>
     <table>
       <tr>
@@ -51,16 +58,8 @@
         <td>{{product.price}}</td>
       </tr>
     {% endfor %}
-      <tr style="border: 0px solid #bbbbbb;">
-        <td style="border: 0px solid #bbbbbb;">Order Subtotal(KES) </td>
-        <td>{{subtotal}}</td>
-      </tr>
-      <tr style="border: 0px solid #bbbbbb;">
-        <td style="border: 0px solid #bbbbbb;">VAT @ 14% (KES) </td>
-        <td>{{vat}}</td>
-      </tr>
-      <tr style="border: 0px solid #bbbbbb;">
-        <td style="border: 0px solid #bbbbbb;">TOTAL (KES)</td>
+      <tr>
+        <td>Order Total </td>
         <td>{{payment.order.total_price}}</td>
       </tr>
     </table>

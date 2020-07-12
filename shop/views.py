@@ -186,11 +186,28 @@ class CheckOutView(View):
         if not os.path.isfile(path):
                 raise Exception( 'media URI must start with %s or %s' % (sUrl, mUrl))
         return path
-    def receipt(self,payment):
+
+    def receipt(self,payment,number):
+        subtotal=payment.amount*(100/114)
+        vat=payment.amount-subtotal
         template = get_template('shop/receipt.html')
-        context = {'receipt_no':self.get_receipt_no() ,'payment':payment,"products":payment.order.products.all(),'date':datetime.datetime.today().strftime('%d/%m/%Y')}
+        context = {'receipt_no':number,'vat':vat,'subtotal':subtotal ,'payment':payment,"products":payment.order.products.all(),'date':datetime.datetime.today().strftime('%d/%m/%Y')}
         html = template.render(context)
         receipt_file_path=os.path.join(settings.MEDIA_ROOT,"receipts/"+self.request.user.first_name+self.request.user.last_name+"Receipt"+self.get_receipt_no()+".pdf")
+        receipt_file = open(receipt_file_path, "w+b")
+        pisaStatus = pisa.CreatePDF(html, dest=receipt_file, link_callback=self.link_callback)
+        if pisaStatus.err:
+            return HttpResponse('We had some errors <pre>' + html + '</pre>')
+        receipt_file.close()
+        return receipt_file_path
+    
+    def generate_po(self,payment,number):
+        template = get_template('shop/lpo.html')
+        subtotal=payment.amount*(100/114)
+        vat=payment.amount-subtotal
+        context = {'receipt_no':number,'vat':vat,'subtotal':subtotal ,'payment':payment,"products":payment.order.products.all(),'date':datetime.datetime.today().strftime('%d/%m/%Y')}
+        html = template.render(context)
+        receipt_file_path=os.path.join(settings.MEDIA_ROOT,"lpos/"+self.request.user.first_name+self.request.user.last_name+"LPO"+self.get_receipt_no()+".pdf")
         receipt_file = open(receipt_file_path, "w+b")
         pisaStatus = pisa.CreatePDF(html, dest=receipt_file, link_callback=self.link_callback)
         if pisaStatus.err:
@@ -225,19 +242,21 @@ class CheckOutView(View):
         payment.account_no = request.POST.get('mpesa_name')
 
         payment.save()
-        print(payment.amount < float(order.total_price))
+
+        receipt_number=self.get_receipt_no()
+        receipt_path=self.receipt(payment,receipt_number)
+        lpo_path=self.generate_po(payment,receipt_number) #this should be generated once enough money
+
         if payment.amount < float(order.total_price):
-            receipt_path=self.receipt(payment)
             order.checkout_by=user.user
             order.save()
-            send_receipt(payment.id,user.user.email,receipt_path,user)
+            send_receipt(payment.id,user.user.email,receipt_path,lpo_path,user)
             return render(request,"shop/checkout.html",{'errors':"The Amount Paid is not enough to fullfill the order, you will be refunded soon!"})
         else:
             order.is_fullfield = True
             order.checkout_by=user.user
             order.save()
-            receipt_path=self.receipt(payment)
-            send_receipt(payment.id,user.user.email,receipt_path,user)
+            send_receipt(payment.id,user.user.email,receipt_path,lpo_path, user)
             return redirect("shop/orders/"+str(order.id)+"/track")
 
 class TrackShipment(View):
