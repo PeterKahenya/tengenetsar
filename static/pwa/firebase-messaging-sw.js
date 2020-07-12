@@ -19,9 +19,28 @@ firebase.initializeApp(firebaseConfig);
 
 const messaging=firebase.messaging()
 messaging.setBackgroundMessageHandler(function (payload) {
-    console.log("payload")
-    const title="Tengeneza Incoming Call"
+    const title="Tengenetsar Incoming Call"
     const options={
+        body: "Request for Advice",
+        icon: "/static/images/icon.png",
+        image: "/static/images/icon.png",
+        badge: "/static/images/icon.png",
+        sound: "/static/multimedia/sounds.mp3",
+        tag: "incoming-call",
+        requireInteraction: true,
+        renotify: true,
+        silent: false,
+        actions: [{
+            action: 'accept-action',
+            title: 'Accept',
+            icon: '/images/images/icons/accept.png'
+          },
+          {
+            action: 'reject-action',
+            title: 'Reject',
+            icon: '/images/images/icons/accept.png'
+          },],
+
         vibrate: [200, 100, 200, 100, 200, 100, 200],
         data:{
             room_id:payload.data.room_id
@@ -31,9 +50,22 @@ messaging.setBackgroundMessageHandler(function (payload) {
 })
 
 self.addEventListener('notificationclick', function(event) {
-    console.log("Event",event)
-  event.notification.close();
-  event.waitUntil(
-    clients.openWindow('https://tengenetsar.kipya-africa.com/expert/call/'+event.notification.data.room_id)
-  );
+    if (!event.action) {
+        event.notification.close();
+        return;
+      }
+      switch (event.action) {
+        case 'accept-action':
+        event.waitUntil(
+            clients.openWindow('https://tengenetsar.kipya-africa.com/expert/call/'+event.notification.data.room_id)
+        );
+        break;
+        case 'reject-action':
+            event.notification.close();
+          break;
+        default:
+            event.notification.close();
+          break;
+      }
+  
 });
