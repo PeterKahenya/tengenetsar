@@ -1,0 +1,145 @@
+{% extends '../base.html' %}
+{% load humanize %}
+{% load static %}
+{% block content %}
+<title>Lipa Na MPESA | Kipya Africa Limited</title>
+<link href="{% static 'css/lipa_na_mpesa.css' %}" rel="stylesheet">
+{% if errors %}
+<div class="jumbotron bg-danger jumbotron-fluid">
+    <div class="container">
+      <h1 class="display-4">NOTICE!!</h1>
+      <p class="lead">{{errors}}</p>
+    </div>
+  </div>
+{% endif %}
+
+<div class="container text-center">
+    <div class="payment-card mt-5">
+        <img src="{% static 'images/kipya_logov1.png' %}" width="200px" alt="">
+        <br>
+        <br>
+        <div class="card" id="first_step">
+            <!-- <img src="{{purpose_object.image.url}}" class="card-img-top" alt="..."> -->
+            <div class="card-body text-center">
+                <img width="200px" src="{% static 'images/lipanampesa.png' %}" alt="">
+                <br>
+                <small class="card-title">Payment for: <strong>Order ID: {{order.id}} </strong></small>
+                <br>
+                <small class="card-title"></small>
+                <br>
+                <small class="card-title">Paid By:{{request.user.first_name}}{{request.user.last_name}}</small>
+                <br>
+                <br>
+                <label for="phone_number">Enter Your Valid Phone Number</label>
+                <br>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" >+254</span>
+                    </div>
+                    <input onchange="update_number()" id="phone_number" placeholder="0712345678" type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                </div>
+                {% include './confirm.html' %}
+
+             
+            </div>
+        </div>
+        <div class="card text-center" id="second_step" >
+                <br>
+                <small >Payment for:  <strong>Order ID: {{order.id}} </strong></small>
+                <small >Paid By:{{request.user.first_name}}{{request.user.last_name}}</small>
+                <img width="200px" class="m-auto" src="{% static 'images/lipanampesa.png' %}" alt="">
+                <label>Paybill: <strong>749320</strong></label>
+                <label>Account no:  <strong id="phone_number_label"></strong></label>
+                <div class="alert alert-primary" id="paymentstatus" role="alert">
+                    Awaiting Payment...
+                </div>
+                <br>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="phone_no_val" value="" id="phone_no_val">
+                    <input type="hidden" name="mpesa_code" value=""   id="mpesa_code">
+                    <input type="hidden" name="mpesa_name" value=""   id="mpesa_name">
+                    <input type="hidden" name="mpesa_amount" value="" id="mpesa_amount">
+                    <button id="finishbtn" class="btn btn-secondary m-2" disabled>Finish</button>
+                </form>
+
+        </div>
+</div>
+</div>
+<hr>
+<div class="container text-center">
+    <h4 class="text-center text-success font-weight-bold">Total: KES. {{order.total_price|intcomma }}</h4>
+<h5 class="text-center">Products List</h5>
+<hr>
+<div class="d-flex align-items-center justify-content-center flex-wrap mb-5">
+    
+    {% for product in products %}
+    <div class="card" style="width: 18rem;">
+        <img src="{{product.image.url}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h6 class="font-weight-bold">{{product.name}}</h6>
+            <!-- <div class="d-flex m-5 justify-content-start">
+                <label> By </label> <img src="{{product.suppler.image.url}}" style="max-width: 50px; height: auto;" alt=""> 
+              </div> -->
+          <p class="card-text">{{product.description}}</p>
+        </div>
+      </div>
+    {% endfor %}
+</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+
+<script>
+var interval=NaN
+function checkStatus() {
+    fetch('https://eawaterspayments.herokuapp.com/ispaid?purpose=course')
+        .then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                return
+            }
+        }).then(res => {
+            if (res.status === 0) {
+                var msg = res.body
+                if (msg.BillRefNumber === $('#phone_no_val').val()) {
+
+                    $('#paymentstatus').html("Thank You Payment Received for " +msg.BillRefNumber)
+                    $('#paymentstatus').removeClass("alert-primary")
+                    $('#paymentstatus').addClass("alert-success")
+                    
+                    $('#mpesa_code').val(msg.TransID)
+                    $('#mpesa_name').val(msg.BillRefNumber)
+                    $('#mpesa_amount').val(msg.TransAmount)
+
+                    $('#finishbtn').removeClass("btn-secondary")
+                    $('#finishbtn').addClass("btn-primary")
+
+                    $('#finishbtn').prop('disabled',false)
+                    clearInterval(interval)
+
+                }
+            } else {
+                console.log('.')
+            }
+        })
+}
+$('#second_step').hide()
+function update_number() {
+    $('#final_number').html("254"+$('#phone_number').val().replace(/^0+/, ''))
+    $('#phone_number_label').html("254"+$('#phone_number').val().replace(/^0+/, ''))
+    $('#phone_no_val').val("254"+$('#phone_number').val().replace(/^0+/, ''))
+}
+
+function confirm_number() {
+    $('#staticBackdrop').modal('hide')
+    $('#first_step').fadeOut()
+    $('#second_step').fadeIn()
+    interval=setInterval(checkStatus,1000)
+}
+
+
+
+</script>
+
+{% endblock %}

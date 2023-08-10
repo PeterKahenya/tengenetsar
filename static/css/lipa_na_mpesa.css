@@ -1,0 +1,23 @@
+@font-face {
+    font-family: PlayFairRegular;
+    src: url('../fonts/playfair/PlayfairDisplay-Regular.otf');
+}
+@font-face {
+    font-family: PlayFairBold;
+    src: url('../fonts/playfair/PlayfairDisplay-Bold.otf');
+}
+html,
+body{
+    background-color: rgb(246, 246, 246);
+    height: 100vh;
+    font-family: PlayFairRegular;
+    margin: 0;
+    padding: 0;
+}
+.payment-card{
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+    background-color: white;
+}

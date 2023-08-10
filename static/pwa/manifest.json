@@ -1,0 +1,43 @@
+{
+    "name": "Tengenetsar",
+    "short_name": "Tengenetsar",
+    "icons": [{
+      "src": "/static/images/icons/icon128x128.png",
+        "sizes": "128x128",
+        "type": "image/png"
+      }, {
+        "src": "/static/images/icons/icon144x144.png",
+        "sizes": "144x144",
+        "type": "image/png"
+      }, {
+        "src": "/static/images/icons/icon152x152.png",
+        "sizes": "152x152",
+        "type": "image/png"
+      }, {
+        "src": "/static/images/icons/icon192x192.png",
+        "sizes": "192x192",
+        "type": "image/png"
+      }, {
+        "src": "/static/images/icons/icon256x256.png",
+        "sizes": "256x256",
+        "type": "image/png"
+      }, {
+        "src": "/static/images/icons/icon512x512.png",
+        "sizes": "512x512",
+        "type": "image/png"
+      }],
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#008800",
+    "theme_color": "#008800",
+    "scope_url": "https://tengeneza.kipya-africa.com/",
+    "intent_filters": {
+      "scope_url_scheme": "https",
+      "scope_url_host": "tengeneza.kipya-africa.com",
+      "scope_url_path": "/"
+    },
+    "bound_webapk": {
+      "runtime_host": "org.chromium.chrome",
+      "runtime_host_application_name": "Chromium"
+    }
+  }

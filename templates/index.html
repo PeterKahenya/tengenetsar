@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+<div class="text-center" style="width: 100%!important">
+	<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="masthead text-center mb-auto">
+    <div class="inner d-flex align-items-center justify-content-center text-center">
+      <div class="masthead-brand text-success font-weight-bold">
+        <img src="{% static 'images/icon.png' %}" style="max-width:150px ">
+    <h1 class="cover-heading text-white">Tengenetsar</h1>
+<br>
+    <hr color="white">
+    <h4 class="text-white">Free Professional Fix</h4>
+    <hr color="white">
+    <br>
+      </div>
+      {% comment %}
+<!--         <a class="nav-link active" href="#">Home</a>
+        <a class="nav-link" href="#">Features</a> -->
+        <!-- {% if request.user.is_authenticated %} -->
+          <!-- <a class="text-muted" href="/logout">Logout</a> -->
+        <!-- {% else %} -->
+        	<!-- <a class="ml-5 btn btn-success bg-success" href="/login">Login</a> -->
+        <!-- {% endif %} -->
+      {% endcomment %}
+    </div>
+  </header>
+    
+
+  <main role="main" class="inner cover">
+    
+    <p class="lead d-flex justify-content-center">
+      <a href="/call" class="btn shadow-lg text-white d-flex align-items-center justify-content-center" style="border-radius: 50%;width: 80px;height: 80px;background: #fcca0a">
+        <span class="material-icons" style="font-size: 3rem;color: black" >add_ic_call</span>
+      </a>
+    </p>
+  </main>
+
+  <footer class="mastfoot mt-auto">
+    <div class="inner">
+      <p>A product of <a href="https://www.kipya-africa.com/">Kipya Africa Limited</a>.</p>
+    </div>
+  </footer>
+</div>
+</div>
+{% endblock %}
