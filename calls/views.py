@@ -12,6 +12,7 @@ import requests
 
 
 def sendPush(to,roomId):
+    print(to,roomId)
     url = 'https://fcm.googleapis.com/fcm/send'
     json_data = {
         "to": to,
@@ -21,11 +22,12 @@ def sendPush(to,roomId):
         },
     }
     headers = {
-        "Authorization":"key=AAAAOGOy1tc:APA91bH41zurNt10opqsUz66eNl79KlHgXDNDyiZ4Hzm7pwpmdvk2xz2tHjzQWQ4mPqeEDzldQkjVRJT8IR7eM-y8TNgrgTLMvbl4kTj92AP0Tnq0BF1xQbDuVaXrdqkwyiBHdQBfDjT",
+        "Authorization":"key=AAAA0dGhZco:APA91bEP-2AW4G6atxMYXq50PmZt1JThc8zyK126Uo5s9n_uGNiRzRJCfFKMBmT19oAeRSekB_wNU2pdrEv8MiHihTRlNHlXJUR9iTqpnkD017l6_K8ep6ZvD0CXPN0B3reKk7d8ytDk",
         "Content-Type":"application/json"
     }
 
     x = requests.post(url, json = json_data, headers=headers)
+    print(x.text)
 
 
 

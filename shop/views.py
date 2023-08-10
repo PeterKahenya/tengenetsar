@@ -52,7 +52,7 @@ class ProductsListView(View):
             if not order:
                 order = Order()
                 order.is_fullfield = False
-                order.added_by=user
+                order.added_by=request.user
                 order.save()
             context['user']=get_logged_user(self.request,order.id)
             context['order_products'] = order.products.all()

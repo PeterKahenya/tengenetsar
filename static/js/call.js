@@ -40,21 +40,21 @@ const configuration = {
 
 
 
-var firebaseConfig = {
-    apiKey: "AIzaSyB6dl19UhwSuJfZBVZFLqwpvEVYQnZI7dQ",
-    authDomain: "tengenetsar.firebaseapp.com",
-    databaseURL: "https://tengenetsar.firebaseio.com",
-    projectId: "tengenetsar",
-    storageBucket: "tengenetsar.appspot.com",
-    messagingSenderId: "242190833367",
-    appId: "1:242190833367:web:fbbb3383cf8755e06a4292",
-    measurementId: "G-5LS6BV6K04"
+const firebaseConfig = {
+  apiKey: "AIzaSyDWA6iiUK1IPcKU5-p0iEhNBGLf358Xco8",
+  authDomain: "tengenetsar-487c1.firebaseapp.com",
+  projectId: "tengenetsar-487c1",
+  storageBucket: "tengenetsar-487c1.appspot.com",
+  messagingSenderId: "901165180362",
+  appId: "1:901165180362:web:3978749683bbb0fc27db33",
+  measurementId: "G-RZE98WX20Y"
 };
 
 
 
 
 async function init() {
+  console.log("INITIALIZING")
   if (typeof firebase === 'undefined') throw new Error('hosting/init-error: Firebase SDK not detected.');
   firebase.initializeApp(firebaseConfig);
   if (user==="caller") {
@@ -62,6 +62,8 @@ async function init() {
   }else{
     localStream = await navigator.mediaDevices.getUserMedia({video: { facingMode:"user" }, audio: true});
   }
+  console.log("INITIALIZING DONE")
+
   my_video.srcObject = localStream;
   my_video.muted=true
   remoteStream = new MediaStream();
@@ -71,6 +73,8 @@ async function init() {
     start_call_page.style.display="none"
     live_calling_page.style.display="flex"
     loadMessages(roomId)
+    console.log("ROOM CREATED")
+
 
   } else {
     roomId = document.getElementById('room_id').value;
@@ -153,6 +157,8 @@ function lock_this_fundi(status) {
 
 
 function sendRoom(roomId) {
+  console.log("Sending ROOM "+roomId)
+
   axios.post('/calls/sendroom', {
     expert_id: expert_id,
     room_id: roomId,
@@ -182,8 +188,14 @@ function save_chat(text,sender_id) {
 }
 
 async function createRoom() {
+  console.log("CREATING ROOM")
   const db = firebase.firestore();
+  console.log("CREATING ROOM1")
+
   const roomRef = await db.collection('rooms').doc();
+  console.log("CREATING ROOM2")
+  console.log(roomRef.id)
+
   peerConnection = new RTCPeerConnection(configuration);
   registerPeerConnectionListeners();
   localStream.getTracks().forEach(track => {
@@ -195,11 +207,24 @@ async function createRoom() {
     callerCandidatesCollection.add(event.candidate.toJSON());
   });
 
+  console.log("CREATING ROOM3")
+
+
   const offer = await peerConnection.createOffer();
+  console.log(offer)
+
   await peerConnection.setLocalDescription(offer);
+  console.log("CREATING ROOM4")
+
   const roomWithOffer = {'offer': {type: offer.type,sdp: offer.sdp}};
+  console.log("CREATING ROOM5")
+
   await roomRef.set(roomWithOffer);
+  console.log("CREATING ROOM6")
+
   roomId = roomRef.id;
+  console.log("Room ID "+roomId)
+
   sendRoom(roomId)
   peerConnection.addEventListener('track', event => {
     event.streams[0].getTracks().forEach(track => {

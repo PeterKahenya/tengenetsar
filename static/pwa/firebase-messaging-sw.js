@@ -5,15 +5,15 @@ importScripts("https://www.gstatic.com/firebasejs/7.15.5/firebase-messaging.js")
 
 
 var firebaseConfig = {
-    apiKey: "AIzaSyB6dl19UhwSuJfZBVZFLqwpvEVYQnZI7dQ",
-    authDomain: "tengenetsar.firebaseapp.com",
-    databaseURL: "https://tengenetsar.firebaseio.com",
-    projectId: "tengenetsar",
-    storageBucket: "tengenetsar.appspot.com",
-    messagingSenderId: "242190833367",
-    appId: "1:242190833367:web:fbbb3383cf8755e06a4292",
-    measurementId: "G-5LS6BV6K04"
+  apiKey: "AIzaSyDWA6iiUK1IPcKU5-p0iEhNBGLf358Xco8",
+  authDomain: "tengenetsar-487c1.firebaseapp.com",
+  projectId: "tengenetsar-487c1",
+  storageBucket: "tengenetsar-487c1.appspot.com",
+  messagingSenderId: "901165180362",
+  appId: "1:901165180362:web:3978749683bbb0fc27db33",
+  measurementId: "G-RZE98WX20Y"    
 };
+
 if (typeof firebase === 'undefined') throw new Error('hosting/init-error: Firebase SDK not detected.');
 firebase.initializeApp(firebaseConfig);
 
@@ -57,7 +57,7 @@ self.addEventListener('notificationclick', function(event) {
       switch (event.action) {
         case 'accept-action':
         event.waitUntil(
-            clients.openWindow('https://tengenetsar.kipya-africa.com/expert/call/'+event.notification.data.room_id)
+            clients.openWindow('http://127.0.0.1:8000/expert/call/'+event.notification.data.room_id)
         );
         break;
         case 'reject-action':
