@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+<div class="text-center" style="width: 100%!important">
+	<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+  <header class="masthead text-center mb-auto">
+    <div class="inner d-flex align-items-center justify-content-center text-center">
+      <div class="masthead-brand text-success font-weight-bold">
+        <img src="{% static 'images/tengenetsar_icon.png' %}" style="max-width:150px ">
+    <h1 class="cover-heading text-white">Tengenetsar</h1>
+    <hr color="white">
+    <h4 class="text-white">Free Professional Fix</h4>
+    <hr color="white">
+  </header>
+
+
+  <main role="main" class="inner cover">
+
+    <p class="lead d-flex justify-content-center font-weight-bold">
+      <a href="/shop" class="btn shadow-lg text-dark d-flex align-items-center justify-content-center" style="min-width: 80px !important;min-height: 80px !important;background: #fcca0a">
+        <span class="font-weight-bold mr-2">Get Started </span><span class="material-icons" style="font-size: 2.5rem;color: black" >login</span>
+      </a>
+    </p>
+  </main>
+
+  <footer class="mastfoot mt-auto">
+    <div class="inner">
+      <!-- <p><a href="/expert">For Experts</a>.</p> -->
+    </div>
+    <div class="inner">
+      <p>A platform of <a href="https://www.kipya-africa.com/">Kipya Africa</a>.</p>
+    </div>
+    <br>
+    <hr>
+    <br>
+  </footer>
+</div>
+</div>
+{% endblock content %}

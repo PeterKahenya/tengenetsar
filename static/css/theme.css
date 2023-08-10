@@ -1,0 +1,35 @@
+.card{
+    border-radius: 10px!important;
+}
+
+.btn{
+    /* border-radius: 20px !important; */
+    padding: 10px !important;
+    /* min-width: 8vw; */
+}
+
+.form-control{
+    border: none !important;
+    font-size: large;
+    background: transparent;
+    text-align: center !important;
+}
+
+.form-control:focus{
+    border: none !important;
+    border-bottom: 0.5px solid #ccc !important;
+    background-color: transparent;
+    
+}
+
+/* Change the white to any color ;) */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active  {
+    -webkit-box-shadow: 0 0 0 30px #f7f7f7 inset !important;
+}
+/*Change text in autofill textbox*/
+input:-webkit-autofill {
+    -webkit-text-fill-color: rgb(26, 26, 26) !important;
+}

@@ -1,0 +1,85 @@
+{% load humanize %}
+{% load mathfilters %}
+
+<style>
+  table, th, td {
+  border: 1px solid #bbbbbb;
+  padding: 5px;
+}
+</style>
+<div style="text-align: center;">
+  <img width="100%" height="200px" src="https://tengenetsar.kipya-africa.com/static/images/top_image.png" alt="">
+</div>
+<br>
+<br>
+<div style="display: flex;flex-direction: column;justify-content: space-between;">
+  <div>
+      <strong>Supplier Legal Name:</strong> Kipya (Africa) Limited  <br>
+      <strong>P.O. BOX </strong> 7407-00100, Nairobi, Kenya <br>
+      <strong>Tel:</strong> +254-728-615-438 <br>
+      <strong>Email:</strong> info@kipya-africa.com <br>
+      <strong>PIN:</strong> P051326321U <br>
+  </div>
+  <br>
+  <p><strong>LOCAL PURCHASE ORDER</strong></p>
+  <br>
+  <div>
+      <strong>LPO Number:</strong>  {{receipt_no}}
+      <br>
+      <strong>Date:</strong> {{date}}
+  </div>
+  <br>
+  <div>
+    <strong>Supplier Details</strong><br>
+    Doshi & Co (Hardware) Ltd. <br>
+    P.O Box 40671 GPO 00100 <br>
+    Nairobi, Kenya
+  </div>
+</div>
+<br>
+<br>
+<div>
+    <table>
+      <tr>
+        <th>Item</th>
+        <th>Item Code</th>
+        <th>Qty</th>
+        <th>Rate Per Item</th>
+        <th>Amount (KES)</th>
+      </tr>
+    
+    {% for oi in products %}
+      <tr>
+        <td>{{oi.product.name}}</td>
+        <td>{{oi.product.serial_no}}</td>
+        <td>{{oi.quantity}}</td>
+        <td>{{oi.product.price|intcomma}}</td>
+        <td>{{oi.product.price|mul:oi.quantity|intcomma}}</td>
+      </tr>
+    {% endfor %}
+    </table>
+    <br>
+    <br>
+    <table style="color: #00b050;">
+      <tr style="border: 0px solid #bbbbbb;">
+        <td style="border: 0px solid #bbbbbb;">Order Subtotal(KES) </td>
+        <td>{{subtotal|intcomma}}</td>
+      </tr>
+      <tr style="border: 0px solid #bbbbbb;">
+        <td style="border: 0px solid #bbbbbb;">VAT @ 14% (KES) </td>
+        <td>{{vat|intcomma}}</td>
+      </tr>
+      <tr style="border: 0px solid #bbbbbb;">
+        <td style="border: 0px solid #bbbbbb;">TOTAL (KES)</td>
+        <td>{{order.total_price|intcomma}}</td>
+      </tr>
+    </table>
+    <br>
+    <hr color="wheat">
+    <div style="text-align: center;">
+      Contact us <br>
+      Email: info@kipya-africa.com <br>
+      Phone: +254728615438 <br>
+      Website: tengenetsar.kipya-africa.com <br>
+    </div>
+</div>

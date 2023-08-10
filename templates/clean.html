@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Clean Cookies</title>
+</head>
+<body>
+<div id="message"></div>
+<script type="text/javascript">
+	function deleteAllCookies() {
+    var cookies = document.cookie.split(";");
+
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i];
+        var eqPos = cookie.indexOf("=");
+        var name = eqPos > -1 ? cookie.substr(0, eqPos) : cookie;
+        document.cookie = name + "=;expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    }
+}
+
+	if (!navigator.cookieEnabled) {
+		document.getElementById('message').innerHTML = "Your Browser does not support cookies"
+	}else{
+		deleteAllCookies()
+		window.location.href="/shop/"
+	}	
+
+</script>
+</body>
+</html>

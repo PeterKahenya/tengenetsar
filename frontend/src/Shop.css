@@ -1,0 +1,22 @@
+.desktopCategoriesList{
+    display: none !important;
+}
+
+#call_screen{
+	/*display: none !important;*/
+	background: #fefefe;
+	position: absolute;
+	z-index: 4000 !important;
+	width: 100vw !important;
+	height: 100vh !important;
+}
+@media screen and (min-width:800px){
+    .desktopCategoriesList{
+        display: block !important;
+    }
+}
+@media screen and (max-width:800px){
+    .desktopCategoriesList{
+        display: none !important;
+    }
+}

@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<!-- <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}"> -->
+<div class="d-flex flex-column align-items-center justify-content-center" style="width: 100%!important;height: 100% !important;">
+	<div class="card bg-light shadow-sm" style="width: 27.5rem;min-height: 30rem;">
+	<div class="card-body bg-light" style="border-radius: 10px!important;border: none!important;">
+		    <form class="form-signin p-2" action="" method="POST">
+        		{% csrf_token %}
+		        <div class="text-center mb-4">
+		             <img class="mb-4" src="{% static 'images/brand.png' %}" alt="" width="60" height="72">
+					<h1 class="h3 mb-3 font-weight-bold text-muted">Caller | Login</h1> 
+					<br>
+		            {% if errors %}
+		                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+		                  
+		                    <small class="text-small">{{errors}}</small>
+
+		                  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		                    <span aria-hidden="true">&times;</span>
+		                  </button>
+		                </div>
+		            {% endif %}
+		        </div>
+
+			  	<div class="form-label-group">
+			    	<input type="text" name="username"  id="inputEmail" class="form-control" placeholder="Username" required autofocus>
+			  	</div>
+			  	<br>
+  				<div class="form-label-group">
+    				<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+  				</div>
+  				<br>
+  				<br>
+			  	<div class="d-flex justify-content-around text-center">
+			    	<button class="btn btn-lg btn-success" type="submit">Sign In</button>
+			    	<a class="btn btn-lg btn-warning" href="/caller/signup" >Sign Up</a>
+			  	</div>
+			</form>
+		  </div>
+		</div>
+
+  <footer class="mastfoot">
+    <div class="inner">
+  	  <p class="mt-5 mb-3 text-white text-center">&copy; 2020</p>
+    </div>
+  </footer>
+</div>
+{% endblock %}
