@@ -1,0 +1,29 @@
+.signUpContainer{
+	min-width: 420px;
+    min-height: 500px;
+    padding: 10px;
+}
+
+.signUpForm{
+   min-width: 400px;
+    min-height: 400px;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+}
+
+
+@media screen and (max-width: 800px){
+	.signUpContainer{
+	    /*min-width: 500px;*/
+    	/*min-height: 500px;*/
+	    padding: 50px;
+	}
+
+	.signUpForm{
+	    
+	    display: flex;
+	    flex-direction: column;
+	}
+
+}

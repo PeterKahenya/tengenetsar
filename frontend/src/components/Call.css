@@ -1,0 +1,23 @@
+.bottomNav{
+
+	top: auto !important;
+	bottom: 0 !important;
+	position: fixed;
+	background: transparent !important;
+	right: 20%;
+	left: 20%;
+	color: white;
+	text-align: center;
+	min-width: 200px;
+}
+
+@media screen and (min-width: 480px) {
+
+	.bottomNav{
+		right: 40%;
+		left: 40%;
+	}
+
+
+}
+

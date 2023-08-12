@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calling Page</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<link rel="stylesheet" type="text/css" href="{% static 'css/call.css' %}">
+
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-app.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-analytics.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-firestore.js"></script>
+	<script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-messaging.js"></script>
+	<link href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css" 
+	rel="stylesheet">
+	<script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Asul&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+	<input type="hidden" id="utype" value="{{utype}}">
+	<input type="hidden" id="room" value="{{call.room}}">
+
+	<div class="belowCallContainer">
+		
+	</div>
+	<div class="callContainer">
+		<div class="avContainer">
+			<div class="remoteVideoHolder">
+				<video autoplay playsinline id="remoteVideo"></video>
+			</div>
+			
+			<div class="liveControls" >
+				<div class="topControls">
+					<button target="_blank" 
+							style="float: left;" 
+							class="material-icons btn btn-outline-light control-buttons">
+
+							shopping_cart
+
+					</button>
+					<button 
+						id="flip_camera_btn" 
+						style="float: right;display: block!important" 
+						class="material-icons btn btn-outline-light control-buttons">
+
+							flip_camera_android
+
+					</button>
+				</div>
+				<div class="bottomControls">
+					<button id="mic_off_btn" class="material-icons btn btn-outline-light control-buttons">
+						mic
+					</button>
+					<button id="videocam_off_btn" class="material-icons btn btn-outline-light control-buttons">
+						videocam
+					</button>
+					<button id="hangup_btn" class="material-icons bg-danger btn btn-outline-danger text-white control-buttons">
+						call
+					</button>
+					<video autoplay playsinline id="localVideo"></video>
+				</div>
+			</div>
+		</div>
+		<div class="messagingContainer">
+			<div class="chatLogsContainer" id="chat_logs">
+				
+			</div>
+			<div class="chatBoxContainer">
+				<button class="material-icons" data-toggle="modal" data-target="#exampleModal" id="send_chat_btn">
+					add
+				</button>
+				<input id="chat_text_area" class="form-controls" placeholder="Enter message..." />
+				<button class="material-icons" id="send_chat_btn">
+					send
+				</button>
+			</div>
+			<div id="callDetailsContainer" class="callDetailsContainer text-success text-center" style="font-size: 1rem">
+				Tengenetsar...
+			</div>
+		</div>
+	</div>
+	<!-- <div id="awaitingCallContainer" class="awaitingCallContainer bg-success text-white">
+			<h3>Connecting...</h3>
+	
+	</div> -->
+
+	<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body embed-responsive embed-responsive-21by9">
+        <iframe class="embed-responsive-item" src="https://tengenetsar.kipya-africa.com/shop" title="W3Schools Free Online Web Tutorials"></iframe>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+	<script type="text/javascript" src="{% static 'js/config.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/call.js' %}"></script>
+</body>
+</html>

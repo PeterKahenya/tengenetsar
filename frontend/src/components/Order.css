@@ -1,0 +1,36 @@
+.orderItem{
+
+}
+
+.orderProductImageAvatar{
+	padding: 5px !important;
+	background: white !important;
+
+}
+
+.orderProductImage{
+	/*padding: 5px !important;*/
+	max-width: 40px !important;
+	max-height: 40px !important;
+}
+
+.orderProductName{
+	width: 40% !important;
+	white-space: nowrap !important;
+  	overflow: hidden !important;
+  	text-overflow: ellipsis !important;
+
+}
+
+.orderQuantityInput{
+	border-bottom: none !important;
+	font-size: 30px !important;
+	margin: 10px !important;
+
+}
+
+.orderDeleteItemButton{
+	background: transparent !important;
+	border:none !important;
+	color: red !important;
+}

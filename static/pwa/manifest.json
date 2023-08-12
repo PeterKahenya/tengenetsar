@@ -1,6 +1,14 @@
 {
     "name": "Tengenetsar",
     "short_name": "Tengenetsar",
+<<<<<<< HEAD
+=======
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#00b050",
+    "description": "Tengenetsar - Get Professional Virtual Assistance from Experts - Plumbers, Electricians, Mechanic, Online",
+    "categories": ["utilities", "productivity", "medical","shopping", "lifestyle","social" ],
+>>>>>>> v3
     "icons": [{
       "src": "/static/images/icons/icon128x128.png",
         "sizes": "128x128",
@@ -26,6 +34,7 @@
         "sizes": "512x512",
         "type": "image/png"
       }],
+<<<<<<< HEAD
     "start_url": "/",
     "display": "standalone",
     "background_color": "#008800",
@@ -34,6 +43,13 @@
     "intent_filters": {
       "scope_url_scheme": "https",
       "scope_url_host": "tengeneza.kipya-africa.com",
+=======
+    "theme_color": "#00b050",
+    "scope_url": "https://tengenetsar.kipya-africa.com/",
+    "intent_filters": {
+      "scope_url_scheme": "https",
+      "scope_url_host": "tengenetsarbeta.kipya-africa.com",
+>>>>>>> v3
       "scope_url_path": "/"
     },
     "bound_webapk": {

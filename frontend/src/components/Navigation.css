@@ -1,0 +1,110 @@
+body{
+    background-color: #fafafa !important;
+
+}
+
+*{
+	/*color: white !important;*/
+}
+.appbar{
+	background: #fefefe !important;
+	/*box-shadow: none !important;*/
+	display: flex !important;
+	padding: 0px 30px !important;
+	align-items: center !important;
+}
+
+.toolbar{
+	display: flex !important;
+	flex-direction: column !important;
+	justify-content: space-around;
+	min-height: 15vh!important;
+	align-items: center !important;
+}
+
+.toolbarTop{
+	display: flex !important;
+	flex-direction: row !important;
+	justify-content: space-between !important;
+	width: 80vw !important;
+	align-items: center !important;
+}
+
+.searchbar{
+	min-width: 300px !important;
+	width: 300px !important;
+	max-width: 300px !important;
+
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	margin: 5px;
+
+}
+
+.searchButton{
+	width: 50px !important;
+	height: 50px !important;
+	background: #fcca0a !important;
+	color: black !important;
+	border:none !important;
+	border-radius: 2px !important;
+
+}
+
+.searchInput{
+	width: 250px !important;
+	height: 50px !important;
+	border: 1px solid #fcca0a50 !important;
+	padding: 5px;
+	border-radius: 2px !important;
+}
+
+.leftDrawerContent{
+	min-width: 400px !important;
+	/*background: red !important;*/
+}
+
+.rightDrawerContent{
+	min-width: 300px !important;
+	max-width: 80vw !important;
+
+	/*background: red !important;*/
+}
+
+.material-icons{
+	font-size: 30px !important;
+	cursor: pointer;
+}
+
+.brand{
+	width: 100px !important;
+}
+
+.brandImage{
+	width: 80px !important;
+}
+
+.rightButtons{
+	width: 70px  !important;
+	margin-right: 30px !important;
+}
+
+@media screen and (min-width:800px){
+	.menuButton{
+		display: none !important;
+	}
+
+	.brand{
+		width: 200px !important;
+	}
+
+	.brandImage{
+		width: 160px !important;
+	}
+
+	.rightButtons{
+		width: 90px  !important;
+	}
+
+}

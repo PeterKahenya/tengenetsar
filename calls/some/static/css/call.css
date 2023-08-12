@@ -1,0 +1,269 @@
+html,body,.callContainer,.awaitingCallContainer{
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	padding: 0;
+	margin: 0;
+}
+
+
+.awaitingCallContainer{
+	position: absolute;
+	z-index: 100;
+}
+
+.belowCallContainer{
+	background: #ccc;
+	position: absolute;
+	z-index: 1;
+	height: 100%;
+	width: 100%;
+}
+
+.callContainer{
+	display: flex;
+	flex-direction: column;
+	/*background: #00b050;*/
+	position: absolute;
+	z-index: 2;
+}
+
+.avContainer{
+	/*background: #008080;*/
+
+	flex-grow: 1;
+}
+
+.messagingContainer{
+	/*background: #800080;*/
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
+}
+
+.callDetailsContainer{
+	background: #ededed;
+	flex-grow: 0.5;
+}
+
+.chatLogsContainer{
+	background: #e6e4df;
+	flex-grow: 10.5;
+
+}
+
+.chatBoxContainer{
+	background: #ededed;
+	flex-grow: 1 !important;
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	justify-content: center;
+	padding: 5px 0px;
+	/*max-height: 5vh;*/
+	align-items: center;
+}
+
+#send_chat_btn{
+	width: 45px;
+	height: 45px;
+	border: none;
+	background: #00b050;
+	border-radius: 50%;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0px 10px;
+}
+
+#chat_text_area{
+	width: 220px;
+	font-size: 15px;
+	height: 50px !important;
+	border-radius: 30px;
+	border: 0.5px solid #eee;
+	padding: 10px 20px;
+	color: #777;
+	/*text-align: center;*/
+}
+
+#remoteVideo{
+	width: 100%;
+	height: 50vh;
+	position: absolute;
+	z-index: 3;
+	background: #000;
+}
+
+
+
+
+.liveControls{
+	position: absolute;
+	z-index: 4;
+	height: 50vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100% !important;
+}
+
+.control-buttons{
+	color: white;
+	font-size: 1.3rem;
+	border-radius: 50% !important;
+	width: 40px !important;
+	height: 40px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	background: transparent;
+	border: 1px solid white;
+}
+
+
+.bottomControls, .topControls{
+	display: flex;
+	width: 100% !important;
+	height: 20vh;
+	justify-content: space-around;
+	margin: 10px;
+	align-items: center;
+}
+
+.topControls{
+	height: 10vh;
+	justify-content: space-between;
+	padding: 0px 20px;
+}
+
+.topControls>.control-buttons{
+	border: none !important;
+}
+
+
+#localVideo{
+	background: #111111;
+	max-width: 50px;
+	max-height: 50px;
+	background: #222222;
+	margin: 5px;
+}
+
+
+.chats{
+	display: flex;
+	flex-direction: column;
+	height: 40%!important;
+	justify-content: space-between;
+	background: #f5f4ed;
+}
+
+.chatbox{
+	display: flex;
+	justify-content: center;
+	position: fixed;
+	bottom: 5px!important;
+    width: 100%;
+	background: #f5f4ed;
+	
+}
+#my_chat_text_area{
+	width: 80%;
+	border: none;
+	border-radius: 3px;
+	padding: 15px!important;
+
+}
+
+/*#chat_logs{
+	overflow-y: scroll;
+	height: 30%;
+	padding-bottom: 10px;
+}
+*/
+.my_chat,.other_chat{
+	padding: 10px;
+	width: 60%;
+	margin: 5px auto;
+}
+
+.my_chat{
+	background:linear-gradient(to top right,#15ad43,#00b050);
+	float: right;
+	color: #fff;
+	font-size: 0.8rem;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	margin-right: 5px;
+}
+.other_chat{
+	background: #fff;
+	float: left;
+	font-size: 0.8rem;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	margin-left: 5px;
+}
+
+
+@media screen and (min-width: 800px) {
+
+	.callContainer{
+		position: absolute;
+		background: white;
+		z-index: 2;
+		height: 90vh;
+		width: 75vw;
+		margin: 5vh 12.5vw;
+		display: flex;
+		flex-direction: row;
+		border-radius: 5px;
+		box-shadow: 0 4px 8px 5px rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}
+
+	.avContainer{
+		background: #000;
+		flex-grow: 3;
+		max-width: 45vw;
+		height: 100%;
+	}
+
+	#remoteVideo{
+		/*background: #00b030;*/
+		position: absolute;
+		z-index: 3;
+		width: 44.9vw;
+		height: 100%;
+		align-items: center;
+	}
+
+	.liveControls{
+		/*background: #fcca0a;*/
+		position: absolute;
+		z-index: 4;
+		width: 45vw !important;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		/*padding-top: 20px;*/
+		padding-bottom: 40px;
+
+	}
+
+	.messagingContainer{
+		flex-grow: 1;
+		max-width: 30vw;
+	}
+
+	#chat_text_area{
+		width: 400px;
+	}
+
+
+}

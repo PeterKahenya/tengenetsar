@@ -1,0 +1,338 @@
+
+html,body,.mainCallContainer{
+	background-color: #ffffff;
+	width: 100%;
+	height: 100%;
+	overflow-y: auto;
+}
+
+.callContainer{
+	display: flex;
+	flex-direction: column;
+	width: 100vw;
+	height: 100vh;
+	/* background-color: brown; */
+	/*overflow-y: scroll;*/
+	/*display: none !important;*/
+
+
+}
+
+
+
+
+
+.awaitingCallContainer{
+	position: absolute;
+	z-index: 4;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	color: white;
+	width: 100vw;
+	height: 100vh;
+	background-color: #00b050;
+	/*overflow-y: hidden;*/
+
+}
+
+.videoPanel{
+	background-color: rgb(0, 0, 0);
+	flex-grow: 4;
+	max-height: 44vh;
+	min-height: 44vh;
+	width: 100%;
+}
+
+.mainVideo{
+	position: absolute;
+	z-index: 2;
+	/* background-color: yellow; */
+	max-height: 44vh;
+	min-height: 44vh;
+	width: 100vw;
+}
+
+.videoControls{
+	position: absolute;
+	z-index: 3;
+	/* background-color: blue; */
+	width: 100vw;
+	max-height: 44vh;
+	min-height: 44vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	padding: 10px;
+}
+
+.topControls{
+	/* background-color: teal; */
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.bottomControls{
+	/* background-color: rgb(0, 128, 21); */
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+
+}
+
+#remoteVideo{
+	width: 100%;
+	height: 100%;
+	max-height: 44vh;
+	min-height: 44vh;
+}
+
+#localVideo{
+	width: 50px;
+	height: 50px;
+}
+
+.control-buttons{
+	color: white;
+	font-size: 1rem !important;
+	border-radius: 50% !important;
+	width: 40px !important;
+	height: 40px !important;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	background: transparent;
+	/* border: 1px solid white; */
+}
+
+
+
+
+
+
+
+
+
+
+
+.chatPanel{
+	background-color: rgb(255, 255, 255);
+	flex-grow: 5;
+	max-height: 56vh;
+	min-height: 56vh;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: stretch;
+}
+
+.chatProfile{
+	background-color: #ffffff;
+	flex-grow: 0;
+	display: none;
+	border-bottom: 0.1px solid #dddddd; 
+}
+
+.chatLogs{
+	background-color: #fffbe7;
+	overflow-y: scroll;
+	flex-grow: 8;
+	max-height: 80%;
+}
+
+.chatBox{
+	border-top: 0.1px solid #e7e7e7;
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	margin: auto;
+	padding: 0px 5%;
+	justify-content: space-evenly;
+	align-items: center;
+	flex-grow: 1;
+}
+
+#chat_text_area{
+	width: 80%;
+	font-size: 16px;
+	height: 50px !important;
+	border-radius: 40px;
+	border: 1px solid #eee;
+	padding: 10px 20px;
+	color: #666666;
+	background-color: #ffffff;
+}
+
+#chat_text_area:focus{
+	/* border: none !important; */
+	outline: none !important;
+	inset: inherit;
+}
+
+#send_chat_btn{
+	width: 50px !important;
+	height: 50px !important;
+	border: none;
+	background: #00ca5b;
+	border-radius: 50%;
+	color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* margin: 0px 5px; */
+	font-size: 20px !important;
+	/* flex-grow: 1; */
+}
+
+#send_cart_btn{
+		width: 50px !important;
+	height: 50px !important;
+	border: none;
+	background: #fcca0a;
+	border-radius: 50%;
+	color: #ccc;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	/* margin: 0px 5px; */
+	font-size: 20px !important;
+	/* flex-grow: 1; */
+}
+
+#send_chat_btn:focus{
+	outline: none;
+	/* background-color: ; */
+}
+
+#send_chat_btn:hover{
+	background-color: #01ac4e;
+}
+
+.my_chat,.other_chat{
+	padding: 10px;
+	width: 60%;
+	margin: 5px auto;
+}
+
+.my_chat{
+	background:linear-gradient(to top right,#18fd9e,#00b050);
+	float: right;
+	color: #fff;
+	font-size: 0.8rem;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 0px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	margin-right: 5px;
+	/* border: 0.1px solid #01b11971; */
+}
+.other_chat{
+	background: rgb(255, 255, 255);
+	float: left;
+	font-size: 0.8rem;
+	border-top-left-radius: 0px;
+	border-top-right-radius: 10px;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+	margin-left: 5px;
+	border: 0.5px solid rgb(228, 228, 228);
+}
+
+
+@media screen and (min-width: 800px) {
+
+	.callContainer{
+		position: absolute;
+		background: white;
+		z-index: 2;
+		height: 90vh;
+		width: 75vw;
+		margin: 5vh 12.5vw;
+		flex-direction: row;
+		border-radius: 20px;
+		box-shadow: 0 4px 80px 5px #fcca0a33, 0 6px 10px 0 #fccc0a2c;
+		border: 1px dotted #00ad2b;
+	}
+
+	.videoPanel{
+		flex-grow: 4;
+		max-width: 60%;
+		min-width: 60%;
+		min-height: 90vh;
+		max-height: 90vh;
+		border-top-left-radius: 20px;
+		border-bottom-left-radius: 20px;
+
+	}
+
+	.mainVideo{
+		position: absolute;
+		z-index: 2;
+		/* background-color: yellow; */
+		max-width: 60%;
+		min-width: 60%;
+		min-height: 90vh;
+		max-height: 90vh;
+	}
+
+	#remoteVideo{
+		width: 99.9%;
+		height: 99.9%;
+		min-height: 90vh;
+		max-height: 90vh;
+	}
+
+	.videoControls{
+		max-width: 60%;
+		min-width: 60%;
+		min-height: 90vh;
+		max-height: 90vh;
+		padding: 50px;
+	}
+	
+	#localVideo{
+		width: 100px;
+		height: 100px;
+	}
+
+
+
+
+
+	
+	.chatPanel{
+		flex-grow: 3;
+		max-width: 40%;
+		min-width: 40%;
+		min-height: 90vh;
+		max-height: 90vh;
+		border-left: 3px solid #00d836;
+		border-top-right-radius: 20px;
+		border-bottom-right-radius: 20px;
+	}
+
+	.chatProfile{
+		background-color: #ffffff;
+		flex-grow: 2;
+		display: flex;
+		border-bottom: 0.1px solid #dddddd; 
+	}
+
+	.awaitingCallContainer{
+		position: absolute;
+		z-index: 3;
+		display: flex;
+		flex-direction: column;
+		width: 75vw;
+		height: 90vh;
+		border-radius: 20px;
+		margin: 5vh 12.5vw;
+		background-color: #00b050;	
+	}
+
+}

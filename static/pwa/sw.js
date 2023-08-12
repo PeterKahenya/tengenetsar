@@ -2,6 +2,7 @@
 
 // CODELAB: Update cache names any time any of the cached files change.
 const CACHE_NAME = 'static-cache-v1';
+<<<<<<< HEAD
 var peer;
 var dataconnection;
 var customer_call;
@@ -10,6 +11,13 @@ var customer_call;
 const FILES_TO_CACHE = [
     '/static/pwa/offline.html',
   ];
+=======
+
+// CODELAB: Add list of files to cache here.
+const FILES_TO_CACHE = [
+    '/static/pwa/offline/home.html',
+];
+>>>>>>> v3
 
 self.addEventListener('install', (evt) => {
     console.log('[ServiceWorker] Install');
@@ -51,7 +59,11 @@ self.addEventListener('fetch', (evt) => {
           .catch(() => {
             return caches.open(CACHE_NAME)
                 .then((cache) => {
+<<<<<<< HEAD
                   return cache.match('/static/pwa/offline.html');
+=======
+                  return cache.match('/static/pwa/offline/home.html');
+>>>>>>> v3
                 });
           })
   );
@@ -59,8 +71,29 @@ self.addEventListener('fetch', (evt) => {
 });
 
 self.addEventListener('notificationclick', function(event) {
+<<<<<<< HEAD
   event.notification.close();
   event.waitUntil(
     clients.openWindow('https://tengeneza.kipya-africa.com/fundi_n/')
   );
+=======
+    if (!event.action) {
+        event.notification.close();
+        return;
+      }
+      switch (event.action) {
+        case 'accept-action':
+        event.waitUntil(
+            clients.openWindow('https://tengenetsar.kipya-africa.com/shop?r='+event.notification.data.room_id)
+        );
+        break;
+        case 'reject-action':
+            event.notification.close();
+          break;
+        default:
+            event.notification.close();
+          break;
+      }
+  
+>>>>>>> v3
 });
